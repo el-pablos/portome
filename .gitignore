@@ -1,12 +1,14 @@
 # Markdown files (except README.md)
 *.md
 !README.md
+.claude
 
 # Configuration files
 *.conf
 *.config
 .env*
 config/
+tams-portfolio.service
 
 # Shell scripts
 *.sh
@@ -18,6 +20,7 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
 
 # Development environments
 .vscode/
@@ -130,7 +133,10 @@ temp/
 
 # Large files (GitHub has 100MB limit)
 # These patterns catch common large file types
+# Allow specific showcase MP4 files
 *.mp4
+!document_4906738443322655853.mp4
+!document_4913463249711662401.mp4
 *.mkv
 *.avi
 *.mov

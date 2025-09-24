@@ -39,13 +39,13 @@ const GlobalStyles = () => (
       --bg-card: rgba(255, 255, 255, 0.8);
       --bg-button: rgba(0, 0, 0, 0.05);
       --bg-button-hover: rgba(0, 0, 0, 0.1);
-      --text-primary: #000000;
-      --text-secondary: rgba(0, 0, 0, 0.7);
-      --text-muted: rgba(0, 0, 0, 0.5);
-      --border-color: rgba(0, 0, 0, 0.1);
+      --text-primary: #1a1a1a;
+      --text-secondary: #4a5568;
+      --text-muted: #718096;
+      --border-color: rgba(0, 0, 0, 0.15);
       --shadow-color: rgba(0, 0, 0, 0.1);
       --violet-primary: #7c3aed;
-      --violet-secondary: #a78bfa;
+      --violet-secondary: #8b5cf6;
       --violet-bg: rgba(124, 58, 237, 0.1);
     }
 
@@ -72,7 +72,7 @@ const GlobalStyles = () => (
     body {
       background-color: var(--bg-primary);
       color: var(--text-primary);
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
     /* Glow for purple vibes */
@@ -128,7 +128,7 @@ const GlobalStyles = () => (
 
     /* Responsive-hover helpers */
     @media (hover:hover) {
-      .hoverlift { transition: transform .25s ease, filter .25s ease, box-shadow .25s ease; will-change: transform; }
+      .hoverlift { transition: transform .15s ease, filter .15s ease, box-shadow .15s ease; will-change: transform; }
       .hoverlift:hover { transform: translateY(-4px); filter: brightness(1.05); }
       .hoverpulse:hover { box-shadow: 0 10px 30px rgba(167,139,250,.25); }
     }
@@ -143,14 +143,14 @@ const Button = ({ as: Tag = "a", href, onClick, children, className = "", target
     target={target}
     rel={rel}
     type={type}
-    className={`inline-flex items-center gap-2 rounded-2xl px-5 py-2.5 font-medium transition-[transform,background,opacity] duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-[0.99] ${className}`}
+    className={`inline-flex items-center gap-2 rounded-2xl px-5 py-2.5 font-medium transition-[transform,background,opacity] duration-150 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-[0.99] ${className}`}
   >
     {children}
   </Tag>
 );
 
 const Card = ({ children, className = "" }) => (
-  <div className={`rounded-2xl border transition-all duration-300 backdrop-blur-md shadow-lg hoverlift hoverpulse ${className}`} style={{
+  <div className={`rounded-2xl border transition-all duration-200 backdrop-blur-md shadow-lg hoverlift hoverpulse ${className}`} style={{
     borderColor: 'var(--border-color)',
     backgroundColor: 'var(--bg-card)',
     boxShadow: `0 10px 25px var(--shadow-color)`
@@ -161,9 +161,9 @@ const Card = ({ children, className = "" }) => (
 
 const SectionTitle = ({ pre, title, desc }) => (
   <div className="mx-auto max-w-3xl text-center mb-10">
-    <div className="text-sm uppercase tracking-[0.3em] transition-colors duration-300" style={{color: 'var(--violet-secondary)'}}>{pre}</div>
-    <h2 className="mt-2 text-3xl sm:text-4xl font-semibold transition-colors duration-300" style={{color: 'var(--text-primary)'}}>{title}</h2>
-    {desc && <p className="mt-3 transition-colors duration-300" style={{color: 'var(--text-secondary)'}}>{desc}</p>}
+    <div className="text-sm uppercase tracking-[0.3em] transition-colors duration-200" style={{color: 'var(--violet-secondary)'}}>{pre}</div>
+    <h2 className="mt-2 text-3xl sm:text-4xl font-semibold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{title}</h2>
+    {desc && <p className="mt-3 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>{desc}</p>}
   </div>
 );
 
@@ -205,11 +205,11 @@ const Navbar = ({ onToggleTheme, theme }) => {
   return (
     <div className={`fixed top-3 inset-x-0 z-50 transition-all ${scrolled ? "scale-[.98]" : ""}`}>
       <div className="mx-auto max-w-6xl px-4">
-        <div className="relative rounded-3xl backdrop-blur-xl p-2.5 flex items-center justify-between glow-purple transition-all duration-300" style={{
+        <div className="relative rounded-3xl backdrop-blur-xl p-2.5 flex items-center justify-between glow-purple transition-all duration-200" style={{
           borderColor: 'var(--border-color)',
           backgroundColor: 'var(--bg-button)'
         }}>
-          <a href="#home" className="flex items-center gap-2 font-semibold transition-colors duration-300" style={{color: 'var(--text-primary)'}}>
+          <a href="#home" className="flex items-center gap-2 font-semibold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>
             <TerminalSquare className="size-5" style={{color: 'var(--violet-primary)'}} />
             <span className="hidden sm:block">Tama EL Pablo</span>
           </a>
@@ -218,7 +218,7 @@ const Navbar = ({ onToggleTheme, theme }) => {
               <a
                 key={id}
                 href={`#${id}`}
-                className={`px-3 py-2 rounded-2xl text-sm capitalize transition-all duration-300 ${
+                className={`px-3 py-2 rounded-2xl text-sm capitalize transition-all duration-200 ${
                   active === id
                     ? "border"
                     : "hover:bg-opacity-20"
@@ -245,7 +245,7 @@ const Navbar = ({ onToggleTheme, theme }) => {
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            <Button as="button" onClick={onToggleTheme} className="transition-all duration-300" style={{
+            <Button as="button" onClick={onToggleTheme} className="transition-all duration-200" style={{
               backgroundColor: 'var(--bg-button)',
               color: 'var(--text-primary)'
             }} onMouseEnter={(e) => {
@@ -256,7 +256,7 @@ const Navbar = ({ onToggleTheme, theme }) => {
               {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
               <span className="hidden sm:inline">{theme === "dark" ? "Light" : "Dark"}</span>
             </Button>
-            <Button href="#contact" className="transition-all duration-300" style={{
+            <Button href="#contact" className="transition-all duration-200" style={{
               backgroundColor: 'var(--violet-primary)',
               color: 'white'
             }} onMouseEnter={(e) => {
@@ -286,16 +286,16 @@ const HeroTerminal = ({ theme = 'dark' }) => {
   const [i, setI] = useState(0);
   const [typed, setTyped] = useState(0);
 
-  useEffect(() => { const blink = setInterval(() => setCursorOn((c) => !c), 500); return () => clearInterval(blink); }, []);
+  useEffect(() => { const blink = setInterval(() => setCursorOn((c) => !c), 350); return () => clearInterval(blink); }, []);
   useEffect(() => {
     const current = lines[i]; if (!current) return;
-    if (typed <= current.text.length) { const t = setTimeout(() => setTyped((v) => v + 1), 40); return () => clearTimeout(t); }
-    else { const pause = setTimeout(() => { setI((v) => Math.min(v + 1, lines.length - 1)); setTyped(0); }, 900); return () => clearTimeout(pause); }
+    if (typed <= current.text.length) { const t = setTimeout(() => setTyped((v) => v + 1), 25); return () => clearTimeout(t); }
+    else { const pause = setTimeout(() => { setI((v) => Math.min(v + 1, lines.length - 1)); setTyped(0); }, 600); return () => clearTimeout(pause); }
   }, [typed, i, lines]);
 
   return (
     <Card className="relative overflow-hidden glow-purple">
-      <div className="flex items-center gap-2 px-4 py-3 border-b transition-colors duration-300" style={{
+      <div className="flex items-center gap-2 px-4 py-3 border-b transition-colors duration-200" style={{
         borderColor: 'var(--border-color)',
         backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.05)'
       }}>
@@ -304,26 +304,26 @@ const HeroTerminal = ({ theme = 'dark' }) => {
           <span className="size-3 rounded-full bg-yellow-400/90 inline-block" />
           <span className="size-3 rounded-full bg-green-400/90 inline-block" />
         </div>
-        <div className="ml-3 text-xs transition-colors duration-300" style={{color: 'var(--text-muted)'}}>magicui/terminal — tama@dev</div>
+        <div className="ml-3 text-xs transition-colors duration-200" style={{color: 'var(--text-muted)'}}>magicui/terminal — tama@dev</div>
       </div>
-      <div className="p-6 text-sm font-mono leading-7 transition-colors duration-300" style={{
+      <div className="p-6 text-sm font-mono leading-7 transition-colors duration-200" style={{
         background: theme === 'dark' ? 'linear-gradient(to bottom, rgba(0,0,0,0.4), transparent)' : 'linear-gradient(to bottom, rgba(0,0,0,0.05), transparent)'
       }}>
         {lines.slice(0, i).map((l, idx) => (
-          <div key={idx} className="transition-colors duration-300" style={{color: theme === 'dark' ? 'rgba(196, 181, 253, 0.9)' : 'rgba(88, 28, 135, 0.8)'}}>
-            <span className="transition-colors duration-300" style={{color: theme === 'dark' ? '#6ee7b7' : '#059669'}}>{l.prompt}</span>
+          <div key={idx} className="transition-colors duration-200" style={{color: theme === 'dark' ? 'rgba(196, 181, 253, 0.9)' : 'rgba(88, 28, 135, 0.8)'}}>
+            <span className="transition-colors duration-200" style={{color: theme === 'dark' ? '#6ee7b7' : '#059669'}}>{l.prompt}</span>
             <span>{l.text}</span>
           </div>
         ))}
         {i < lines.length && (
-          <div className="transition-colors duration-300" style={{color: theme === 'dark' ? 'rgba(196, 181, 253, 0.9)' : 'rgba(88, 28, 135, 0.8)'}}>
-            <span className="transition-colors duration-300" style={{color: theme === 'dark' ? '#6ee7b7' : '#059669'}}>{lines[i].prompt}</span>
+          <div className="transition-colors duration-200" style={{color: theme === 'dark' ? 'rgba(196, 181, 253, 0.9)' : 'rgba(88, 28, 135, 0.8)'}}>
+            <span className="transition-colors duration-200" style={{color: theme === 'dark' ? '#6ee7b7' : '#059669'}}>{lines[i].prompt}</span>
             <span>{lines[i].text.slice(0, typed)}</span>
-            <span className={`ml-0.5 transition-opacity duration-300 ${cursorOn ? "opacity-100" : "opacity-0"}`} style={{color: 'var(--violet-primary)'}}>▮</span>
+            <span className={`ml-0.5 transition-opacity duration-200 ${cursorOn ? "opacity-100" : "opacity-0"}`} style={{color: 'var(--violet-primary)'}}>▮</span>
           </div>
         )}
         {i >= lines.length - 1 && (
-          <div className="mt-4 transition-colors duration-300" style={{color: 'var(--text-secondary)'}}>$ Done. Type <span style={{color: 'var(--text-primary)'}}>help</span> to explore.</div>
+          <div className="mt-4 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>$ Done. Type <span style={{color: 'var(--text-primary)'}}>help</span> to explore.</div>
         )}
       </div>
     </Card>
@@ -334,10 +334,10 @@ const HeroTerminal = ({ theme = 'dark' }) => {
 const About = ({ theme }) => (
   <div className="grid md:grid-cols-2 gap-6">
     <Card className="p-6">
-      <h3 className="text-xl font-semibold transition-colors duration-300" style={{color: 'var(--text-primary)'}}>About Me</h3>
-      <p className="mt-3 transition-colors duration-300" style={{color: 'var(--text-secondary)'}}>Hi! I'm <span className="font-medium transition-colors duration-300" style={{color: 'var(--text-primary)'}}>Tama EL Pablo</span>, a <span className="transition-colors duration-300" style={{color: 'var(--text-primary)'}}>Backend Developer</span> who loves building reliable APIs and scalable services with <span className="transition-colors duration-300" style={{color: 'var(--text-primary)'}}>Laravel</span> as my primary stack.</p>
+      <h3 className="text-xl font-semibold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>About Me</h3>
+      <p className="mt-3 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Hi! I'm <span className="font-medium transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Tama EL Pablo</span>, a <span className="transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Backend Developer</span> who loves building reliable APIs and scalable services with <span className="transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Laravel</span> as my primary stack.</p>
       <div className="mt-5 flex flex-wrap items-center gap-3 text-sm">
-        <a className="inline-flex items-center gap-2 px-3 py-2 rounded-xl transition-all duration-300" style={{
+        <a className="inline-flex items-center gap-2 px-3 py-2 rounded-xl transition-all duration-200" style={{
           backgroundColor: 'var(--bg-button)',
           color: 'var(--text-primary)'
         }} href="https://github.com/el-pablos" target="_blank" rel="noreferrer"
@@ -345,7 +345,7 @@ const About = ({ theme }) => (
         onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--bg-button)'}>
           <Github className="size-4" /> el-pablos <ExternalLink className="size-4" />
         </a>
-        <Button href="https://t.me/ImTamaa" target="_blank" rel="noreferrer" className="transition-all duration-300" style={{
+        <Button href="https://t.me/ImTamaa" target="_blank" rel="noreferrer" className="transition-all duration-200" style={{
           backgroundColor: 'var(--violet-primary)',
           color: 'white'
         }} onMouseEnter={(e) => {
@@ -375,22 +375,22 @@ const StatsSection = () => (
   <section className="py-12 md:py-20">
     <div className="mx-auto max-w-5xl space-y-8 px-4 md:space-y-16">
       <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
-        <h2 className="text-4xl font-medium lg:text-5xl transition-colors duration-300" style={{color: 'var(--text-primary)'}}>Proven Performance</h2>
-        <p className="transition-colors duration-300" style={{color: 'var(--text-secondary)'}}>Terbukti stresser OP by bogor1337 team. Track record yang membuktikan kualitas dan keandalan tools yang saya kembangkan.</p>
+        <h2 className="text-4xl font-medium lg:text-5xl transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Proven Performance</h2>
+        <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Terbukti stresser OP by bogor1337 team. Track record yang membuktikan kualitas dan keandalan tools yang saya kembangkan.</p>
       </div>
 
       <div className="grid gap-12 divide-y *:text-center md:grid-cols-3 md:gap-2 md:divide-x md:divide-y-0 md:divide-white/10">
         <div className="space-y-4 pt-6 md:pt-0">
-          <div className="text-5xl font-bold transition-colors duration-300" style={{color: 'var(--violet-primary)'}}>99.9%</div>
-          <p className="transition-colors duration-300" style={{color: 'var(--text-secondary)'}}>Success Rate</p>
+          <div className="text-5xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>99.9%</div>
+          <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Success Rate</p>
         </div>
         <div className="space-y-4 pt-6 md:pt-0">
-          <div className="text-5xl font-bold transition-colors duration-300" style={{color: 'var(--violet-primary)'}}>∞</div>
-          <p className="transition-colors duration-300" style={{color: 'var(--text-secondary)'}}>sudah beberapa web</p>
+          <div className="text-5xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>∞</div>
+          <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>sudah beberapa web</p>
         </div>
         <div className="space-y-4 pt-6 md:pt-0">
-          <div className="text-5xl font-bold transition-colors duration-300" style={{color: 'var(--violet-primary)'}}>24/7</div>
-          <p className="transition-colors duration-300" style={{color: 'var(--text-secondary)'}}>Available</p>
+          <div className="text-5xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>24/7</div>
+          <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Available</p>
         </div>
       </div>
     </div>
@@ -436,7 +436,7 @@ const Services = () => {
           transition={{ duration: 0.6, delay: index * 0.1 }}
           viewport={{ once: true }}
         >
-          <Card className="p-6 hover:scale-105 transition-transform duration-300">
+          <Card className="p-6 hover:scale-105 transition-transform duration-200">
             <service.icon className="size-12 text-violet-400 mb-4" />
             <h3 className="text-xl font-semibold text-white mb-3">{service.title}</h3>
             <p className="text-white/70 mb-4 text-sm">{service.desc}</p>
@@ -554,24 +554,41 @@ const WebStressingService = () => {
 
 // ---------- Web Stresser Showcase ----------
 const WebStresserShowcase = () => {
-  const proofImages = [
+  const proofItems = [
     {
       title: "DPR RI Website Takedown",
       description: "Successfully brought down DPR RI website showing 'Under Maintenance PAGE NOT FOUND' status",
-      imageUrl: "/photo_4913463250167902324_w.jpg",
+      mediaUrl: "/photo_4913463250167902324_w.jpg",
+      mediaType: "image",
       tags: ["Government", "Stress Test", "Verified"]
     },
     {
       title: "Tax Office Server Disruption",
       description: "coretaxdjp.pajak.go.id rendered unreachable with global connection timeouts from multiple locations",
-      imageUrl: "/photo_4913463250167902361_y.jpg",
+      mediaUrl: "/photo_4913463250167902361_y.jpg",
+      mediaType: "image",
       tags: ["Government", "Multi-Location", "Connection Timeout"]
     },
     {
       title: "UGM University Portal Down",
       description: "ugm.ac.id successfully targeted with connection timeouts verified from international test points",
-      imageUrl: "/photo_4915715049981588609_y.jpg",
+      mediaUrl: "/photo_4915715049981588609_y.jpg",
+      mediaType: "image",
       tags: ["Education", "University", "Global Testing"]
+    },
+    {
+      title: "POLICETUBE Down IPOS",
+      description: "Complete server disruption of POLICETUBE platform with comprehensive takedown verification",
+      mediaUrl: "/document_4906738443322655853.mp4",
+      mediaType: "video",
+      tags: ["Law Enforcement", "Platform Down", "Verified"]
+    },
+    {
+      title: "KEJAGUNG RI Down IPOS",
+      description: "Attorney General's office website successfully targeted with complete system disruption",
+      mediaUrl: "/document_4913463249711662401.mp4",
+      mediaType: "video",
+      tags: ["Government", "Attorney General", "System Down"]
     }
   ];
 
@@ -584,8 +601,8 @@ const WebStresserShowcase = () => {
           desc="Real proof of successful stress testing operations. Terbukti stresser OP by bogor1337 team."
         />
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {proofImages.map((proof, index) => (
+        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {proofItems.map((proof, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -593,21 +610,34 @@ const WebStresserShowcase = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="overflow-hidden hover:scale-105 transition-transform duration-300">
+              <Card className="overflow-hidden hover:scale-105 transition-transform duration-200">
                 <div className="relative h-48 bg-gradient-to-br from-violet-600/20 to-purple-600/20 overflow-hidden">
-                  <img
-                    src={proof.imageUrl}
-                    alt={proof.title}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                    }}
-                  />
+                  {proof.mediaType === 'video' ? (
+                    <video
+                      src={proof.mediaUrl}
+                      className="w-full h-full object-cover"
+                      controls
+                      preload="metadata"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src={proof.mediaUrl}
+                      alt={proof.title}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                  )}
                   <div className="absolute inset-0 bg-black/40 hidden items-center justify-center">
                     <div className="text-center text-white/80">
                       <Target className="size-12 mx-auto mb-2" />
-                      <p className="text-sm">Proof Screenshot</p>
+                      <p className="text-sm">{proof.mediaType === 'video' ? 'Proof Video' : 'Proof Screenshot'}</p>
                     </div>
                   </div>
                   <div className="absolute top-4 right-4">
@@ -692,7 +722,7 @@ const Portfolio = () => {
           transition={{ duration: 0.6, delay: index * 0.1 }}
           viewport={{ once: true }}
         >
-          <Card className="overflow-hidden hover:scale-105 transition-transform duration-300">
+          <Card className="overflow-hidden hover:scale-105 transition-transform duration-200">
             <div className="h-48 bg-gradient-to-br from-violet-600/20 to-purple-600/20 relative overflow-hidden">
               <div className="absolute inset-0 bg-black/20"></div>
               <div className="absolute inset-0 flex items-center justify-center">
@@ -933,33 +963,33 @@ const GitHubStats = () => {
   const stats = useGitHubStats();
 
   const StatCard = ({ title, data }) => (
-    <div className="p-4 rounded-xl transition-all duration-300" style={{
+    <div className="p-4 rounded-xl transition-all duration-200" style={{
       backgroundColor: 'var(--bg-card)',
       borderColor: 'var(--border-color)',
       border: '1px solid'
     }}>
-      <h4 className="font-semibold mb-3 transition-colors duration-300" style={{color: 'var(--text-primary)'}}>
+      <h4 className="font-semibold mb-3 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>
         {title}
       </h4>
       {data.loading ? (
-        <div className="text-sm transition-colors duration-300" style={{color: 'var(--text-muted)'}}>
+        <div className="text-sm transition-colors duration-200" style={{color: 'var(--text-muted)'}}>
           Loading stats...
         </div>
       ) : data.error ? (
-        <div className="text-sm transition-colors duration-300" style={{color: 'var(--text-muted)'}}>
+        <div className="text-sm transition-colors duration-200" style={{color: 'var(--text-muted)'}}>
           Stats unavailable
         </div>
       ) : (
         <div className="space-y-2 text-sm">
-          <div className="flex items-center gap-2 transition-colors duration-300" style={{color: 'var(--text-secondary)'}}>
+          <div className="flex items-center gap-2 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
             <GitBranch className="size-4" style={{color: 'var(--violet-primary)'}} />
             <span>Repos: {data.repos}</span>
           </div>
-          <div className="flex items-center gap-2 transition-colors duration-300" style={{color: 'var(--text-secondary)'}}>
+          <div className="flex items-center gap-2 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
             <Star className="size-4" style={{color: 'var(--violet-primary)'}} />
             <span>Activity: {data.commits}+ events</span>
           </div>
-          <div className="flex items-center gap-2 transition-colors duration-300" style={{color: 'var(--text-secondary)'}}>
+          <div className="flex items-center gap-2 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
             <Calendar className="size-4" style={{color: 'var(--violet-primary)'}} />
             <span>Last: {data.lastCommit}</span>
           </div>
@@ -1021,7 +1051,7 @@ const VisitorCounter = () => {
   const count = useVisitorCounter();
 
   return (
-    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full transition-all duration-300" style={{
+    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full transition-all duration-200" style={{
       backgroundColor: 'var(--violet-bg)',
       color: 'var(--text-primary)',
       fontSize: '0.875rem'
@@ -1032,25 +1062,79 @@ const VisitorCounter = () => {
   );
 };
 
-// ---------- Animated URL Hash Hook ----------
+// ---------- Enhanced Animated URL Hash Hook ----------
 const useAnimatedHash = () => {
   useEffect(() => {
-    const hashes = ['#tamshub', '#code', '#your', '#dream'];
+    const baseHashes = ['tamshub', 'code', 'your', 'dream'];
+    const glitchChars = ['░', '▒', '▓', '█', '◆', '◇', '★', '▲', '▼', '◄', '►'];
+    const cursorChars = ['_', '▮', '│', '|'];
     let currentIndex = 0;
+    let isAnimating = false;
+    let currentHash = '';
+    let cursorVisible = true;
+    let cursorIndex = 0;
+
+    const getRandomGlitchChar = () => glitchChars[Math.floor(Math.random() * glitchChars.length)];
+    const getCurrentCursor = () => cursorChars[cursorIndex % cursorChars.length];
+
+    const animateHashTransition = async (newHash) => {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      // Phase 1: Glitch effect with random characters
+      for (let i = 0; i < 3; i++) {
+        const glitchHash = '#' + Array.from({length: newHash.length}, () => getRandomGlitchChar()).join('');
+        window.history.replaceState(null, null, glitchHash);
+        await new Promise(resolve => setTimeout(resolve, 80));
+      }
+
+      // Phase 2: Typing animation with cursor
+      currentHash = '';
+      for (let i = 0; i <= newHash.length; i++) {
+        currentHash = newHash.substring(0, i);
+        const displayHash = '#' + currentHash + (i < newHash.length ? getCurrentCursor() : '');
+        window.history.replaceState(null, null, displayHash);
+
+        // Occasionally insert random glitch characters during typing
+        if (Math.random() < 0.3 && i < newHash.length) {
+          const glitchPos = Math.floor(Math.random() * currentHash.length);
+          const glitchedHash = '#' + currentHash.substring(0, glitchPos) + getRandomGlitchChar() + currentHash.substring(glitchPos + 1) + getCurrentCursor();
+          window.history.replaceState(null, null, glitchedHash);
+          await new Promise(resolve => setTimeout(resolve, 50));
+          window.history.replaceState(null, null, displayHash);
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 120));
+        cursorIndex++;
+      }
+
+      // Phase 3: Final hash with blinking cursor for a moment
+      for (let i = 0; i < 4; i++) {
+        cursorVisible = !cursorVisible;
+        const finalHash = '#' + newHash + (cursorVisible ? getCurrentCursor() : '');
+        window.history.replaceState(null, null, finalHash);
+        await new Promise(resolve => setTimeout(resolve, 200));
+      }
+
+      // Set final clean hash
+      window.history.replaceState(null, null, '#' + newHash);
+      isAnimating = false;
+    };
 
     const updateHash = () => {
-      const newHash = hashes[currentIndex];
-      window.history.replaceState(null, null, newHash);
-      currentIndex = (currentIndex + 1) % hashes.length;
+      const newHash = baseHashes[currentIndex];
+      animateHashTransition(newHash);
+      currentIndex = (currentIndex + 1) % baseHashes.length;
     };
 
     // Set initial hash
     updateHash();
-    const interval = setInterval(updateHash, 2000);
+    const interval = setInterval(updateHash, 4000); // Longer interval to accommodate animation
 
     // Prevent page jumping on hash changes
     const preventJump = (e) => {
-      if (e.target.hash && hashes.includes(e.target.hash)) {
+      const targetHash = e.target.hash || window.location.hash;
+      if (targetHash && baseHashes.some(hash => targetHash.includes(hash))) {
         e.preventDefault();
       }
     };
@@ -1107,7 +1191,7 @@ const useAnimatedFavicon = () => {
     };
 
     updateFavicon(); // Set initial favicon
-    const interval = setInterval(updateFavicon, 1500);
+    const interval = setInterval(updateFavicon, 1000);
 
     return () => {
       clearInterval(interval);
@@ -1162,8 +1246,8 @@ const useAnimatedTitle = () => {
       document.title = currentText + (isBlinking ? cursorSymbol : "");
     };
 
-    const typeInterval = setInterval(typewriter, 150);
-    const blinkInterval = setInterval(cursorBlink, 500);
+    const typeInterval = setInterval(typewriter, 100);
+    const blinkInterval = setInterval(cursorBlink, 350);
 
     return () => {
       clearInterval(typeInterval);
@@ -1183,7 +1267,7 @@ export default function PortfolioTamaELPabloV2() {
   useEffect(() => { const root = document.documentElement; if (theme === "dark") root.classList.add("dark"); else root.classList.remove("dark"); }, [theme]);
 
   return (
-    <div className="min-h-screen transition-colors duration-300" style={{
+    <div className="min-h-screen transition-colors duration-200" style={{
       backgroundColor: 'var(--bg-primary)',
       color: 'var(--text-primary)'
     }}>
@@ -1196,8 +1280,8 @@ export default function PortfolioTamaELPabloV2() {
       <section id="home" className="pt-28 pb-16">
         <div className="mx-auto max-w-6xl px-4">
           <div className="text-center">
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-4xl sm:text-6xl font-extrabold tracking-tight transition-colors duration-300" style={{color: 'var(--text-primary)'}}>Tama EL Pablo</motion.h1>
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="mt-3 text-lg transition-colors duration-300" style={{color: 'var(--text-secondary)'}}>Backend Developer <span style={{color: 'var(--text-muted)'}}>|</span> Open Source Enthusiast</motion.p>
+            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-4xl sm:text-6xl font-extrabold tracking-tight transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Tama EL Pablo</motion.h1>
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="mt-3 text-lg transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Backend Developer <span style={{color: 'var(--text-muted)'}}>|</span> Open Source Enthusiast</motion.p>
           </div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} className="mt-8">
@@ -1206,7 +1290,7 @@ export default function PortfolioTamaELPabloV2() {
 
           <div className="mt-8 flex flex-col items-center gap-4">
           <div className="flex items-center justify-center gap-3">
-            <Button href="#portfolio" className="transition-all duration-300" style={{
+            <Button href="#portfolio" className="transition-all duration-200" style={{
               backgroundColor: 'var(--violet-primary)',
               color: 'white'
             }} onMouseEnter={(e) => {
@@ -1214,7 +1298,7 @@ export default function PortfolioTamaELPabloV2() {
             }} onMouseLeave={(e) => {
               e.target.style.backgroundColor = 'var(--violet-primary)';
             }}>View Portfolio <ChevronRight className="size-4"/></Button>
-            <Button href="#contact" className="transition-all duration-300" style={{
+            <Button href="#contact" className="transition-all duration-200" style={{
               backgroundColor: 'var(--bg-button)',
               color: 'var(--text-primary)'
             }} onMouseEnter={(e) => {

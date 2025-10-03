@@ -17,7 +17,6 @@ import {
   Link as LinkIcon,
   Twitter,
   Check,
-  Target,
   Zap,
   Bot,
   ShoppingCart,
@@ -27,6 +26,11 @@ import {
   GitBranch,
   Star,
   Calendar,
+  Play,
+  X,
+  Filter,
+  Image as ImageIcon,
+  Video as VideoIcon,
 } from "lucide-react";
 
 // ---------- Inline Styles (keyframes & global helpers) ----------
@@ -552,14 +556,18 @@ const WebStressingService = () => {
   );
 };
 
-// ---------- Web Stresser Showcase ----------
+// ---------- Modern Gallery Showcase ----------
 const WebStresserShowcase = () => {
+  const [selectedMedia, setSelectedMedia] = useState(null);
+  const [filterCategory, setFilterCategory] = useState('All');
+
   const proofItems = [
     {
       title: "DPR RI Website Takedown",
       description: "Successfully brought down DPR RI website showing 'Under Maintenance PAGE NOT FOUND' status",
       mediaUrl: "/photo_4913463250167902324_w.jpg",
       mediaType: "image",
+      category: "Government",
       tags: ["Government", "Stress Test", "Verified"]
     },
     {
@@ -567,6 +575,7 @@ const WebStresserShowcase = () => {
       description: "coretaxdjp.pajak.go.id rendered unreachable with global connection timeouts from multiple locations",
       mediaUrl: "/photo_4913463250167902361_y.jpg",
       mediaType: "image",
+      category: "Government",
       tags: ["Government", "Multi-Location", "Connection Timeout"]
     },
     {
@@ -574,6 +583,7 @@ const WebStresserShowcase = () => {
       description: "ugm.ac.id successfully targeted with connection timeouts verified from international test points",
       mediaUrl: "/photo_4915715049981588609_y.jpg",
       mediaType: "image",
+      category: "Education",
       tags: ["Education", "University", "Global Testing"]
     },
     {
@@ -581,6 +591,7 @@ const WebStresserShowcase = () => {
       description: "Complete server disruption of POLICETUBE platform with comprehensive takedown verification",
       mediaUrl: "/document_4906738443322655853.mp4",
       mediaType: "video",
+      category: "Law Enforcement",
       tags: ["Law Enforcement", "Platform Down", "Verified"]
     },
     {
@@ -588,73 +599,156 @@ const WebStresserShowcase = () => {
       description: "Attorney General's office website successfully targeted with complete system disruption",
       mediaUrl: "/document_4913463249711662401.mp4",
       mediaType: "video",
+      category: "Government",
       tags: ["Government", "Attorney General", "System Down"]
+    },
+    {
+      title: "Indonesia.go.id Down IPOS",
+      description: "Main Indonesian government portal successfully disrupted with complete system takedown",
+      mediaUrl: "/indonesiagoid.mp4",
+      mediaType: "video",
+      category: "Government",
+      tags: ["Government", "National Portal", "IPOS"]
+    },
+    {
+      title: "Mobile JKN Down IPOS",
+      description: "National health insurance mobile platform rendered completely inaccessible",
+      mediaUrl: "/jkn.jpg",
+      mediaType: "image",
+      category: "Healthcare",
+      tags: ["Healthcare", "Mobile App", "IPOS"]
+    },
+    {
+      title: "Universitas Indonesia Down IPOS",
+      description: "Premier Indonesian university website successfully taken offline",
+      mediaUrl: "/universitasindonesia.jpg",
+      mediaType: "image",
+      category: "Education",
+      tags: ["Education", "University", "IPOS"]
+    },
+    {
+      title: "MyTelkomsel Down IPOS",
+      description: "Major telecommunications provider platform disrupted with full system takedown",
+      mediaUrl: "/mytelkomsel.mp4",
+      mediaType: "video",
+      category: "Telecommunications",
+      tags: ["Telco", "Mobile Platform", "IPOS"]
     }
   ];
 
+  const categories = ['All', ...new Set(proofItems.map(item => item.category))];
+  const filteredItems = filterCategory === 'All'
+    ? proofItems
+    : proofItems.filter(item => item.category === filterCategory);
+
   return (
     <section className="py-16">
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-auto max-w-7xl px-4">
         <SectionTitle
-          pre="Showcase"
-          title="Proven Results"
-          desc="Real proof of successful stress testing operations. Terbukti stresser OP by bogor1337 team."
+          pre="Showcase Gallery"
+          title="Proven Attack Results"
+          desc="Real proof of successful IPOS operations. Terbukti stresser OP by bogor1337 team."
         />
 
-        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {proofItems.map((proof, index) => (
+        {/* Category Filter */}
+        <div className="mb-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="flex items-center gap-2 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>
+            <Filter className="size-4" />
+            <span className="text-sm font-medium">Filter:</span>
+          </div>
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setFilterCategory(cat)}
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                filterCategory === cat ? 'shadow-lg' : 'hover:scale-105'
+              }`}
+              style={filterCategory === cat ? {
+                backgroundColor: 'var(--violet-primary)',
+                color: 'white'
+              } : {
+                backgroundColor: 'var(--bg-button)',
+                color: 'var(--text-secondary)'
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Gallery Grid */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {filteredItems.map((proof, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
+              className="group cursor-pointer"
+              onClick={() => setSelectedMedia(proof)}
             >
-              <Card className="overflow-hidden hover:scale-105 transition-transform duration-200">
-                <div className="relative h-48 bg-gradient-to-br from-violet-600/20 to-purple-600/20 overflow-hidden">
+              <Card className="overflow-hidden hover:scale-105 transition-all duration-200 hover:shadow-2xl">
+                <div className="relative h-56 bg-gradient-to-br from-violet-600/20 to-purple-600/20 overflow-hidden">
                   {proof.mediaType === 'video' ? (
-                    <video
-                      src={proof.mediaUrl}
-                      className="w-full h-full object-cover"
-                      controls
-                      preload="metadata"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
-                    />
+                    <>
+                      <video
+                        src={proof.mediaUrl}
+                        className="w-full h-full object-cover"
+                        preload="metadata"
+                        muted
+                      />
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-200 flex items-center justify-center">
+                        <div className="bg-violet-600/90 rounded-full p-4 group-hover:scale-110 transition-transform duration-200">
+                          <Play className="size-8 text-white fill-white" />
+                        </div>
+                      </div>
+                    </>
                   ) : (
-                    <img
-                      src={proof.mediaUrl}
-                      alt={proof.title}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
-                    />
+                    <>
+                      <img
+                        src={proof.mediaUrl}
+                        alt={proof.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <ImageIcon className="size-12 text-white" />
+                      </div>
+                    </>
                   )}
-                  <div className="absolute inset-0 bg-black/40 hidden items-center justify-center">
-                    <div className="text-center text-white/80">
-                      <Target className="size-12 mx-auto mb-2" />
-                      <p className="text-sm">{proof.mediaType === 'video' ? 'Proof Video' : 'Proof Screenshot'}</p>
-                    </div>
+
+                  <div className="absolute top-3 left-3">
+                    <span className="bg-black/80 backdrop-blur-sm text-white px-2 py-1 rounded text-xs font-medium flex items-center gap-1">
+                      {proof.mediaType === 'video' ? <VideoIcon className="size-3" /> : <ImageIcon className="size-3" />}
+                      {proof.mediaType === 'video' ? 'VIDEO' : 'IMAGE'}
+                    </span>
                   </div>
-                  <div className="absolute top-4 right-4">
-                    <span className="bg-red-600/90 text-white px-2 py-1 rounded text-xs font-medium shadow-lg">
-                      VERIFIED ✓
+                  <div className="absolute top-3 right-3">
+                    <span className="bg-red-600/90 text-white px-2 py-1 rounded text-xs font-bold shadow-lg">
+                      ✓ VERIFIED
                     </span>
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-semibold text-white mb-2">{proof.title}</h3>
-                  <p className="text-white/70 text-sm mb-4">{proof.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {proof.tags.map((tag, i) => (
-                      <span key={i} className="px-2 py-1 bg-violet-600/20 text-violet-300 rounded text-xs">
+
+                <div className="p-4">
+                  <h3 className="text-base font-semibold mb-2 line-clamp-1 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{proof.title}</h3>
+                  <p className="text-xs mb-3 line-clamp-2 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>{proof.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {proof.tags.slice(0, 2).map((tag, i) => (
+                      <span key={i} className="px-2 py-0.5 rounded text-xs transition-colors duration-200" style={{
+                        backgroundColor: 'var(--violet-bg)',
+                        color: 'var(--violet-primary)'
+                      }}>
                         {tag}
                       </span>
                     ))}
+                    {proof.tags.length > 2 && (
+                      <span className="px-2 py-0.5 rounded text-xs transition-colors duration-200" style={{
+                        backgroundColor: 'var(--bg-button)',
+                        color: 'var(--text-muted)'
+                      }}>
+                        +{proof.tags.length - 2}
+                      </span>
+                    )}
                   </div>
                 </div>
               </Card>
@@ -662,12 +756,83 @@ const WebStresserShowcase = () => {
           ))}
         </div>
 
-        {/* Trust Badges */}
-        <div className="mt-12 text-center">
-          <div className="inline-flex items-center gap-3 bg-violet-600/10 border border-violet-500/20 rounded-2xl px-6 py-3">
-            <Zap className="size-5 text-violet-400" />
-            <span className="text-white font-semibold">Powered by bogor1337 Team</span>
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+        {/* Modal Lightbox */}
+        {selectedMedia && (
+          <div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+            style={{backgroundColor: 'rgba(0,0,0,0.95)'}}
+            onClick={() => setSelectedMedia(null)}
+          >
+            <div className="relative max-w-5xl w-full max-h-[90vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
+              <button
+                onClick={() => setSelectedMedia(null)}
+                className="absolute -top-12 right-0 p-2 rounded-full transition-all duration-200 hover:scale-110"
+                style={{backgroundColor: 'var(--bg-button)', color: 'var(--text-primary)'}}
+              >
+                <X className="size-6" />
+              </button>
+
+              <div className="rounded-2xl overflow-hidden shadow-2xl">
+                {selectedMedia.mediaType === 'video' ? (
+                  <video
+                    src={selectedMedia.mediaUrl}
+                    className="w-full max-h-[70vh] object-contain bg-black"
+                    controls
+                    autoPlay
+                  />
+                ) : (
+                  <img
+                    src={selectedMedia.mediaUrl}
+                    alt={selectedMedia.title}
+                    className="w-full max-h-[70vh] object-contain bg-black"
+                  />
+                )}
+              </div>
+
+              <div className="mt-4 p-6 rounded-2xl transition-all duration-200" style={{
+                backgroundColor: 'var(--bg-card)',
+                borderColor: 'var(--border-color)',
+                border: '1px solid'
+              }}>
+                <h2 className="text-2xl font-bold mb-2 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{selectedMedia.title}</h2>
+                <p className="mb-4 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>{selectedMedia.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {selectedMedia.tags.map((tag, i) => (
+                    <span key={i} className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200" style={{
+                      backgroundColor: 'var(--violet-bg)',
+                      color: 'var(--violet-primary)'
+                    }}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Stats Counter */}
+        <div className="mt-16 text-center">
+          <div className="inline-flex flex-col items-center gap-4 bg-gradient-to-r from-violet-600/10 to-purple-600/10 border border-violet-500/20 rounded-3xl px-8 py-6">
+            <div className="flex items-center gap-3">
+              <Zap className="size-6 text-violet-400" />
+              <span className="text-xl font-bold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Powered by bogor1337 Team</span>
+              <div className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></div>
+            </div>
+            <div className="flex gap-8 text-center">
+              <div>
+                <div className="text-3xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>{proofItems.length}</div>
+                <div className="text-xs uppercase tracking-wider transition-colors duration-200" style={{color: 'var(--text-muted)'}}>Total Attacks</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>100%</div>
+                <div className="text-xs uppercase tracking-wider transition-colors duration-200" style={{color: 'var(--text-muted)'}}>Success Rate</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>{categories.length - 1}</div>
+                <div className="text-xs uppercase tracking-wider transition-colors duration-200" style={{color: 'var(--text-muted)'}}>Categories</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

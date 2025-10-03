@@ -536,42 +536,42 @@ const WebStressingService = () => {
           </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
           {pricing[currency].map((plan, index) => (
-            <Card key={index} className={`flex flex-col relative ${plan.popular ? 'ring-2 ring-violet-500' : ''}`}>
+            <Card key={index} className={`flex flex-col relative min-h-[420px] hover:scale-105 transition-transform duration-200 ${plan.popular ? 'ring-2 ring-violet-500' : ''}`}>
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
                   <span className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-3 py-1 text-xs font-medium rounded-full">
                     Popular
                   </span>
                 </div>
               )}
 
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{plan.duration}</h3>
-                <div className="mb-4">
-                  <span className="text-3xl font-bold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{currency} {plan.price}</span>
-                  <span className="text-sm ml-1 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>/ session</span>
+              <div className="p-8 flex-1 flex flex-col">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold mb-3 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{plan.duration}</h3>
+                  <div className="mb-2">
+                    <span className="text-4xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>{currency === 'IDR' ? 'IDR' : '$'} {plan.price}</span>
+                  </div>
+                  <span className="text-sm transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>per session</span>
                 </div>
 
-                <hr className="border-dashed mb-4" style={{borderColor: 'var(--border-color)'}} />
+                <hr className="border-dashed mb-6" style={{borderColor: 'var(--border-color)'}} />
 
-                <ul className="space-y-3 text-sm mb-6">
-                  {features.slice(0, index + 4).map((feature, i) => (
-                    <li key={i} className="flex items-center gap-2 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
-                      <Check className="size-4 flex-shrink-0" style={{color: 'var(--violet-secondary)'}} />
-                      {feature}
+                <ul className="space-y-3 text-sm mb-6 flex-1">
+                  {features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
+                      <Check className="size-4 flex-shrink-0 mt-0.5" style={{color: 'var(--violet-secondary)'}} />
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
 
-              <div className="p-6 pt-0 mt-auto">
                 <Button
                   href="https://t.me/ImTamaa"
                   target="_blank"
                   rel="noreferrer"
-                  className={`w-full ${plan.popular ? 'bg-violet-600 hover:bg-violet-500 text-white' : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'}`}
+                  className={`w-full mt-auto ${plan.popular ? 'bg-violet-600 hover:bg-violet-500 text-white' : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'}`}
                 >
                   <Send className="size-4" />
                   Order via Telegram

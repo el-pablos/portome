@@ -281,9 +281,9 @@ const Navbar = ({ onToggleTheme, theme }) => {
 const HeroTerminal = ({ theme = 'dark' }) => {
   const lines = useMemo(() => [
     { prompt: "~$", text: " whoami" },
-    { prompt: "tama@dev:$", text: " echo \"Backend Developer | Open Source Enthusiast\"" },
-    { prompt: "tama@dev:$", text: " gh profile view el-pablos" },
-    { prompt: "tama@dev:$", text: " telegram open @ImTamaa" },
+    { prompt: "tamas@tamshub:$", text: " echo \"Backend Developer | Open Source Enthusiast\"" },
+    { prompt: "tamas@tamshub:$", text: " gh profile view el-pablos" },
+    { prompt: "tamas@tamshub:$", text: " telegram open @ImTamaa" },
   ], []);
 
   const [cursorOn, setCursorOn] = useState(true);
@@ -308,7 +308,7 @@ const HeroTerminal = ({ theme = 'dark' }) => {
           <span className="size-3 rounded-full bg-yellow-400/90 inline-block" />
           <span className="size-3 rounded-full bg-green-400/90 inline-block" />
         </div>
-        <div className="ml-3 text-xs transition-colors duration-200" style={{color: 'var(--text-muted)'}}>magicui/terminal — tama@dev</div>
+        <div className="ml-3 text-xs transition-colors duration-200" style={{color: 'var(--text-muted)'}}>tamas@tamshub</div>
       </div>
       <div className="p-6 text-sm font-mono leading-7 transition-colors duration-200" style={{
         background: theme === 'dark' ? 'linear-gradient(to bottom, rgba(0,0,0,0.4), transparent)' : 'linear-gradient(to bottom, rgba(0,0,0,0.05), transparent)'
@@ -375,31 +375,55 @@ const About = ({ theme }) => (
 );
 
 // ---------- Stats Section ----------
-const StatsSection = () => (
-  <section className="py-12 md:py-20">
-    <div className="mx-auto max-w-5xl space-y-8 px-4 md:space-y-16">
-      <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
-        <h2 className="text-4xl font-medium lg:text-5xl transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Proven Performance</h2>
-        <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Terbukti stresser OP by bogor1337 team. Track record yang membuktikan kualitas dan keandalan tools yang saya kembangkan.</p>
-      </div>
+const StatsSection = () => {
+  const successRate = useCountUp(99.9, 2500, 1);
+  const websites = useCountUp(150, 2000);
+  const uptime = useCountUp(24, 1500);
 
-      <div className="grid gap-12 divide-y *:text-center md:grid-cols-3 md:gap-2 md:divide-x md:divide-y-0 md:divide-white/10">
-        <div className="space-y-4 pt-6 md:pt-0">
-          <div className="text-5xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>99.9%</div>
-          <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Success Rate</p>
+  return (
+    <section className="py-12 md:py-20">
+      <div className="mx-auto max-w-5xl space-y-8 px-4 md:space-y-16">
+        <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
+          <h2 className="text-4xl font-medium lg:text-5xl transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Proven Performance</h2>
+          <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya. Track record yang membuktikan kualitas dan keandalan tools yang saya kembangkan.</p>
         </div>
-        <div className="space-y-4 pt-6 md:pt-0">
-          <div className="text-5xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>∞</div>
-          <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>sudah beberapa web</p>
-        </div>
-        <div className="space-y-4 pt-6 md:pt-0">
-          <div className="text-5xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>24/7</div>
-          <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Available</p>
+
+        <div className="grid gap-12 divide-y *:text-center md:grid-cols-3 md:gap-2 md:divide-x md:divide-y-0 md:divide-white/10">
+          <motion.div
+            className="space-y-4 pt-6 md:pt-0"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="text-5xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>{successRate}%</div>
+            <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Success Rate</p>
+          </motion.div>
+          <motion.div
+            className="space-y-4 pt-6 md:pt-0"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="text-5xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>{websites}+</div>
+            <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Websites Tested</p>
+          </motion.div>
+          <motion.div
+            className="space-y-4 pt-6 md:pt-0"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <div className="text-5xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>{uptime}/7</div>
+            <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Available</p>
+          </motion.div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 // ---------- Services ----------
 const Services = () => {
@@ -441,12 +465,12 @@ const Services = () => {
           viewport={{ once: true }}
         >
           <Card className="p-6 hover:scale-105 transition-transform duration-200">
-            <service.icon className="size-12 text-violet-400 mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-3">{service.title}</h3>
-            <p className="text-white/70 mb-4 text-sm">{service.desc}</p>
+            <service.icon className="size-12 mb-4" style={{color: 'var(--violet-primary)'}} />
+            <h3 className="text-xl font-semibold mb-3 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{service.title}</h3>
+            <p className="mb-4 text-sm transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>{service.desc}</p>
             <div className="flex flex-wrap gap-2">
               {service.tech.map((tech, i) => (
-                <span key={i} className="px-2 py-1 bg-violet-600/20 text-violet-300 rounded text-xs">
+                <span key={i} className="px-2 py-1 rounded text-xs transition-colors duration-200" style={{backgroundColor: 'var(--violet-bg)', color: 'var(--violet-secondary)'}}>
                   {tech}
                 </span>
               ))}
@@ -464,49 +488,55 @@ const WebStressingService = () => {
 
   const pricing = {
     IDR: [
-      { duration: '1 Hour', price: '350,000', popular: false },
-      { duration: '2 Hours', price: '500,000', popular: true },
-      { duration: '3 Hours', price: '700,000', popular: false }
+      { duration: '1 Hours', price: '250,000', popular: false },
+      { duration: '2 Hours', price: '400,000', popular: true },
+      { duration: '3 Hours', price: '500,000', popular: false },
+      { duration: '1 Days', price: '1,200,000', popular: false },
+      { duration: '2 Days', price: '2,400,000', popular: false }
     ],
     USD: [
-      { duration: '1 Hour', price: '23', popular: false },
-      { duration: '2 Hours', price: '33', popular: true },
-      { duration: '3 Hours', price: '47', popular: false }
+      { duration: '1 Hours', price: '17', popular: false },
+      { duration: '2 Hours', price: '27', popular: true },
+      { duration: '3 Hours', price: '33', popular: false },
+      { duration: '1 Days', price: '80', popular: false },
+      { duration: '2 Days', price: '160', popular: false }
     ]
   };
 
   const features = [
     'Jasa Takedown Website Slot',
-    'Phising Website Removal',
-    'Pemerintah Site Testing',
-    'Store & E-commerce Security',
+    'Jasa Takedown Website Phising',
+    'Jasa Takedown Website Pemerintah',
+    'Jasa Takedown Website Store/E-commerce',
     'Custom Target Analysis',
+    'CDN Bypass (Akamai, Cloudflare, Fastly)',
     'Real-time Monitoring',
-    'Detailed Report',
-    '24/7 Support'
+    'Detailed Attack Report',
+    '24/7 Support & Consultation'
   ];
 
   return (
     <section className="py-16 md:py-32">
       <div className="mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-2xl space-y-6 text-center mb-16">
-          <h2 className="text-4xl font-semibold text-white lg:text-5xl">Web Stress Testing Services</h2>
-          <p className="text-white/70">Professional web stress testing and security analysis services. Terbukti stresser OP by bogor1337 team dengan track record yang dapat dipercaya.</p>
+          <h2 className="text-4xl font-semibold lg:text-5xl transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Web Stress Testing Services</h2>
+          <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Professional web stress testing and security analysis services. Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya.</p>
 
           {/* Currency Toggle */}
           <div className="flex items-center justify-center gap-3 mt-8">
-            <span className={`text-sm ${currency === 'IDR' ? 'text-white' : 'text-white/60'}`}>IDR</span>
+            <span className="text-sm transition-colors duration-200" style={{color: currency === 'IDR' ? 'var(--text-primary)' : 'var(--text-secondary)'}}>IDR</span>
             <button
               onClick={() => setCurrency(currency === 'IDR' ? 'USD' : 'IDR')}
-              className="relative inline-flex h-6 w-11 items-center rounded-full bg-white/20 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500"
+              className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2"
+              style={{backgroundColor: 'var(--card-bg)', '--tw-ring-color': 'var(--violet-primary)'}}
             >
-              <span className={`inline-block h-4 w-4 transform rounded-full bg-violet-500 transition-transform ${currency === 'USD' ? 'translate-x-6' : 'translate-x-1'}`} />
+              <span className={`inline-block h-4 w-4 transform rounded-full transition-transform ${currency === 'USD' ? 'translate-x-6' : 'translate-x-1'}`} style={{backgroundColor: 'var(--violet-primary)'}} />
             </button>
-            <span className={`text-sm ${currency === 'USD' ? 'text-white' : 'text-white/60'}`}>USD</span>
+            <span className="text-sm transition-colors duration-200" style={{color: currency === 'USD' ? 'var(--text-primary)' : 'var(--text-secondary)'}}>USD</span>
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {pricing[currency].map((plan, index) => (
             <Card key={index} className={`flex flex-col relative ${plan.popular ? 'ring-2 ring-violet-500' : ''}`}>
               {plan.popular && (
@@ -518,18 +548,18 @@ const WebStressingService = () => {
               )}
 
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">{plan.duration}</h3>
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{plan.duration}</h3>
                 <div className="mb-4">
-                  <span className="text-3xl font-bold text-white">{currency} {plan.price}</span>
-                  <span className="text-white/60 text-sm ml-1">/ session</span>
+                  <span className="text-3xl font-bold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{currency} {plan.price}</span>
+                  <span className="text-sm ml-1 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>/ session</span>
                 </div>
 
-                <hr className="border-dashed border-white/20 mb-4" />
+                <hr className="border-dashed mb-4" style={{borderColor: 'var(--border-color)'}} />
 
                 <ul className="space-y-3 text-sm mb-6">
                   {features.slice(0, index + 4).map((feature, i) => (
-                    <li key={i} className="flex items-center gap-2 text-white/80">
-                      <Check className="size-4 text-violet-400 flex-shrink-0" />
+                    <li key={i} className="flex items-center gap-2 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
+                      <Check className="size-4 flex-shrink-0" style={{color: 'var(--violet-secondary)'}} />
                       {feature}
                     </li>
                   ))}
@@ -647,7 +677,7 @@ const WebStresserShowcase = () => {
         <SectionTitle
           pre="Showcase Gallery"
           title="Proven Attack Results"
-          desc="Real proof of successful IPOS operations. Terbukti stresser OP by bogor1337 team."
+          desc="Real proof of successful IPOS operations. Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya."
         />
 
         {/* Category Filter */}
@@ -815,8 +845,8 @@ const WebStresserShowcase = () => {
         <div className="mt-16 text-center">
           <div className="inline-flex flex-col items-center gap-4 bg-gradient-to-r from-violet-600/10 to-purple-600/10 border border-violet-500/20 rounded-3xl px-8 py-6">
             <div className="flex items-center gap-3">
-              <Zap className="size-6 text-violet-400" />
-              <span className="text-xl font-bold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Powered by bogor1337 Team</span>
+              <Zap className="size-6" style={{color: 'var(--violet-secondary)'}} />
+              <span className="text-xl font-bold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Managed by myself | TamsHub Stresser</span>
               <div className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></div>
             </div>
             <div className="flex gap-8 text-center">
@@ -891,20 +921,20 @@ const Portfolio = () => {
             <div className="h-48 bg-gradient-to-br from-violet-600/20 to-purple-600/20 relative overflow-hidden">
               <div className="absolute inset-0 bg-black/20"></div>
               <div className="absolute inset-0 flex items-center justify-center">
-                <project.icon className="size-16 text-violet-300/60" />
+                <project.icon className="size-16" style={{color: 'var(--violet-secondary)', opacity: 0.6}} />
               </div>
               <div className="absolute top-4 right-4 flex gap-2">
-                <a href={project.github} target="_blank" rel="noreferrer" className="p-2 bg-black/40 rounded-lg hover:bg-violet-600/40 transition-colors">
-                  <Github className="size-4 text-white" />
+                <a href={project.github} target="_blank" rel="noreferrer" className="p-2 bg-black/40 rounded-lg transition-colors" style={{'--hover-bg': 'var(--violet-primary)'}}>
+                  <Github className="size-4 transition-colors duration-200" style={{color: 'var(--text-primary)'}} />
                 </a>
               </div>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-              <p className="text-white/70 text-sm mb-4">{project.desc}</p>
+              <h3 className="text-xl font-semibold mb-2 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{project.title}</h3>
+              <p className="text-sm mb-4 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>{project.desc}</p>
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((tech, i) => (
-                  <span key={i} className="px-2 py-1 bg-violet-600/20 text-violet-300 rounded text-xs">
+                  <span key={i} className="px-2 py-1 rounded text-xs transition-colors duration-200" style={{backgroundColor: 'var(--violet-bg)', color: 'var(--violet-secondary)'}}>
                     {tech}
                   </span>
                 ))}
@@ -926,10 +956,10 @@ const CTA = () => (
     viewport={{ once: true }}
   >
     <Card className="text-center p-12">
-      <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+      <h2 className="text-3xl md:text-4xl font-bold mb-4 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>
         Ready to Start Your Project?
       </h2>
-      <p className="text-white/70 mb-8 max-w-2xl mx-auto">
+      <p className="mb-8 max-w-2xl mx-auto transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
         Let's discuss your backend needs and build something amazing together. I'm available for freelance work and open to collaboration.
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -943,16 +973,16 @@ const CTA = () => (
         </Button>
       </div>
       <div className="flex justify-center gap-6">
-        <a href="https://github.com/el-pablos" target="_blank" rel="noreferrer" className="text-white/60 hover:text-violet-400 transition-colors">
+        <a href="https://github.com/el-pablos" target="_blank" rel="noreferrer" className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
           <Github className="size-6" />
         </a>
-        <a href="https://github.com/dasaraul" target="_blank" rel="noreferrer" className="text-white/60 hover:text-violet-400 transition-colors">
+        <a href="https://github.com/dasaraul" target="_blank" rel="noreferrer" className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
           <Github className="size-6" />
         </a>
-        <a href="https://t.me/ImTamaa" target="_blank" rel="noreferrer" className="text-white/60 hover:text-violet-400 transition-colors">
+        <a href="https://t.me/ImTamaa" target="_blank" rel="noreferrer" className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
           <Send className="size-6" />
         </a>
-        <button className="text-white/60 hover:text-violet-400 transition-colors" onClick={() => console.log('Twitter link placeholder')}>
+        <button className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}} onClick={() => console.log('Twitter link placeholder')}>
           <Twitter className="size-6" />
         </button>
       </div>
@@ -980,10 +1010,10 @@ const Footer = () => {
         <div className="py-12 grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 text-white font-semibold">
-              <TerminalSquare className="size-5 text-violet-300" /> Tama EL Pablo
+            <div className="flex items-center gap-2 font-semibold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>
+              <TerminalSquare className="size-5" style={{color: 'var(--violet-secondary)'}} /> Tama EL Pablo
             </div>
-            <p className="mt-3 text-white/70 text-sm">Backend Developer berfokus pada Laravel. Mengutamakan performa, keamanan, dan integrasi yang rapi.</p>
+            <p className="mt-3 text-sm transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Backend Developer berfokus pada Laravel. Mengutamakan performa, keamanan, dan integrasi yang rapi.</p>
             <div className="mt-4 flex items-center gap-3">
               <a className="p-2 rounded-xl bg-white/10 hover:bg-white/20" href="https://github.com/el-pablos" target="_blank" rel="noreferrer"><Github className="size-5"/></a>
               <a className="p-2 rounded-xl bg-white/10 hover:bg-white/20" href="https://github.com/dasaraul" target="_blank" rel="noreferrer"><Github className="size-5"/></a>
@@ -994,38 +1024,38 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-semibold">Quick Links</h4>
+            <h4 className="font-semibold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Quick Links</h4>
             <ul className="mt-3 space-y-2 text-sm">
               {quickLinks.map((l) => (
-                <li key={l.label}><a className="text-white/75 hover:text-white inline-flex items-center gap-2" href={l.href}><LinkIcon className="size-4 text-violet-300"/>{l.label}</a></li>
+                <li key={l.label}><a className="inline-flex items-center gap-2 transition-colors duration-200 hover:opacity-100" style={{color: 'var(--text-secondary)'}} href={l.href}><LinkIcon className="size-4" style={{color: 'var(--violet-secondary)'}}/>{l.label}</a></li>
               ))}
             </ul>
           </div>
 
           {/* Tech Stack */}
           <div>
-            <h4 className="text-white font-semibold">Tech Stack</h4>
+            <h4 className="font-semibold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Tech Stack</h4>
             <div className="mt-3 flex flex-wrap gap-2">
               {chips.map((c) => (
-                <span key={c} className="text-xs px-3 py-1 rounded-full bg-white/10 text-white/80 hover:bg-white/20 transition">{c}</span>
+                <span key={c} className="text-xs px-3 py-1 rounded-full transition-colors duration-200" style={{backgroundColor: 'var(--card-bg)', color: 'var(--text-secondary)'}}>{c}</span>
               ))}
             </div>
           </div>
 
           {/* Contact */}
           <div>
-            <h4 className="text-white font-semibold">Contact</h4>
-            <ul className="mt-3 space-y-2 text-sm text-white/80">
-              <li className="flex items-center gap-2"><Mail className="size-4 text-violet-300"/> admin@tams.my.id</li>
-              <li className="flex items-center gap-2"><Send className="size-4 text-violet-300"/> t.me/ImTamaa</li>
-              <li className="flex items-center gap-2"><MapPin className="size-4 text-violet-300"/> Jakarta Selatan, Indonesia</li>
+            <h4 className="font-semibold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Contact</h4>
+            <ul className="mt-3 space-y-2 text-sm transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
+              <li className="flex items-center gap-2"><Mail className="size-4" style={{color: 'var(--violet-secondary)'}}/> admin@tams.my.id</li>
+              <li className="flex items-center gap-2"><Send className="size-4" style={{color: 'var(--violet-secondary)'}}/> t.me/ImTamaa</li>
+              <li className="flex items-center gap-2"><MapPin className="size-4" style={{color: 'var(--violet-secondary)'}}/> Jakarta Selatan, Indonesia</li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 py-6 text-center text-xs text-white/60">
+        <div className="py-6 text-center text-xs transition-colors duration-200" style={{borderTop: '1px solid var(--border-color)', color: 'var(--text-secondary)'}}>
           <p>© {new Date().getFullYear()} Tama EL Pablo • Code That Matters, Security That Protects • Jakarta Selatan</p>
-          <p className="mt-1">Open to freelance & collaboration. <a className="underline hover:text-white" href="https://github.com/el-pablos" target="_blank" rel="noreferrer">el-pablos</a> • <a className="underline hover:text-white" href="https://github.com/dasaraul" target="_blank" rel="noreferrer">dasaraul</a> • <a className="underline hover:text-white" href="https://t.me/ImTamaa" target="_blank" rel="noreferrer">Telegram</a></p>
+          <p className="mt-1">Open to freelance & collaboration. <a className="underline transition-colors duration-200 hover:opacity-100" style={{color: 'var(--text-secondary)'}} href="https://github.com/el-pablos" target="_blank" rel="noreferrer">el-pablos</a> • <a className="underline transition-colors duration-200 hover:opacity-100" style={{color: 'var(--text-secondary)'}} href="https://github.com/dasaraul" target="_blank" rel="noreferrer">dasaraul</a> • <a className="underline transition-colors duration-200 hover:opacity-100" style={{color: 'var(--text-secondary)'}} href="https://t.me/ImTamaa" target="_blank" rel="noreferrer">Telegram</a></p>
         </div>
       </div>
     </footer>
@@ -1169,6 +1199,41 @@ const GitHubStats = () => {
       <StatCard title="@dasaraul" data={stats.dasaraul} />
     </div>
   );
+};
+
+// ---------- Count-Up Animation Hook ----------
+const useCountUp = (end, duration = 2000, decimals = 0) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTime;
+    let animationFrame;
+
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const current = easeOutQuart * end;
+
+      setCount(decimals > 0 ? current.toFixed(decimals) : Math.floor(current));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [end, duration, decimals]);
+
+  return count;
 };
 
 // ---------- Visitor Counter Hook ----------

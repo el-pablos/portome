@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   Github,
@@ -170,6 +170,102 @@ const SectionTitle = ({ pre, title, desc }) => (
     {desc && <p className="mt-3 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>{desc}</p>}
   </div>
 );
+
+// ---------- Lazy Load Image Component ----------
+const LazyImage = ({ src, alt, className, onClick, style }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    if (!imgRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: '50px', // Start loading 50px before entering viewport
+        threshold: 0.01
+      }
+    );
+
+    observer.observe(imgRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={imgRef} className={className} onClick={onClick} style={style}>
+      {isInView && (
+        <>
+          {!isLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center" style={{backgroundColor: 'var(--bg-card)'}}>
+              <div className="w-8 h-8 border-4 border-t-transparent rounded-full animate-spin" style={{borderColor: 'var(--violet-primary)', borderTopColor: 'transparent'}}></div>
+            </div>
+          )}
+          <img
+            src={src}
+            alt={alt}
+            loading="lazy"
+            onLoad={() => setIsLoaded(true)}
+            className={`w-full h-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+          />
+        </>
+      )}
+    </div>
+  );
+};
+
+// ---------- Lazy Load Video Component ----------
+const LazyVideo = ({ src, className, onClick, style }) => {
+  const [isInView, setIsInView] = useState(false);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        } else {
+          setIsInView(false);
+        }
+      },
+      {
+        rootMargin: '100px',
+        threshold: 0.01
+      }
+    );
+
+    observer.observe(videoRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={videoRef} className={className} onClick={onClick} style={style}>
+      {isInView ? (
+        <video
+          src={src}
+          className="w-full h-full object-cover"
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center" style={{backgroundColor: 'var(--bg-card)'}}>
+          <Play className="size-12" style={{color: 'var(--violet-secondary)', opacity: 0.5}} />
+        </div>
+      )}
+    </div>
+  );
+};
 
 // ---------- Background ----------
 const Background = () => <div className="pointer-events-none fixed inset-0 -z-10 faulty-terminal-bg" />;
@@ -591,7 +687,7 @@ const WebStresserShowcase = () => {
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [filterCategory, setFilterCategory] = useState('All');
 
-  const proofItems = [
+  const proofItems = useMemo(() => [
     {
       title: "DPR RI Website Takedown",
       description: "Successfully brought down DPR RI website showing 'Under Maintenance PAGE NOT FOUND' status",
@@ -635,10 +731,26 @@ const WebStresserShowcase = () => {
     {
       title: "Indonesia.go.id Down IPOS",
       description: "Main Indonesian government portal successfully disrupted with complete system takedown",
-      mediaUrl: "/indonesiagoid.mp4",
-      mediaType: "video",
+      mediaUrl: "/indogoid.jpg",
+      mediaType: "image",
       category: "Government",
       tags: ["Government", "National Portal", "IPOS"]
+    },
+    {
+      title: "BPJS Kesehatan Down IPOS",
+      description: "National health insurance system successfully disrupted with connection timeouts globally",
+      mediaUrl: "/bpjsgoid.jpg",
+      mediaType: "image",
+      category: "Healthcare",
+      tags: ["Healthcare", "Government", "IPOS"]
+    },
+    {
+      title: "UPN Yogyakarta Down IPOS",
+      description: "National university TCP connection completely disrupted across all VPS servers",
+      mediaUrl: "/upnyogyakarta.jpg",
+      mediaType: "image",
+      category: "Education",
+      tags: ["Education", "University", "IPOS"]
     },
     {
       title: "Mobile JKN Down IPOS",
@@ -664,12 +776,15 @@ const WebStresserShowcase = () => {
       category: "Telecommunications",
       tags: ["Telco", "Mobile Platform", "IPOS"]
     }
-  ];
+  ], []);
 
-  const categories = ['All', ...new Set(proofItems.map(item => item.category))];
-  const filteredItems = filterCategory === 'All'
-    ? proofItems
-    : proofItems.filter(item => item.category === filterCategory);
+  const categories = useMemo(() => ['All', ...new Set(proofItems.map(item => item.category))], [proofItems]);
+  const filteredItems = useMemo(() =>
+    filterCategory === 'All'
+      ? proofItems
+      : proofItems.filter(item => item.category === filterCategory),
+    [filterCategory, proofItems]
+  );
 
   return (
     <section className="py-16">
@@ -710,24 +825,24 @@ const WebStresserShowcase = () => {
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredItems.map((proof, index) => (
             <motion.div
-              key={index}
+              key={proof.title}
+              layout
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="group cursor-pointer"
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.2, delay: Math.min(index * 0.03, 0.3) }}
+              className="group cursor-pointer lazy-content"
               onClick={() => setSelectedMedia(proof)}
             >
               <Card className="overflow-hidden hover:scale-105 transition-all duration-200 hover:shadow-2xl">
                 <div className="relative h-56 bg-gradient-to-br from-violet-600/20 to-purple-600/20 overflow-hidden">
                   {proof.mediaType === 'video' ? (
                     <>
-                      <video
+                      <LazyVideo
                         src={proof.mediaUrl}
-                        className="w-full h-full object-cover"
-                        preload="metadata"
-                        muted
+                        className="w-full h-full"
                       />
-                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-200 flex items-center justify-center">
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-200 flex items-center justify-center pointer-events-none">
                         <div className="bg-violet-600/90 rounded-full p-4 group-hover:scale-110 transition-transform duration-200">
                           <Play className="size-8 text-white fill-white" />
                         </div>
@@ -735,12 +850,12 @@ const WebStresserShowcase = () => {
                     </>
                   ) : (
                     <>
-                      <img
+                      <LazyImage
                         src={proof.mediaUrl}
                         alt={proof.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        className="w-full h-full group-hover:scale-110 transition-transform duration-300"
                       />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
                         <ImageIcon className="size-12 text-white" />
                       </div>
                     </>

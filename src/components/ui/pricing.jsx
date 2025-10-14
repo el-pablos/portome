@@ -29,12 +29,12 @@ export function Pricing({
   title = "Simple, Transparent Pricing",
   description = "Choose the plan that works for you\nAll plans include access to our platform, lead generation tools, and dedicated support.",
 }) {
-  const [isMonthly, setIsMonthly] = useState(true);
+  const [isUSD, setIsUSD] = useState(true);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const switchRef = useRef(null);
 
   const handleToggle = (checked) => {
-    setIsMonthly(!checked);
+    setIsUSD(checked);
     if (checked && switchRef.current) {
       const rect = switchRef.current.getBoundingClientRect();
       const x = rect.left + rect.width / 2;
@@ -48,10 +48,10 @@ export function Pricing({
           y: y / window.innerHeight,
         },
         colors: [
-          "hsl(var(--primary))",
-          "hsl(var(--accent))",
-          "hsl(var(--secondary))",
-          "hsl(var(--muted))",
+          "#7c3aed",
+          "#8b5cf6",
+          "#a78bfa",
+          "#c4b5fd",
         ],
         ticks: 200,
         gravity: 1.2,
@@ -74,14 +74,14 @@ export function Pricing({
       </div>
 
       <div className="flex justify-center mb-10 items-center">
-        <span className="mr-3 font-semibold transition-colors duration-200" style={{color: isMonthly ? 'var(--text-primary)' : 'var(--text-secondary)'}}>
-          Monthly
+        <span className="mr-3 font-semibold transition-colors duration-200" style={{color: !isUSD ? 'var(--text-primary)' : 'var(--text-secondary)'}}>
+          IDR
         </span>
         <label className="relative inline-flex items-center cursor-pointer">
           <Label>
             <Switch
               ref={switchRef}
-              checked={!isMonthly}
+              checked={isUSD}
               onCheckedChange={handleToggle}
               className="relative"
               style={{
@@ -90,8 +90,8 @@ export function Pricing({
             />
           </Label>
         </label>
-        <span className="ml-3 font-semibold transition-colors duration-200" style={{color: !isMonthly ? 'var(--text-primary)' : 'var(--text-secondary)'}}>
-          Annual <span style={{color: 'var(--violet-primary)'}}>(Save 20%)</span>
+        <span className="ml-3 font-semibold transition-colors duration-200" style={{color: isUSD ? 'var(--text-primary)' : 'var(--text-secondary)'}}>
+          USD
         </span>
       </div>
 
@@ -150,24 +150,37 @@ export function Pricing({
               </p>
               <div className="mt-6 flex items-center justify-center gap-x-2">
                 <span className="text-5xl font-bold tracking-tight transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>
-                  <NumberFlow
-                    value={
-                      isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)
-                    }
-                    format={{
-                      style: "currency",
-                      currency: "USD",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0,
-                    }}
-                    formatter={(value) => `$${value}`}
-                    transformTiming={{
-                      duration: 500,
-                      easing: "ease-out",
-                    }}
-                    willChange
-                    className="font-variant-numeric: tabular-nums"
-                  />
+                  {isUSD ? (
+                    <>
+                      $<NumberFlow
+                        value={Number(plan.price)}
+                        format={{
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
+                        }}
+                        transformTiming={{
+                          duration: 500,
+                          easing: "ease-out",
+                        }}
+                        willChange
+                      />
+                    </>
+                  ) : (
+                    <>
+                      IDR <NumberFlow
+                        value={Number(plan.yearlyPrice)}
+                        format={{
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
+                        }}
+                        transformTiming={{
+                          duration: 500,
+                          easing: "ease-out",
+                        }}
+                        willChange
+                      />
+                    </>
+                  )}
                 </span>
                 {plan.period !== "Next 3 months" && (
                   <span className="text-sm font-semibold leading-6 tracking-wide transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
@@ -177,7 +190,7 @@ export function Pricing({
               </div>
 
               <p className="text-xs leading-5 transition-colors duration-200" style={{color: 'var(--text-muted)'}}>
-                {isMonthly ? "billed monthly" : "billed annually"}
+                {isUSD ? "in USD" : "in IDR"}
               </p>
 
               <ul className="mt-5 gap-2 flex flex-col">

@@ -63,8 +63,8 @@ export function Pricing({
   };
 
   return (
-    <div className="container py-20">
-      <div className="text-center space-y-4 mb-12">
+    <div className="mx-auto max-w-7xl px-4 py-20">
+      <div className="text-center space-y-4 mb-12 mx-auto max-w-3xl">
         <h2 className="text-4xl font-bold tracking-tight sm:text-5xl transition-colors duration-200" style={{color: 'var(--text-primary)'}}>
           {title}
         </h2>
@@ -95,7 +95,7 @@ export function Pricing({
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 sm:2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {plans.map((plan, index) => (
           <motion.div
             key={index}

@@ -30,6 +30,7 @@ import {
   Filter,
   Image as ImageIcon,
   Video as VideoIcon,
+  Check,
 } from "lucide-react";
 
 // Import komponen UI modern
@@ -39,7 +40,6 @@ import { MetalButton } from "./components/ui/liquid-glass-button";
 import { ShaderLines } from "./components/ui/shader-lines";
 import { FocusCards } from "./components/ui/focus-cards";
 import { LampContainer } from "./components/ui/lamp";
-import { Pricing } from "./components/ui/pricing";
 import { Testimonials } from "./components/ui/testimonials-columns";
 
 // ---------- Inline Styles (keyframes & global helpers) ----------
@@ -621,72 +621,133 @@ const Services = () => {
 
 // ---------- Web Stressing Service ----------
 const WebStressingService = () => {
-  const pricingPlans = [
-    {
-      name: "BASIC",
-      price: "17",
-      yearlyPrice: "14",
-      period: "per session",
-      features: [
-        "1 Hours Duration",
-        "Jasa Takedown Website Slot",
-        "Jasa Takedown Website Phising",
-        "Basic Target Analysis",
-        "Email Support",
-      ],
-      description: "Perfect for small-scale testing",
-      buttonText: "Order via Telegram",
-      href: "https://t.me/ImTamaa",
-      isPopular: false,
-    },
-    {
-      name: "PROFESSIONAL",
-      price: "27",
-      yearlyPrice: "22",
-      period: "per session",
-      features: [
-        "2 Hours Duration",
-        "Jasa Takedown Website Pemerintah",
-        "Jasa Takedown Website Store/E-commerce",
-        "CDN Bypass (Akamai, Cloudflare, Fastly)",
-        "Real-time Monitoring",
-        "Detailed Attack Report",
-        "24/7 Support & Consultation",
-      ],
-      description: "Ideal for professional security testing",
-      buttonText: "Order via Telegram",
-      href: "https://t.me/ImTamaa",
-      isPopular: true,
-    },
-    {
-      name: "ENTERPRISE",
-      price: "80",
-      yearlyPrice: "64",
-      period: "per session",
-      features: [
-        "1 Days Duration",
-        "Everything in Professional",
-        "Custom Target Analysis",
-        "Advanced CDN Bypass",
-        "Priority Support",
-        "Custom Attack Strategies",
-        "Comprehensive Reports",
-        "Dedicated Consultation",
-      ],
-      description: "For large-scale operations",
-      buttonText: "Order via Telegram",
-      href: "https://t.me/ImTamaa",
-      isPopular: false,
-    },
+  const [currency, setCurrency] = useState('IDR');
+
+  const pricing = {
+    IDR: [
+      { duration: '1 Hours', price: '250,000', popular: false },
+      { duration: '2 Hours', price: '400,000', popular: true },
+      { duration: '3 Hours', price: '500,000', popular: false },
+      { duration: '1 Days', price: '1,200,000', popular: false },
+      { duration: '2 Days', price: '2,400,000', popular: false }
+    ],
+    USD: [
+      { duration: '1 Hours', price: '17', popular: false },
+      { duration: '2 Hours', price: '27', popular: true },
+      { duration: '3 Hours', price: '33', popular: false },
+      { duration: '1 Days', price: '80', popular: false },
+      { duration: '2 Days', price: '160', popular: false }
+    ]
+  };
+
+  const features = [
+    'Jasa Takedown Website Slot',
+    'Jasa Takedown Website Phising',
+    'Jasa Takedown Website Pemerintah',
+    'Jasa Takedown Website Store/E-commerce',
+    'Custom Target Analysis',
+    'CDN Bypass (Akamai, Cloudflare, Fastly)',
+    'Real-time Monitoring',
+    'Detailed Attack Report',
+    '24/7 Support & Consultation'
   ];
 
   return (
     <section className="py-16 md:py-32 relative">
-      <Pricing
-        plans={pricingPlans}
-        title="Web Stress Testing Services"
-        description="Professional web stress testing and security analysis services.\nDengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya."
-      />
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-2xl space-y-6 text-center mb-16 relative">
+          <h2 className="text-4xl font-semibold lg:text-5xl transition-colors duration-200 relative z-10" style={{color: 'var(--text-primary)'}}>Web Stress Testing Services</h2>
+          <p className="transition-colors duration-200 relative z-10" style={{color: 'var(--text-secondary)'}}>Professional web stress testing and security analysis services. Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya.</p>
+
+          {/* Sparkles Effect di background header */}
+          <div className="absolute inset-0 w-full h-full -z-10 opacity-30">
+            <SparklesCore
+              background="transparent"
+              minSize={0.3}
+              maxSize={0.8}
+              particleDensity={50}
+              className="w-full h-full"
+              particleColor="#a78bfa"
+              speed={0.3}
+            />
+          </div>
+
+          {/* Currency Toggle */}
+          <div className="flex items-center justify-center gap-3 mt-8 relative z-10">
+            <span className="text-sm transition-colors duration-200" style={{color: currency === 'IDR' ? 'var(--text-primary)' : 'var(--text-secondary)'}}>IDR</span>
+            <button
+              onClick={() => setCurrency(currency === 'IDR' ? 'USD' : 'IDR')}
+              className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2"
+              style={{backgroundColor: 'var(--bg-card)', '--tw-ring-color': 'var(--violet-primary)'}}
+            >
+              <span className={`inline-block h-4 w-4 transform rounded-full transition-transform ${currency === 'USD' ? 'translate-x-6' : 'translate-x-1'}`} style={{backgroundColor: 'var(--violet-primary)'}} />
+            </button>
+            <span className="text-sm transition-colors duration-200" style={{color: currency === 'USD' ? 'var(--text-primary)' : 'var(--text-secondary)'}}>USD</span>
+          </div>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+          {pricing[currency].map((plan, index) => (
+            <Card key={index} className={`flex flex-col relative min-h-[420px] hover:scale-105 transition-transform duration-200 ${plan.popular ? 'ring-2' : ''}`} style={plan.popular ? {borderColor: 'var(--violet-primary)'} : {}}>
+              {plan.popular && (
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
+                  <span className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-3 py-1 text-xs font-medium rounded-full">
+                    Popular
+                  </span>
+                </div>
+              )}
+
+              <div className="p-8 flex-1 flex flex-col">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold mb-3 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{plan.duration}</h3>
+                  <div className="mb-2">
+                    <span className="text-4xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>{currency === 'IDR' ? 'IDR' : '$'} {plan.price}</span>
+                  </div>
+                  <span className="text-sm transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>per session</span>
+                </div>
+
+                <hr className="border-dashed mb-6" style={{borderColor: 'var(--border-color)'}} />
+
+                <ul className="space-y-3 text-sm mb-6 flex-1">
+                  {features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
+                      <Check className="size-4 flex-shrink-0 mt-0.5" style={{color: 'var(--violet-secondary)'}} />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href="https://t.me/ImTamaa"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200 hover:scale-105"
+                  style={{
+                    backgroundColor: plan.popular ? 'var(--violet-primary)' : 'var(--bg-button)',
+                    color: plan.popular ? 'white' : 'var(--text-primary)',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!plan.popular) {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-button-hover)';
+                    } else {
+                      e.currentTarget.style.backgroundColor = 'var(--violet-secondary)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!plan.popular) {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-button)';
+                    } else {
+                      e.currentTarget.style.backgroundColor = 'var(--violet-primary)';
+                    }
+                  }}
+                >
+                  Order via Telegram
+                </a>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
@@ -811,8 +872,9 @@ const WebStresserShowcase = () => {
             className="text-center"
           >
             <div className="text-sm uppercase tracking-[0.3em] mb-4" style={{color: 'var(--violet-secondary)'}}>Showcase Gallery</div>
-            <h1 className="mt-8 bg-gradient-to-br from-violet-400 to-purple-600 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl">
-              Proven Attack Results
+            <h1 className="mt-8 py-4 text-center text-4xl font-extrabold tracking-tight md:text-7xl">
+              <span className="text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.5)]">Proven</span>{' '}
+              <span className="bg-gradient-to-br from-violet-400 to-purple-600 bg-clip-text text-transparent">Attack Results</span>
             </h1>
             <p className="mt-4 max-w-2xl mx-auto transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
               Real proof of successful IPOS operations. Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya.

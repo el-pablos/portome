@@ -14,14 +14,25 @@ export const TestimonialsColumn = (props) => {
           ease: "linear",
           repeatType: "loop",
         }}
-        className="flex flex-col gap-6 pb-6 bg-background"
+        className="flex flex-col gap-6 pb-6"
+        style={{
+          background: 'var(--bg-primary)'
+        }}
       >
         {[
           ...new Array(2).fill(0).map((_, index) => (
             <React.Fragment key={index}>
               {props.testimonials.map(({ text, image, name, role }, i) => (
-                <div className="p-10 rounded-3xl border shadow-lg shadow-primary/10 max-w-xs w-full" key={i}>
-                  <div>{text}</div>
+                <div
+                  className="p-10 rounded-2xl border transition-all duration-200 backdrop-blur-md shadow-lg max-w-xs w-full"
+                  key={i}
+                  style={{
+                    borderColor: 'var(--border-color)',
+                    backgroundColor: 'var(--bg-card)',
+                    boxShadow: '0 10px 25px var(--shadow-color)'
+                  }}
+                >
+                  <div className="text-sm transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>{text}</div>
                   <div className="flex items-center gap-2 mt-5">
                     <img
                       width={40}
@@ -31,8 +42,8 @@ export const TestimonialsColumn = (props) => {
                       className="h-10 w-10 rounded-full"
                     />
                     <div className="flex flex-col">
-                      <div className="font-medium tracking-tight leading-5">{name}</div>
-                      <div className="leading-5 opacity-60 tracking-tight">{role}</div>
+                      <div className="font-medium tracking-tight leading-5 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{name}</div>
+                      <div className="leading-5 tracking-tight text-sm transition-colors duration-200" style={{color: 'var(--text-muted)'}}>{role}</div>
                     </div>
                   </div>
                 </div>
@@ -51,7 +62,7 @@ export const Testimonials = ({ testimonials }) => {
   const thirdColumn = testimonials.slice(6, 9);
 
   return (
-    <section className="bg-background my-20 relative">
+    <section className="my-20 relative" style={{background: 'var(--bg-primary)'}}>
       <div className="container z-10 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -61,13 +72,13 @@ export const Testimonials = ({ testimonials }) => {
           className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
         >
           <div className="flex justify-center">
-            <div className="border py-1 px-4 rounded-lg">Testimonials</div>
+            <div className="border py-1 px-4 rounded-lg transition-colors duration-200" style={{borderColor: 'var(--violet-primary)', color: 'var(--violet-primary)'}}>Testimonials</div>
           </div>
 
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter mt-5">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter mt-5 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>
             What our users say
           </h2>
-          <p className="text-center mt-5 opacity-75">
+          <p className="text-center mt-5 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
             See what our customers have to say about us.
           </p>
         </motion.div>

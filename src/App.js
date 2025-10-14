@@ -16,7 +16,6 @@ import {
   MapPin,
   Link as LinkIcon,
   Twitter,
-  Check,
   Zap,
   Bot,
   ShoppingCart,
@@ -37,7 +36,6 @@ import {
 import { SparklesCore } from "./components/ui/sparkles";
 import { BackgroundBeams } from "./components/ui/background-beams";
 import { MetalButton } from "./components/ui/liquid-glass-button";
-import { TestimonialsWithMarquee } from "./components/ui/testimonials-with-marquee";
 import { ShaderLines } from "./components/ui/shader-lines";
 import { FocusCards } from "./components/ui/focus-cards";
 import { LampContainer } from "./components/ui/lamp";
@@ -801,7 +799,7 @@ const WebStresserShowcase = () => {
     <section className="py-16">
       <div className="mx-auto max-w-7xl px-4">
         {/* Lamp Effect Section Title */}
-        <LampContainer className="min-h-[400px] mb-12">
+        <LampContainer className="min-h-[450px] mb-12">
           <motion.div
             initial={{ opacity: 0.5, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -812,11 +810,11 @@ const WebStresserShowcase = () => {
             }}
             className="text-center"
           >
-            <div className="text-sm uppercase tracking-[0.3em] mb-4 text-cyan-400">Showcase Gallery</div>
-            <h1 className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl">
+            <div className="text-sm uppercase tracking-[0.3em] mb-4" style={{color: 'var(--violet-secondary)'}}>Showcase Gallery</div>
+            <h1 className="mt-8 bg-gradient-to-br from-violet-400 to-purple-600 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl">
               Proven Attack Results
             </h1>
-            <p className="mt-4 text-slate-400 max-w-2xl mx-auto">
+            <p className="mt-4 max-w-2xl mx-auto transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
               Real proof of successful IPOS operations. Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya.
             </p>
           </motion.div>

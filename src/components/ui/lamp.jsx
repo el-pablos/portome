@@ -95,7 +95,7 @@ export const LampContainer = ({
         <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem]" style={{ background: 'var(--bg-primary)' }}></div>
       </div>
 
-      <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5">
+      <div className="relative z-50 flex -translate-y-32 flex-col items-center px-5">
         {children}
       </div>
     </div>

@@ -77,8 +77,9 @@ export function Pricing({
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
-        {plans.map((plan, index) => (
+      {/* First Row: 3 cards (1 Hour, 2 Hours, 3 Hours) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-6">
+        {plans.slice(0, 3).map((plan, index) => (
           <motion.div
             key={index}
             initial={{ y: 50, opacity: 0 }}
@@ -87,6 +88,137 @@ export function Pricing({
             transition={{
               duration: 0.5,
               delay: index * 0.1,
+              ease: "easeOut"
+            }}
+            className={cn(
+              "rounded-2xl border transition-all duration-200 backdrop-blur-md shadow-lg p-6 text-center flex flex-col relative",
+              plan.isPopular && "ring-2 ring-offset-2",
+            )}
+            style={{
+              borderColor: plan.isPopular ? 'var(--violet-primary)' : 'var(--border-color)',
+              borderWidth: plan.isPopular ? '2px' : '1px',
+              backgroundColor: 'var(--bg-card)',
+              boxShadow: plan.isPopular ? '0 10px 40px rgba(124, 58, 237, 0.3)' : '0 10px 25px var(--shadow-color)',
+              ringColor: plan.isPopular ? 'var(--violet-primary)' : 'transparent'
+            }}
+          >
+            {plan.isPopular && (
+              <div className="absolute top-0 right-0 py-0.5 px-2 rounded-bl-xl rounded-tr-xl flex items-center" style={{backgroundColor: 'var(--violet-primary)'}}>
+                <Star className="h-4 w-4 fill-current text-white" />
+                <span className="ml-1 font-sans font-semibold text-white">
+                  Popular
+                </span>
+              </div>
+            )}
+            <div className="flex-1 flex flex-col">
+              <p className="text-base font-semibold transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
+                {plan.name}
+              </p>
+              <div className="mt-6 flex items-center justify-center gap-x-2">
+                <span className="text-5xl font-bold tracking-tight transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>
+                  {isUSD ? (
+                    <>
+                      $<NumberFlow
+                        value={Number(plan.price)}
+                        format={{
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
+                        }}
+                        transformTiming={{
+                          duration: 500,
+                          easing: "ease-out",
+                        }}
+                        willChange
+                      />
+                    </>
+                  ) : (
+                    <>
+                      IDR <NumberFlow
+                        value={Number(plan.yearlyPrice)}
+                        format={{
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
+                        }}
+                        transformTiming={{
+                          duration: 500,
+                          easing: "ease-out",
+                        }}
+                        willChange
+                      />
+                    </>
+                  )}
+                </span>
+                {plan.period !== "Next 3 months" && (
+                  <span className="text-sm font-semibold leading-6 tracking-wide transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
+                    / {plan.period}
+                  </span>
+                )}
+              </div>
+
+              <p className="text-xs leading-5 transition-colors duration-200" style={{color: 'var(--text-muted)'}}>
+                {isUSD ? "in USD" : "in IDR"}
+              </p>
+
+              <ul className="mt-5 gap-2 flex flex-col">
+                {plan.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <Check className="h-4 w-4 mt-1 flex-shrink-0" style={{color: 'var(--violet-secondary)'}} />
+                    <span className="text-left text-sm transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <hr className="w-full my-4" style={{borderColor: 'var(--border-color)'}} />
+
+              <a
+                href={plan.href}
+                className={cn(
+                  "group relative w-full gap-2 overflow-hidden text-lg font-semibold tracking-tighter",
+                  "inline-flex items-center justify-center rounded-md px-4 py-2",
+                  "transform-gpu transition-all duration-300 ease-out",
+                  "hover:scale-105"
+                )}
+                style={{
+                  backgroundColor: plan.isPopular ? 'var(--violet-primary)' : 'var(--bg-button)',
+                  color: plan.isPopular ? 'white' : 'var(--text-primary)',
+                  border: plan.isPopular ? 'none' : '1px solid var(--border-color)',
+                }}
+                onMouseEnter={(e) => {
+                  if (!plan.isPopular) {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-button-hover)';
+                  } else {
+                    e.currentTarget.style.backgroundColor = 'var(--violet-secondary)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!plan.isPopular) {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-button)';
+                  } else {
+                    e.currentTarget.style.backgroundColor = 'var(--violet-primary)';
+                  }
+                }}
+              >
+                {plan.buttonText}
+              </a>
+              <p className="mt-6 text-xs leading-5 transition-colors duration-200" style={{color: 'var(--text-muted)'}}>
+                {plan.description}
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Second Row: 2 cards (1 Day, 2 Days) - Centered */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        {plans.slice(3, 5).map((plan, index) => (
+          <motion.div
+            key={index + 3}
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.5,
+              delay: (index + 3) * 0.1,
               ease: "easeOut"
             }}
             className={cn(

@@ -40,6 +40,9 @@ import { MetalButton } from "./components/ui/liquid-glass-button";
 import { TestimonialsWithMarquee } from "./components/ui/testimonials-with-marquee";
 import { ShaderLines } from "./components/ui/shader-lines";
 import { FocusCards } from "./components/ui/focus-cards";
+import { LampContainer } from "./components/ui/lamp";
+import { Pricing } from "./components/ui/pricing";
+import { Testimonials } from "./components/ui/testimonials-columns";
 
 // ---------- Inline Styles (keyframes & global helpers) ----------
 const GlobalStyles = () => (
@@ -620,117 +623,72 @@ const Services = () => {
 
 // ---------- Web Stressing Service ----------
 const WebStressingService = () => {
-  const [currency, setCurrency] = useState('IDR');
-
-  const pricing = {
-    IDR: [
-      { duration: '1 Hours', price: '250,000', popular: false },
-      { duration: '2 Hours', price: '400,000', popular: true },
-      { duration: '3 Hours', price: '500,000', popular: false },
-      { duration: '1 Days', price: '1,200,000', popular: false },
-      { duration: '2 Days', price: '2,400,000', popular: false }
-    ],
-    USD: [
-      { duration: '1 Hours', price: '17', popular: false },
-      { duration: '2 Hours', price: '27', popular: true },
-      { duration: '3 Hours', price: '33', popular: false },
-      { duration: '1 Days', price: '80', popular: false },
-      { duration: '2 Days', price: '160', popular: false }
-    ]
-  };
-
-  const features = [
-    'Jasa Takedown Website Slot',
-    'Jasa Takedown Website Phising',
-    'Jasa Takedown Website Pemerintah',
-    'Jasa Takedown Website Store/E-commerce',
-    'Custom Target Analysis',
-    'CDN Bypass (Akamai, Cloudflare, Fastly)',
-    'Real-time Monitoring',
-    'Detailed Attack Report',
-    '24/7 Support & Consultation'
+  const pricingPlans = [
+    {
+      name: "BASIC",
+      price: "17",
+      yearlyPrice: "14",
+      period: "per session",
+      features: [
+        "1 Hours Duration",
+        "Jasa Takedown Website Slot",
+        "Jasa Takedown Website Phising",
+        "Basic Target Analysis",
+        "Email Support",
+      ],
+      description: "Perfect for small-scale testing",
+      buttonText: "Order via Telegram",
+      href: "https://t.me/ImTamaa",
+      isPopular: false,
+    },
+    {
+      name: "PROFESSIONAL",
+      price: "27",
+      yearlyPrice: "22",
+      period: "per session",
+      features: [
+        "2 Hours Duration",
+        "Jasa Takedown Website Pemerintah",
+        "Jasa Takedown Website Store/E-commerce",
+        "CDN Bypass (Akamai, Cloudflare, Fastly)",
+        "Real-time Monitoring",
+        "Detailed Attack Report",
+        "24/7 Support & Consultation",
+      ],
+      description: "Ideal for professional security testing",
+      buttonText: "Order via Telegram",
+      href: "https://t.me/ImTamaa",
+      isPopular: true,
+    },
+    {
+      name: "ENTERPRISE",
+      price: "80",
+      yearlyPrice: "64",
+      period: "per session",
+      features: [
+        "1 Days Duration",
+        "Everything in Professional",
+        "Custom Target Analysis",
+        "Advanced CDN Bypass",
+        "Priority Support",
+        "Custom Attack Strategies",
+        "Comprehensive Reports",
+        "Dedicated Consultation",
+      ],
+      description: "For large-scale operations",
+      buttonText: "Order via Telegram",
+      href: "https://t.me/ImTamaa",
+      isPopular: false,
+    },
   ];
 
   return (
     <section className="py-16 md:py-32 relative">
-      <div className="mx-auto max-w-6xl px-4">
-        <div className="mx-auto max-w-2xl space-y-6 text-center mb-16 relative">
-          <h2 className="text-4xl font-semibold lg:text-5xl transition-colors duration-200 relative z-10" style={{color: 'var(--text-primary)'}}>Web Stress Testing Services</h2>
-          <p className="transition-colors duration-200 relative z-10" style={{color: 'var(--text-secondary)'}}>Professional web stress testing and security analysis services. Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya.</p>
-
-          {/* Sparkles Effect di background header */}
-          <div className="absolute inset-0 w-full h-full -z-10 opacity-30">
-            <SparklesCore
-              background="transparent"
-              minSize={0.3}
-              maxSize={0.8}
-              particleDensity={50}
-              className="w-full h-full"
-              particleColor="#a78bfa"
-              speed={0.3}
-            />
-          </div>
-
-          {/* Currency Toggle */}
-          <div className="flex items-center justify-center gap-3 mt-8 relative z-10">
-            <span className="text-sm transition-colors duration-200" style={{color: currency === 'IDR' ? 'var(--text-primary)' : 'var(--text-secondary)'}}>IDR</span>
-            <button
-              onClick={() => setCurrency(currency === 'IDR' ? 'USD' : 'IDR')}
-              className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2"
-              style={{backgroundColor: 'var(--card-bg)', '--tw-ring-color': 'var(--violet-primary)'}}
-            >
-              <span className={`inline-block h-4 w-4 transform rounded-full transition-transform ${currency === 'USD' ? 'translate-x-6' : 'translate-x-1'}`} style={{backgroundColor: 'var(--violet-primary)'}} />
-            </button>
-            <span className="text-sm transition-colors duration-200" style={{color: currency === 'USD' ? 'var(--text-primary)' : 'var(--text-secondary)'}}>USD</span>
-          </div>
-        </div>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
-          {pricing[currency].map((plan, index) => (
-            <Card key={index} className={`flex flex-col relative min-h-[420px] hover:scale-105 transition-transform duration-200 ${plan.popular ? 'ring-2 ring-violet-500' : ''}`}>
-              {plan.popular && (
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
-                  <span className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-3 py-1 text-xs font-medium rounded-full">
-                    Popular
-                  </span>
-                </div>
-              )}
-
-              <div className="p-8 flex-1 flex flex-col">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold mb-3 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{plan.duration}</h3>
-                  <div className="mb-2">
-                    <span className="text-4xl font-bold transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>{currency === 'IDR' ? 'IDR' : '$'} {plan.price}</span>
-                  </div>
-                  <span className="text-sm transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>per session</span>
-                </div>
-
-                <hr className="border-dashed mb-6" style={{borderColor: 'var(--border-color)'}} />
-
-                <ul className="space-y-3 text-sm mb-6 flex-1">
-                  {features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-2 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
-                      <Check className="size-4 flex-shrink-0 mt-0.5" style={{color: 'var(--violet-secondary)'}} />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Button
-                  href="https://t.me/ImTamaa"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`w-full mt-auto ${plan.popular ? 'bg-violet-600 hover:bg-violet-500 text-white' : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'}`}
-                >
-                  <Send className="size-4" />
-                  Order via Telegram
-                </Button>
-              </div>
-            </Card>
-          ))}
-        </div>
-
-      </div>
+      <Pricing
+        plans={pricingPlans}
+        title="Web Stress Testing Services"
+        description="Professional web stress testing and security analysis services.\nDengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya."
+      />
     </section>
   );
 };
@@ -842,12 +800,27 @@ const WebStresserShowcase = () => {
   return (
     <section className="py-16">
       <div className="mx-auto max-w-7xl px-4">
-        <SectionTitle
-          pre="Showcase Gallery"
-          title="Proven Attack Results"
-          desc="Real proof of successful IPOS operations. Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya."
-          withShader={true}
-        />
+        {/* Lamp Effect Section Title */}
+        <LampContainer className="min-h-[400px] mb-12">
+          <motion.div
+            initial={{ opacity: 0.5, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.3,
+              duration: 0.8,
+              ease: "easeInOut",
+            }}
+            className="text-center"
+          >
+            <div className="text-sm uppercase tracking-[0.3em] mb-4 text-cyan-400">Showcase Gallery</div>
+            <h1 className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl">
+              Proven Attack Results
+            </h1>
+            <p className="mt-4 text-slate-400 max-w-2xl mx-auto">
+              Real proof of successful IPOS operations. Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya.
+            </p>
+          </motion.div>
+        </LampContainer>
 
         {/* Category Filter */}
         <div className="mb-8 flex flex-wrap items-center justify-center gap-3">
@@ -1232,11 +1205,11 @@ const PhotoGallery = () => {
     },
     {
       title: "Moment 11",
-      src: "/me/WhatsApp Image 2025-10-10 at 22.26.17_c4dc76b3.jpg"
+      src: "/me/WhatsApp%20Image%202025-10-10%20at%2022.26.17_c4dc76b3.jpg"
     },
     {
       title: "Special Moment",
-      src: "/me/WhatsApp Image 2025-10-10 at 22.29.14_344c694c.jpg"
+      src: "/me/WhatsApp%20Image%202025-10-10%20at%2022.29.14_344c694c.jpg"
     }
   ];
 
@@ -1873,57 +1846,61 @@ export default function PortfolioTamaELPabloV2() {
       </section>
 
       {/* TESTIMONIALS */}
-      <TestimonialsWithMarquee
-        title="What Clients Say"
-        subtitle="Trusted by developers and businesses worldwide for reliable backend solutions"
+      <Testimonials
         testimonials={[
           {
+            text: "Tama delivered an exceptional backend system that scaled perfectly with our growth. His expertise in Node.js and database optimization was invaluable.",
+            image: "https://randomuser.me/api/portraits/men/1.jpg",
             name: "Alex Johnson",
-            role: "CTO",
-            company: "TechStart Inc",
-            content: "Tama delivered an exceptional backend system that scaled perfectly with our growth. His expertise in Node.js and database optimization was invaluable.",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-            rating: 5,
+            role: "CTO at TechStart Inc",
           },
           {
+            text: "Working with Tama was a breeze. He understood our requirements perfectly and delivered a robust API that handles millions of requests daily.",
+            image: "https://randomuser.me/api/portraits/women/2.jpg",
             name: "Sarah Chen",
-            role: "Product Manager",
-            company: "CloudSync",
-            content: "Working with Tama was a breeze. He understood our requirements perfectly and delivered a robust API that handles millions of requests daily.",
-            avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
-            rating: 5,
+            role: "Product Manager at CloudSync",
           },
           {
+            text: "Tama's code quality is outstanding. Clean, well-documented, and maintainable. He's my go-to developer for complex backend projects.",
+            image: "https://randomuser.me/api/portraits/men/3.jpg",
             name: "Michael Rodriguez",
-            role: "Lead Developer",
-            company: "DataFlow Systems",
-            content: "Tama's code quality is outstanding. Clean, well-documented, and maintainable. He's my go-to developer for complex backend projects.",
-            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-            rating: 5,
+            role: "Lead Developer at DataFlow",
           },
           {
+            text: "The authentication system Tama built for us is rock solid. Zero security issues and excellent performance. Highly recommended!",
+            image: "https://randomuser.me/api/portraits/women/4.jpg",
             name: "Emily Watson",
-            role: "Founder",
-            company: "StartupHub",
-            content: "The authentication system Tama built for us is rock solid. Zero security issues and excellent performance. Highly recommended!",
-            avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
-            rating: 5,
+            role: "Founder at StartupHub",
           },
           {
+            text: "Tama's expertise in payment gateway integration saved us months of development time. Professional, reliable, and highly skilled.",
+            image: "https://randomuser.me/api/portraits/men/5.jpg",
             name: "David Kim",
-            role: "Engineering Manager",
-            company: "FinTech Solutions",
-            content: "Tama's expertise in payment gateway integration saved us months of development time. Professional, reliable, and highly skilled.",
-            avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face",
-            rating: 5,
+            role: "Engineering Manager at FinTech",
           },
           {
+            text: "The real-time notification system Tama developed exceeded our expectations. Fast, reliable, and perfectly integrated with our stack.",
+            image: "https://randomuser.me/api/portraits/women/6.jpg",
             name: "Lisa Anderson",
-            role: "Tech Lead",
-            company: "E-Commerce Pro",
-            content: "The real-time notification system Tama developed exceeded our expectations. Fast, reliable, and perfectly integrated with our stack.",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-            rating: 5,
+            role: "Tech Lead at E-Commerce Pro",
+          },
+          {
+            text: "Outstanding work on our microservices architecture. Tama's solutions are always elegant and performant.",
+            image: "https://randomuser.me/api/portraits/men/7.jpg",
+            name: "James Wilson",
+            role: "CTO at ScaleUp",
+          },
+          {
+            text: "The database optimization Tama performed improved our query performance by 10x. Absolutely brilliant work!",
+            image: "https://randomuser.me/api/portraits/women/8.jpg",
+            name: "Maria Garcia",
+            role: "Data Engineer at BigData Corp",
+          },
+          {
+            text: "Tama's API design is world-class. Clean, RESTful, and perfectly documented. A pleasure to work with.",
+            image: "https://randomuser.me/api/portraits/men/9.jpg",
+            name: "Robert Taylor",
+            role: "Senior Developer at API Solutions",
           },
         ]}
       />

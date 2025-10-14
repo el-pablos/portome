@@ -127,6 +127,8 @@ coverage/
 # Gatsby files
 .cache/
 public
+pricing
+testi
 
 # Storybook build outputs
 .out

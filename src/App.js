@@ -1304,7 +1304,7 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Contact</h4>
             <ul className="mt-3 space-y-2 text-sm transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
-              <li className="flex items-center gap-2"><Mail className="size-4" style={{color: 'var(--violet-secondary)'}}/> admin@tams.my.id</li>
+              <li className="flex items-center gap-2"><Mail className="size-4" style={{color: 'var(--violet-secondary)'}}/> admin@porto.tams.codes</li>
               <li className="flex items-center gap-2"><Send className="size-4" style={{color: 'var(--violet-secondary)'}}/> t.me/ImTamaa</li>
               <li className="flex items-center gap-2"><MapPin className="size-4" style={{color: 'var(--violet-secondary)'}}/> Jakarta Selatan, Indonesia</li>
             </ul>

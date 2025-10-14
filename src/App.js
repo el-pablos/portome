@@ -851,8 +851,8 @@ const WebStresserShowcase = () => {
     <section className="py-16">
       <div className="mx-auto max-w-7xl px-4">
         {/* Lamp Effect Section Title */}
-        <LampContainer className="min-h-[300px] mb-8">
-          <div className="text-center">
+        <LampContainer className="min-h-[600px] mb-8">
+          <div className="text-center pt-8">
             <div className="text-sm uppercase tracking-[0.3em] mb-4" style={{color: 'var(--violet-secondary)'}}>Showcase Gallery</div>
             <h1 className="mt-4 py-2 text-center text-4xl font-extrabold tracking-tight md:text-7xl">
               <span className="transition-colors duration-200" style={{

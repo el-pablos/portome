@@ -855,7 +855,10 @@ const WebStresserShowcase = () => {
           <div className="text-center">
             <div className="text-sm uppercase tracking-[0.3em] mb-4" style={{color: 'var(--violet-secondary)'}}>Showcase Gallery</div>
             <h1 className="mt-4 py-2 text-center text-4xl font-extrabold tracking-tight md:text-7xl">
-              <span className="text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.5)]">Proven</span>{' '}
+              <span className="transition-colors duration-200" style={{
+                color: 'var(--text-primary)',
+                textShadow: '0 0 30px rgba(167, 139, 250, 0.6), 0 0 60px rgba(167, 139, 250, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3)'
+              }}>Proven</span>{' '}
               <span className="bg-gradient-to-br from-violet-400 to-purple-600 bg-clip-text text-transparent">Attack Results</span>
             </h1>
             <p className="mt-3 max-w-2xl mx-auto transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>

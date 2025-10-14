@@ -7,30 +7,12 @@ import { useState, useRef } from "react";
 import confetti from "canvas-confetti";
 import NumberFlow from "@number-flow/react";
 
-// Custom hook for media query
-const useMediaQuery = (query) => {
-  const [matches, setMatches] = useState(false);
-
-  useState(() => {
-    const media = window.matchMedia(query);
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
-    const listener = () => setMatches(media.matches);
-    media.addEventListener('change', listener);
-    return () => media.removeEventListener('change', listener);
-  }, [matches, query]);
-
-  return matches;
-};
-
 export function Pricing({
   plans,
   title = "Simple, Transparent Pricing",
   description = "Choose the plan that works for you\nAll plans include access to our platform, lead generation tools, and dedicated support.",
 }) {
   const [isUSD, setIsUSD] = useState(true);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
   const switchRef = useRef(null);
 
   const handleToggle = (checked) => {
@@ -95,45 +77,28 @@ export function Pricing({
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
         {plans.map((plan, index) => (
           <motion.div
             key={index}
-            initial={{ y: 50, opacity: 1 }}
-            whileInView={
-              isDesktop
-                ? {
-                    y: plan.isPopular ? -20 : 0,
-                    opacity: 1,
-                    x: index === 2 ? -30 : index === 0 ? 30 : 0,
-                    scale: index === 0 || index === 2 ? 0.94 : 1.0,
-                  }
-                : {}
-            }
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{
-              duration: 1.6,
-              type: "spring",
-              stiffness: 100,
-              damping: 30,
-              delay: 0.4,
-              opacity: { duration: 0.5 },
+              duration: 0.5,
+              delay: index * 0.1,
+              ease: "easeOut"
             }}
             className={cn(
-              `rounded-2xl border transition-all duration-200 backdrop-blur-md shadow-lg p-6 text-center lg:flex lg:flex-col lg:justify-center relative`,
-              "flex flex-col",
-              !plan.isPopular && "mt-5",
-              index === 0 || index === 2
-                ? "z-0 transform translate-x-0 translate-y-0"
-                : "z-10",
-              index === 0 && "origin-right",
-              index === 2 && "origin-left"
+              "rounded-2xl border transition-all duration-200 backdrop-blur-md shadow-lg p-6 text-center flex flex-col relative",
+              plan.isPopular && "ring-2 ring-offset-2",
             )}
             style={{
               borderColor: plan.isPopular ? 'var(--violet-primary)' : 'var(--border-color)',
               borderWidth: plan.isPopular ? '2px' : '1px',
               backgroundColor: 'var(--bg-card)',
-              boxShadow: plan.isPopular ? '0 10px 40px rgba(124, 58, 237, 0.3)' : '0 10px 25px var(--shadow-color)'
+              boxShadow: plan.isPopular ? '0 10px 40px rgba(124, 58, 237, 0.3)' : '0 10px 25px var(--shadow-color)',
+              ringColor: plan.isPopular ? 'var(--violet-primary)' : 'transparent'
             }}
           >
             {plan.isPopular && (

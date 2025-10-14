@@ -33,6 +33,14 @@ import {
   Video as VideoIcon,
 } from "lucide-react";
 
+// Import komponen UI modern
+import { SparklesCore } from "./components/ui/sparkles";
+import { BackgroundBeams } from "./components/ui/background-beams";
+import { MetalButton } from "./components/ui/liquid-glass-button";
+import { TestimonialsWithMarquee } from "./components/ui/testimonials-with-marquee";
+import { ShaderLines } from "./components/ui/shader-lines";
+import { FocusCards } from "./components/ui/focus-cards";
+
 // ---------- Inline Styles (keyframes & global helpers) ----------
 const GlobalStyles = () => (
   <style>{`
@@ -163,11 +171,43 @@ const Card = ({ children, className = "" }) => (
   </div>
 );
 
-const SectionTitle = ({ pre, title, desc }) => (
-  <div className="mx-auto max-w-3xl text-center mb-10">
-    <div className="text-sm uppercase tracking-[0.3em] transition-colors duration-200" style={{color: 'var(--violet-secondary)'}}>{pre}</div>
-    <h2 className="mt-2 text-3xl sm:text-4xl font-semibold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{title}</h2>
-    {desc && <p className="mt-3 transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>{desc}</p>}
+const SectionTitle = ({ pre, title, desc, withShader = false }) => (
+  <div className="mx-auto max-w-4xl text-center mb-12">
+    <div className="text-sm uppercase tracking-[0.3em] transition-colors duration-200 mb-4" style={{color: 'var(--violet-secondary)'}}>{pre}</div>
+    {withShader ? (
+      <div className="relative mt-4 mb-6 inline-block w-full px-4">
+        {/* Shader Background - Responsive height dengan opacity yang subtle */}
+        <div className="absolute inset-0 h-[100px] sm:h-[120px] md:h-[140px] lg:h-[160px] w-full overflow-hidden rounded-2xl opacity-90">
+          <ShaderLines />
+        </div>
+
+        {/* Glow overlay untuk enhance effect - Lebih subtle */}
+        <div className="absolute inset-0 h-[100px] sm:h-[120px] md:h-[140px] lg:h-[160px] w-full rounded-2xl"
+             style={{
+               background: 'radial-gradient(ellipse at center, rgba(124, 58, 237, 0.1) 0%, transparent 60%)',
+               pointerEvents: 'none'
+             }} />
+
+        {/* Title Text with higher z-index and enhanced styling */}
+        <h2 className="relative z-10 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold transition-colors duration-200 py-6 sm:py-8 md:py-10 leading-tight"
+            style={{
+              color: 'var(--text-primary)',
+              textShadow: `
+                0 0 30px rgba(167, 139, 250, 0.8),
+                0 0 60px rgba(167, 139, 250, 0.5),
+                0 0 90px rgba(167, 139, 250, 0.3),
+                0 2px 4px rgba(0, 0, 0, 0.3)
+              `,
+              WebkitTextStroke: '0.5px rgba(167, 139, 250, 0.4)',
+              letterSpacing: '-0.02em',
+            }}>
+          {title}
+        </h2>
+      </div>
+    ) : (
+      <h2 className="mt-2 text-3xl sm:text-4xl font-semibold transition-colors duration-200" style={{color: 'var(--text-primary)'}}>{title}</h2>
+    )}
+    {desc && <p className="mt-4 text-base sm:text-lg transition-colors duration-200 max-w-3xl mx-auto px-4" style={{color: 'var(--text-secondary)'}}>{desc}</p>}
   </div>
 );
 
@@ -292,7 +332,7 @@ function useActiveSection(ids) {
 }
 
 const Navbar = ({ onToggleTheme, theme }) => {
-  const sections = ["home", "about", "services", "stressing", "portfolio", "contact"];
+  const sections = ["home", "about", "services", "stressing", "portfolio", "gallery", "contact"];
   const active = useActiveSection(sections);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -612,14 +652,27 @@ const WebStressingService = () => {
   ];
 
   return (
-    <section className="py-16 md:py-32">
+    <section className="py-16 md:py-32 relative">
       <div className="mx-auto max-w-6xl px-4">
-        <div className="mx-auto max-w-2xl space-y-6 text-center mb-16">
-          <h2 className="text-4xl font-semibold lg:text-5xl transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Web Stress Testing Services</h2>
-          <p className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Professional web stress testing and security analysis services. Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya.</p>
+        <div className="mx-auto max-w-2xl space-y-6 text-center mb-16 relative">
+          <h2 className="text-4xl font-semibold lg:text-5xl transition-colors duration-200 relative z-10" style={{color: 'var(--text-primary)'}}>Web Stress Testing Services</h2>
+          <p className="transition-colors duration-200 relative z-10" style={{color: 'var(--text-secondary)'}}>Professional web stress testing and security analysis services. Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya.</p>
+
+          {/* Sparkles Effect di background header */}
+          <div className="absolute inset-0 w-full h-full -z-10 opacity-30">
+            <SparklesCore
+              background="transparent"
+              minSize={0.3}
+              maxSize={0.8}
+              particleDensity={50}
+              className="w-full h-full"
+              particleColor="#a78bfa"
+              speed={0.3}
+            />
+          </div>
 
           {/* Currency Toggle */}
-          <div className="flex items-center justify-center gap-3 mt-8">
+          <div className="flex items-center justify-center gap-3 mt-8 relative z-10">
             <span className="text-sm transition-colors duration-200" style={{color: currency === 'IDR' ? 'var(--text-primary)' : 'var(--text-secondary)'}}>IDR</span>
             <button
               onClick={() => setCurrency(currency === 'IDR' ? 'USD' : 'IDR')}
@@ -793,6 +846,7 @@ const WebStresserShowcase = () => {
           pre="Showcase Gallery"
           title="Proven Attack Results"
           desc="Real proof of successful IPOS operations. Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya."
+          withShader={true}
         />
 
         {/* Category Filter */}
@@ -1069,41 +1123,129 @@ const CTA = () => (
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8 }}
     viewport={{ once: true }}
+    className="relative"
   >
-    <Card className="text-center p-12">
-      <h2 className="text-3xl md:text-4xl font-bold mb-4 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>
-        Ready to Start Your Project?
-      </h2>
-      <p className="mb-8 max-w-2xl mx-auto transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
-        Let's discuss your backend needs and build something amazing together. I'm available for freelance work and open to collaboration.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-        <Button href="https://t.me/ImTamaa" target="_blank" rel="noreferrer" className="bg-violet-600 text-white hover:bg-violet-500">
-          <Send className="size-5" />
-          Contact via Telegram
-        </Button>
-        <Button href="https://github.com/el-pablos" target="_blank" rel="noreferrer" className="bg-white/10 text-white hover:bg-white/20">
-          <Github className="size-5" />
-          View GitHub
-        </Button>
+    {/* Container dengan background transparan dan border */}
+    <div className="text-center py-20 md:py-28 px-8 md:px-12 relative overflow-hidden rounded-2xl border transition-all duration-200"
+         style={{
+           borderColor: 'var(--border-color)',
+           backgroundColor: 'transparent', // Transparan agar BackgroundBeams terlihat
+           boxShadow: `0 10px 25px var(--shadow-color)`
+         }}>
+      {/* Background Beams Effect - Lebih terlihat */}
+      <BackgroundBeams className="absolute inset-0 z-0" />
+
+      {/* Subtle overlay untuk readability */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-transparent via-[var(--bg-primary)]/30 to-transparent pointer-events-none" />
+
+      {/* Content dengan z-index lebih tinggi */}
+      <div className="relative z-10">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 transition-colors duration-200"
+            style={{
+              color: 'var(--text-primary)',
+              textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)'
+            }}>
+          Ready to Start Your Project?
+        </h2>
+        <p className="mb-10 max-w-2xl mx-auto text-lg transition-colors duration-200"
+           style={{
+             color: 'var(--text-secondary)',
+             textShadow: '0 1px 5px rgba(0, 0, 0, 0.2)'
+           }}>
+          Let's discuss your backend needs and build something amazing together. I'm available for freelance work and open to collaboration.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+          <a href="https://t.me/ImTamaa" target="_blank" rel="noreferrer">
+            <MetalButton variant="violet" className="w-full sm:w-auto">
+              <Send className="size-5 mr-2 inline" />
+              Contact via Telegram
+            </MetalButton>
+          </a>
+          <a href="https://github.com/el-pablos" target="_blank" rel="noreferrer">
+            <MetalButton variant="default" className="w-full sm:w-auto">
+              <Github className="size-5 mr-2 inline" />
+              View GitHub
+            </MetalButton>
+          </a>
+        </div>
+        <div className="flex justify-center gap-6">
+          <a href="https://github.com/el-pablos" target="_blank" rel="noreferrer" className="transition-all duration-200 hover:scale-110" style={{color: 'var(--text-secondary)'}}>
+            <Github className="size-6" />
+          </a>
+          <a href="https://github.com/dasaraul" target="_blank" rel="noreferrer" className="transition-all duration-200 hover:scale-110" style={{color: 'var(--text-secondary)'}}>
+            <Github className="size-6" />
+          </a>
+          <a href="https://t.me/ImTamaa" target="_blank" rel="noreferrer" className="transition-all duration-200 hover:scale-110" style={{color: 'var(--text-secondary)'}}>
+            <Send className="size-6" />
+          </a>
+          <button className="transition-all duration-200 hover:scale-110" style={{color: 'var(--text-secondary)'}} onClick={() => console.log('Twitter link placeholder')}>
+            <Twitter className="size-6" />
+          </button>
+        </div>
       </div>
-      <div className="flex justify-center gap-6">
-        <a href="https://github.com/el-pablos" target="_blank" rel="noreferrer" className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
-          <Github className="size-6" />
-        </a>
-        <a href="https://github.com/dasaraul" target="_blank" rel="noreferrer" className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
-          <Github className="size-6" />
-        </a>
-        <a href="https://t.me/ImTamaa" target="_blank" rel="noreferrer" className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>
-          <Send className="size-6" />
-        </a>
-        <button className="transition-colors duration-200" style={{color: 'var(--text-secondary)'}} onClick={() => console.log('Twitter link placeholder')}>
-          <Twitter className="size-6" />
-        </button>
-      </div>
-    </Card>
+    </div>
   </motion.div>
 );
+
+// ---------- Photo Gallery ----------
+const PhotoGallery = () => {
+  const photos = [
+    {
+      title: "Moment 1",
+      src: "/me/IMG-20251010-WA0020.jpg"
+    },
+    {
+      title: "Moment 2",
+      src: "/me/IMG-20251010-WA0021.jpg"
+    },
+    {
+      title: "Moment 3",
+      src: "/me/IMG-20251010-WA0022.jpg"
+    },
+    {
+      title: "Moment 4",
+      src: "/me/IMG-20251010-WA0023.jpg"
+    },
+    {
+      title: "Moment 5",
+      src: "/me/IMG-20251010-WA0024.jpg"
+    },
+    {
+      title: "Moment 6",
+      src: "/me/IMG-20251010-WA0025.jpg"
+    },
+    {
+      title: "Moment 7",
+      src: "/me/IMG-20251010-WA0026.jpg"
+    },
+    {
+      title: "Moment 8",
+      src: "/me/IMG-20251010-WA0027.jpg"
+    },
+    {
+      title: "Moment 9",
+      src: "/me/IMG-20251010-WA0028.jpg"
+    },
+    {
+      title: "Moment 10",
+      src: "/me/IMG-20251010-WA0029.jpg"
+    },
+    {
+      title: "Moment 11",
+      src: "/me/WhatsApp Image 2025-10-10 at 22.26.17_c4dc76b3.jpg"
+    },
+    {
+      title: "Special Moment",
+      src: "/me/WhatsApp Image 2025-10-10 at 22.29.14_344c694c.jpg"
+    }
+  ];
+
+  return (
+    <div className="py-16">
+      <FocusCards cards={photos} />
+    </div>
+  );
+};
 
 // ---------- Footer (expanded) ----------
 const Footer = () => {
@@ -1114,6 +1256,7 @@ const Footer = () => {
     { label: "Services", href: "#services" },
     { label: "Stressing", href: "#stressing" },
     { label: "Portfolio", href: "#portfolio" },
+    { label: "Gallery", href: "#gallery" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -1622,11 +1765,34 @@ export default function PortfolioTamaELPabloV2() {
       <Navbar theme={theme} onToggleTheme={() => setTheme((t) => (t === "dark" ? "light" : "dark"))} />
 
       {/* HERO */}
-      <section id="home" className="pt-28 pb-16">
+      <section id="home" className="pt-28 pb-16 relative">
         <div className="mx-auto max-w-6xl px-4">
-          <div className="text-center">
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-4xl sm:text-6xl font-extrabold tracking-tight transition-colors duration-200" style={{color: 'var(--text-primary)'}}>Tama EL Pablo</motion.h1>
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="mt-3 text-lg transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>Backend Developer <span style={{color: 'var(--text-muted)'}}>|</span> Open Source Enthusiast</motion.p>
+          <div className="text-center relative">
+            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-4xl sm:text-6xl font-extrabold tracking-tight transition-colors duration-200 relative z-10" style={{color: 'var(--text-primary)'}}>Tama EL Pablo</motion.h1>
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="mt-3 text-lg transition-colors duration-200 relative z-10" style={{color: 'var(--text-secondary)'}}>Backend Developer <span style={{color: 'var(--text-muted)'}}>|</span> Open Source Enthusiast</motion.p>
+
+            {/* Sparkles Effect di bawah judul */}
+            <div className="w-full max-w-2xl mx-auto h-32 relative mt-4">
+              {/* Gradient overlays untuk efek yang lebih halus */}
+              <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-violet-500 to-transparent h-[2px] w-3/4 blur-sm mx-auto" />
+              <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-violet-500 to-transparent h-px w-3/4 mx-auto" />
+              <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-purple-500 to-transparent h-[5px] w-1/4 blur-sm mx-auto" />
+              <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-purple-500 to-transparent h-px w-1/4 mx-auto" />
+
+              {/* Sparkles Core Component */}
+              <SparklesCore
+                background="transparent"
+                minSize={0.4}
+                maxSize={1}
+                particleDensity={800}
+                className="w-full h-full"
+                particleColor={theme === 'dark' ? '#a78bfa' : '#7c3aed'}
+                speed={0.5}
+              />
+
+              {/* Radial Gradient untuk mencegah tepi tajam */}
+              <div className="absolute inset-0 w-full h-full [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]" style={{backgroundColor: 'var(--bg-primary)'}}></div>
+            </div>
           </div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} className="mt-8">
@@ -1697,6 +1863,70 @@ export default function PortfolioTamaELPabloV2() {
           <Portfolio />
         </div>
       </section>
+
+      {/* PHOTO GALLERY */}
+      <section id="gallery" className="py-16">
+        <div className="mx-auto max-w-6xl px-4">
+          <SectionTitle pre="Gallery" title="My Moments" desc="Koleksi foto-foto pribadi dan momen awikwok." />
+          <PhotoGallery />
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <TestimonialsWithMarquee
+        title="What Clients Say"
+        subtitle="Trusted by developers and businesses worldwide for reliable backend solutions"
+        testimonials={[
+          {
+            name: "Alex Johnson",
+            role: "CTO",
+            company: "TechStart Inc",
+            content: "Tama delivered an exceptional backend system that scaled perfectly with our growth. His expertise in Node.js and database optimization was invaluable.",
+            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+            rating: 5,
+          },
+          {
+            name: "Sarah Chen",
+            role: "Product Manager",
+            company: "CloudSync",
+            content: "Working with Tama was a breeze. He understood our requirements perfectly and delivered a robust API that handles millions of requests daily.",
+            avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
+            rating: 5,
+          },
+          {
+            name: "Michael Rodriguez",
+            role: "Lead Developer",
+            company: "DataFlow Systems",
+            content: "Tama's code quality is outstanding. Clean, well-documented, and maintainable. He's my go-to developer for complex backend projects.",
+            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+            rating: 5,
+          },
+          {
+            name: "Emily Watson",
+            role: "Founder",
+            company: "StartupHub",
+            content: "The authentication system Tama built for us is rock solid. Zero security issues and excellent performance. Highly recommended!",
+            avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
+            rating: 5,
+          },
+          {
+            name: "David Kim",
+            role: "Engineering Manager",
+            company: "FinTech Solutions",
+            content: "Tama's expertise in payment gateway integration saved us months of development time. Professional, reliable, and highly skilled.",
+            avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face",
+            rating: 5,
+          },
+          {
+            name: "Lisa Anderson",
+            role: "Tech Lead",
+            company: "E-Commerce Pro",
+            content: "The real-time notification system Tama developed exceeded our expectations. Fast, reliable, and perfectly integrated with our stack.",
+            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+            rating: 5,
+          },
+        ]}
+      />
 
       {/* CTA / CONTACT */}
       <section id="contact" className="py-16">

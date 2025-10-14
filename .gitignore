@@ -1,7 +1,21 @@
 # Markdown files (except README.md)
 *.md
 !README.md
-.claude
+
+# AI Coding Agents & Assistants
+.claude/
+*.claude
+.anthropic/
+.augment/
+*.augment
+.augmentcode/
+.cursor/
+.aider/
+.copilot/
+.github-copilot/
+.codeium/
+.tabnine/
+.kite/
 
 # Configuration files
 *.conf
@@ -14,6 +28,7 @@ tams-portfolio.service
 *.sh
 *.bash
 *.zsh
+cihuy
 
 # Dependencies
 node_modules/

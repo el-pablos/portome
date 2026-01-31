@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy, Suspense, memo, useCallback } from "react";
+import React, { useEffect, useState, useRef, lazy, Suspense, memo, useCallback } from "react";
 import { 
   TerminalSquare, 
   Sun, 
@@ -12,7 +12,7 @@ import { usePageVisibility } from "./hooks/usePageVisibility";
 
 // ---------- Critical Above-the-fold imports (NOT lazy loaded) ----------
 import Hero from "./components/sections/Hero";
-import { SectionLoader } from "./components/LoadingSpinner";
+import { LoadingSpinner, SectionLoader } from "./components/LoadingSpinner";
 
 // ---------- Lazy loaded components (Below the fold) ----------
 const About = lazy(() => import("./components/sections/About"));
@@ -474,6 +474,7 @@ const SectionTitle = memo(({ pre, title, desc }) => (
 // ---------- Main App ----------
 export default function PortfolioTamaELPabloV2() {
   const [theme, setTheme] = useState("dark");
+  const prefersReducedMotion = useReducedMotion();
   
   // Only run animations if user doesn't prefer reduced motion
   useAnimatedTitle();

@@ -1,7 +1,9 @@
 import React, { memo, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Code2, ShieldCheck, PlugZap, Layers } from 'lucide-react';
+import { Code2, ShieldCheck, PlugZap, Layers, Cpu, Globe, Database, Lock } from 'lucide-react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { GlowCard } from '../ui/spotlight-card';
+import { CyberneticBentoGrid } from '../ui/cybernetic-bento-grid';
 
 // ---------- Card Component ----------
 const Card = memo(({ children, className = "" }) => (
@@ -165,7 +167,7 @@ const Services = memo(() => {
         const ServiceIcon = service.icon;
         
         const content = (
-          <Card className="p-6 hover:scale-105 transition-transform duration-200">
+          <GlowCard className="p-6 h-full hover:scale-[1.02] transition-transform duration-200" spotlightColor="rgba(124, 58, 237, 0.15)">
             <ServiceIcon className="size-12 mb-4" style={{color: 'var(--violet-primary)'}} />
             <h3 className="text-xl font-semibold mb-3" style={{color: 'var(--text-primary)'}}>
               {service.title}
@@ -184,7 +186,7 @@ const Services = memo(() => {
                 </span>
               ))}
             </div>
-          </Card>
+          </GlowCard>
         );
 
         if (prefersReducedMotion) {
@@ -226,6 +228,41 @@ const SectionTitle = memo(({ pre, title, desc }) => (
 
 // ---------- Main Services Export ----------
 const ServicesSection = memo(() => {
+  const bentoItems = [
+    {
+      title: "High Performance",
+      description: "Optimized APIs with sub-100ms response times and efficient database queries.",
+      icon: <Cpu className="size-6" />,
+      className: "md:col-span-1 md:row-span-2",
+    },
+    {
+      title: "Global Scale",
+      description: "Infrastructure ready for millions of requests across multiple regions.",
+      icon: <Globe className="size-6" />,
+    },
+    {
+      title: "Data Integrity",
+      description: "Robust database design with proper indexing, caching, and backup strategies.",
+      icon: <Database className="size-6" />,
+    },
+    {
+      title: "Security First",
+      description: "OWASP-compliant security practices, encryption, and vulnerability assessments.",
+      icon: <Lock className="size-6" />,
+      className: "md:col-span-1 md:row-span-2",
+    },
+    {
+      title: "Clean Architecture",
+      description: "Maintainable, testable code following SOLID principles and design patterns.",
+      icon: <Layers className="size-6" />,
+    },
+    {
+      title: "Rapid Delivery",
+      description: "CI/CD pipelines, automated testing, and agile development workflow.",
+      icon: <PlugZap className="size-6" />,
+    },
+  ];
+
   return (
     <>
       {/* STATS */}
@@ -240,6 +277,16 @@ const ServicesSection = memo(() => {
             desc="Ready to Work / Freelance • OSINT • API Integrations • Cross-Stack" 
           />
           <Services />
+
+          {/* Features Bento Grid */}
+          <div className="mt-16">
+            <SectionTitle 
+              pre="Features" 
+              title="Why Work With Me" 
+              desc="Keunggulan yang bikin project kamu beda dari yang lain." 
+            />
+            <CyberneticBentoGrid items={bentoItems} />
+          </div>
         </div>
       </section>
     </>

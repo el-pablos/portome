@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
+import React, { useEffect, useRef } from "react";
 import { cn } from "../../lib/utils";
 
 // ---------- Flickering Grid Background ----------

@@ -1,5 +1,6 @@
 import React, { useMemo, memo } from 'react';
 import { Testimonials } from '../ui/testimonials-columns';
+import { CircularTestimonials } from '../ui/circular-testimonials';
 
 // ---------- Testimonials Section Wrapper ----------
 const TestimonialsSection = memo(() => {
@@ -60,7 +61,31 @@ const TestimonialsSection = memo(() => {
     },
   ], []);
 
-  return <Testimonials testimonials={testimonials} />;
+  return (
+    <section className="py-16">
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-4xl text-center mb-12">
+          <div className="text-sm uppercase tracking-[0.3em] mb-4" style={{ color: 'var(--violet-secondary)' }}>
+            Testimonials
+          </div>
+          <h2 className="mt-2 text-3xl sm:text-4xl font-semibold" style={{ color: 'var(--text-primary)' }}>
+            What Clients Say
+          </h2>
+          <p className="mt-4 text-base sm:text-lg max-w-3xl mx-auto px-4" style={{ color: 'var(--text-secondary)' }}>
+            Feedback dari orang-orang yang udah kerja bareng gue.
+          </p>
+        </div>
+
+        {/* Circular Testimonials (interactive single-view) */}
+        <CircularTestimonials testimonials={testimonials} autoplayDuration={5000} />
+
+        {/* Columns Testimonials (all visible) */}
+        <div className="mt-12">
+          <Testimonials testimonials={testimonials} />
+        </div>
+      </div>
+    </section>
+  );
 });
 
 TestimonialsSection.displayName = 'TestimonialsSection';

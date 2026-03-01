@@ -1,17 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
 
 // ---------- Animated Shape ----------
-interface ShapeProps {
-  className?: string;
-  delay?: number;
-  width?: number;
-  height?: number;
-  rotate?: number;
-  gradient?: string;
-}
-
 function ElegantShape({
   className = "",
   delay = 0,
@@ -19,7 +10,7 @@ function ElegantShape({
   height = 100,
   rotate = 0,
   gradient = "from-violet-500/[0.15]",
-}: ShapeProps) {
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: -150, rotate: rotate - 15 }}
@@ -30,7 +21,8 @@ function ElegantShape({
         ease: [0.23, 0.86, 0.39, 0.96],
         opacity: { duration: 1.2 },
       }}
-      className={cn("absolute", className)}
+      style={{ position: "absolute" }}
+      className={className}
     >
       <motion.div
         animate={{ y: [0, 15, 0] }}
@@ -39,8 +31,7 @@ function ElegantShape({
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        style={{ width, height }}
-        className="relative"
+        style={{ width, height, position: "relative" }}
       >
         <div
           className={cn(
@@ -53,57 +44,23 @@ function ElegantShape({
         <div
           className={cn(
             "absolute inset-[1px] rounded-full",
-            "bg-[var(--bg-primary)]/90",
             "backdrop-blur-sm"
           )}
+          style={{ backgroundColor: "var(--bg-primary)", opacity: 0.9 }}
         />
       </motion.div>
     </motion.div>
   );
 }
 
-// ---------- Fade In Text ----------
-function TextReveal({
-  text,
-  className = "",
-  delay = 0,
-}: {
-  text: string;
-  className?: string;
-  delay?: number;
-}) {
-  return (
-    <motion.span
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.8,
-        delay,
-        ease: [0.23, 0.86, 0.39, 0.96],
-      }}
-      className={cn("inline-block", className)}
-    >
-      {text}
-    </motion.span>
-  );
-}
-
 // ---------- HeroGeometric ----------
-interface HeroGeometricProps {
-  badge?: string;
-  title1?: string;
-  title2?: string;
-  subtitle?: string;
-  children?: React.ReactNode;
-}
-
 export function HeroGeometric({
   badge = "Tama EL Pablo",
   title1 = "Backend Developer",
   title2 = "Open Source Enthusiast",
   subtitle,
   children,
-}: HeroGeometricProps) {
+}) {
   const shapes = useMemo(
     () => [
       {
@@ -161,11 +118,17 @@ export function HeroGeometric({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm"
           style={{
-            borderColor: "var(--border-color)",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            borderRadius: "9999px",
+            border: "1px solid var(--border-color)",
+            padding: "0.5rem 1rem",
+            fontSize: "0.875rem",
             backgroundColor: "var(--violet-bg)",
             color: "var(--violet-secondary)",
+            marginBottom: "2rem",
           }}
         >
           <span className="inline-block size-2 rounded-full bg-violet-400 animate-pulse" />
@@ -174,17 +137,22 @@ export function HeroGeometric({
 
         {/* Title */}
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight">
-          <TextReveal
-            text={title1}
-            delay={0.3}
-            className="block"
-            // Purple gradient text
-          />
-          <TextReveal
-            text={title2}
-            delay={0.5}
+          <motion.span
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.23, 0.86, 0.39, 0.96] }}
+            style={{ display: "block", color: "var(--text-primary)" }}
+          >
+            {title1}
+          </motion.span>
+          <motion.span
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.23, 0.86, 0.39, 0.96] }}
             className="block bg-gradient-to-r from-violet-400 via-purple-400 to-violet-300 bg-clip-text text-transparent"
-          />
+          >
+            {title2}
+          </motion.span>
         </h1>
 
         {/* Subtitle */}
@@ -200,7 +168,7 @@ export function HeroGeometric({
           </motion.p>
         )}
 
-        {/* Children slot (for buttons, terminal, etc) */}
+        {/* Children slot */}
         {children && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}

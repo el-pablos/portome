@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from "react";
-import { motion } from "framer-motion";
+import React, { useMemo } from "react";
 import { cn } from "../../lib/utils";
 
 // ---------- Logo data (teknologi) ----------

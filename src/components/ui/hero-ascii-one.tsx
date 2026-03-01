@@ -82,23 +82,12 @@ export function HeroAscii({
   }, [text, fontSize]);
 
   useEffect(() => {
-    let animId: number;
-    let isRunning = true;
-
-    const animate = () => {
-      if (!isRunning) return;
-      generateAscii();
-      animId = requestAnimationFrame(animate);
-    };
-
     // Throttle to ~15fps for performance
     const intervalId = setInterval(() => {
       generateAscii();
     }, 66);
 
     return () => {
-      isRunning = false;
-      cancelAnimationFrame(animId);
       clearInterval(intervalId);
     };
   }, [generateAscii]);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, memo } from 'react';
-import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { SparklesCore } from '../ui/sparkles';
+import { HeroGeometric } from '../ui/shape-landing-hero';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 // ---------- Reusable UI atoms ----------
@@ -184,67 +184,42 @@ const VisitorCounter = memo(() => {
 const Hero = memo(({ theme }) => {
   const prefersReducedMotion = useReducedMotion();
   
-  const motionProps = prefersReducedMotion 
-    ? { initial: { opacity: 1, y: 0 }, animate: { opacity: 1, y: 0 } }
-    : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
-
   return (
-    <section id="home" className="pt-28 pb-16 relative">
-      <div className="mx-auto max-w-6xl px-4">
-        <div className="text-center relative">
-          <motion.h1 
-            {...motionProps}
-            transition={{ duration: 0.6 }} 
-            className="text-4xl sm:text-6xl font-extrabold tracking-tight transition-colors duration-200 relative z-10" 
-            style={{color: 'var(--text-primary)'}}
-          >
-            Tama EL Pablo
-          </motion.h1>
-          
-          <motion.p 
-            {...motionProps}
-            transition={{ duration: 0.6, delay: prefersReducedMotion ? 0 : 0.1 }} 
-            className="mt-3 text-lg transition-colors duration-200 relative z-10" 
-            style={{color: 'var(--text-secondary)'}}
-          >
-            Backend Developer <span style={{color: 'var(--text-muted)'}}>|</span> Open Source Enthusiast
-          </motion.p>
+    <section id="home" className="relative">
+      <HeroGeometric
+        badge="Available for Freelance"
+        title1="Tama EL Pablo"
+        title2="Backend Developer"
+        subtitle="Building reliable APIs, scalable services & security-first solutions with Laravel, PHP, and modern DevOps."
+      >
+        {/* Terminal */}
+        <HeroTerminal theme={theme} />
 
-          {/* Sparkles Effect - Only render if not reduced motion */}
-          {!prefersReducedMotion && (
-            <div className="w-full max-w-2xl mx-auto h-32 relative mt-4">
-              <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-violet-500 to-transparent h-[2px] w-3/4 blur-sm mx-auto" />
-              <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-violet-500 to-transparent h-px w-3/4 mx-auto" />
-              <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-purple-500 to-transparent h-[5px] w-1/4 blur-sm mx-auto" />
-              <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-purple-500 to-transparent h-px w-1/4 mx-auto" />
+        {/* Sparkles Effect - Only render if not reduced motion */}
+        {!prefersReducedMotion && (
+          <div className="w-full max-w-2xl mx-auto h-20 relative mt-4">
+            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-violet-500 to-transparent h-[2px] w-3/4 blur-sm mx-auto" />
+            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-violet-500 to-transparent h-px w-3/4 mx-auto" />
 
-              <SparklesCore
-                background="transparent"
-                minSize={0.4}
-                maxSize={1}
-                particleDensity={400} // Reduced from 800 for better performance
-                className="w-full h-full"
-                particleColor={theme === 'dark' ? '#a78bfa' : '#7c3aed'}
-                speed={0.3} // Reduced speed
-              />
+            <SparklesCore
+              background="transparent"
+              minSize={0.4}
+              maxSize={1}
+              particleDensity={300}
+              className="w-full h-full"
+              particleColor={theme === 'dark' ? '#a78bfa' : '#7c3aed'}
+              speed={0.3}
+            />
 
-              <div 
-                className="absolute inset-0 w-full h-full [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]" 
-                style={{backgroundColor: 'var(--bg-primary)'}}
-              />
-            </div>
-          )}
-        </div>
+            <div 
+              className="absolute inset-0 w-full h-full [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]" 
+              style={{backgroundColor: 'var(--bg-primary)'}}
+            />
+          </div>
+        )}
 
-        <motion.div 
-          {...motionProps}
-          transition={{ duration: 0.6, delay: prefersReducedMotion ? 0 : 0.15 }} 
-          className="mt-8"
-        >
-          <HeroTerminal theme={theme} />
-        </motion.div>
-
-        <div className="mt-8 flex flex-col items-center gap-4">
+        {/* CTA Buttons */}
+        <div className="mt-6 flex flex-col items-center gap-4">
           <div className="flex items-center justify-center gap-3">
             <Button 
               href="#portfolio" 
@@ -263,7 +238,7 @@ const Hero = memo(({ theme }) => {
           </div>
           <VisitorCounter />
         </div>
-      </div>
+      </HeroGeometric>
     </section>
   );
 });

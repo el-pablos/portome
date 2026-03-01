@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { Pricing } from '../ui/pricing';
+import { HeroAscii } from '../ui/hero-ascii-one';
 
 // ---------- Web Stressing Service Section ----------
 const WebStressingService = memo(() => {
@@ -113,6 +114,10 @@ const WebStressingService = memo(() => {
 
   return (
     <section className="py-16 md:py-32 relative">
+      {/* ASCII Art Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+        <HeroAscii text="STRESS" fontSize={10} />
+      </div>
       <Pricing
         plans={pricingPlans}
         title="Web Stress Testing Services"

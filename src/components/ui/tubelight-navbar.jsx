@@ -2,27 +2,14 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
 
-interface NavItem {
-  label: string;
-  href: string;
-  icon?: React.ReactNode;
-}
-
-interface TubelightNavbarProps {
-  items: NavItem[];
-  activeSection?: string;
-  className?: string;
-}
-
 export function TubelightNavbar({
   items,
   activeSection = "",
   className = "",
-}: TubelightNavbarProps) {
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const navRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef(null);
 
-  // Sync activeSection with items
   useEffect(() => {
     const idx = items.findIndex(
       (item) => item.href.replace("#", "") === activeSection
@@ -31,7 +18,7 @@ export function TubelightNavbar({
   }, [activeSection, items]);
 
   const handleClick = useCallback(
-    (e: React.MouseEvent, href: string, index: number) => {
+    (e, href, index) => {
       e.preventDefault();
       setActiveIndex(index);
       const id = href.replace("#", "");
@@ -66,21 +53,20 @@ export function TubelightNavbar({
             href={item.href}
             onClick={(e) => handleClick(e, item.href, index)}
             className={cn(
-              "relative flex items-center justify-center px-3 py-2 rounded-full text-xs font-medium transition-colors duration-200",
-              isActive ? "" : "hover:opacity-80"
+              "relative flex items-center justify-center px-3 py-2 rounded-full text-xs font-medium transition-colors duration-200"
             )}
             style={{
-              color: isActive
-                ? "var(--text-primary)"
-                : "var(--text-muted)",
+              color: isActive ? "var(--text-primary)" : "var(--text-muted)",
             }}
             aria-label={`Navigate to ${item.label}`}
           >
             {isActive && (
               <motion.div
                 layoutId="tubelight-active"
-                className="absolute inset-0 rounded-full"
                 style={{
+                  position: "absolute",
+                  inset: 0,
+                  borderRadius: "9999px",
                   backgroundColor: "var(--violet-bg)",
                   border: "1px solid var(--violet-secondary)",
                 }}
@@ -91,10 +77,15 @@ export function TubelightNavbar({
             {isActive && (
               <motion.div
                 layoutId="tubelight-glow"
-                className="absolute -top-1 left-1/2 -translate-x-1/2 w-8 h-1 rounded-full"
                 style={{
-                  background:
-                    "linear-gradient(90deg, transparent, var(--violet-primary), transparent)",
+                  position: "absolute",
+                  top: "-4px",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: "2rem",
+                  height: "4px",
+                  borderRadius: "9999px",
+                  background: "linear-gradient(90deg, transparent, var(--violet-primary), transparent)",
                   filter: "blur(2px)",
                 }}
                 transition={{ type: "spring", stiffness: 350, damping: 30 }}

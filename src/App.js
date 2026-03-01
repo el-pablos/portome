@@ -13,10 +13,12 @@ import { usePageVisibility } from "./hooks/usePageVisibility";
 // ---------- Critical Above-the-fold imports (NOT lazy loaded) ----------
 import Hero from "./components/sections/Hero";
 import { SectionLoader } from "./components/LoadingSpinner";
+import { TubelightNavbar } from "./components/ui/tubelight-navbar";
 
 // ---------- Lazy loaded components (Below the fold) ----------
 const About = lazy(() => import("./components/sections/About"));
 const Services = lazy(() => import("./components/sections/Services"));
+const TechStack = lazy(() => import("./components/sections/TechStack"));
 const Portfolio = lazy(() => import("./components/sections/Portfolio"));
 const Contact = lazy(() => import("./components/sections/Contact"));
 const Footer = lazy(() => import("./components/sections/Footer"));
@@ -501,7 +503,29 @@ export default function PortfolioTamaELPabloV2() {
     >
       <GlobalStyles />
       <Background />
+
+      {/* Skip to content link for accessibility */}
+      <a 
+        href="#home" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium"
+        style={{ backgroundColor: 'var(--violet-primary)', color: 'white' }}
+      >
+        Skip to content
+      </a>
+
       <Navbar theme={theme} onToggleTheme={handleToggleTheme} />
+
+      {/* Mobile Tubelight Navbar */}
+      <TubelightNavbar 
+        items={[
+          { label: "Home", href: "#home" },
+          { label: "About", href: "#about" },
+          { label: "Work", href: "#services" },
+          { label: "Port", href: "#portfolio" },
+          { label: "Chat", href: "#contact" },
+        ]}
+        activeSection="home"
+      />
 
       {/* HERO - Critical, NOT lazy loaded */}
       <Hero theme={theme} />
@@ -509,6 +533,10 @@ export default function PortfolioTamaELPabloV2() {
       {/* Below the fold content - Lazy loaded */}
       <Suspense fallback={<SectionLoader />}>
         <About theme={theme} />
+      </Suspense>
+
+      <Suspense fallback={<SectionLoader />}>
+        <TechStack />
       </Suspense>
 
       <Suspense fallback={<SectionLoader />}>
@@ -551,9 +579,7 @@ export default function PortfolioTamaELPabloV2() {
       </Suspense>
 
       <Suspense fallback={<div className="h-64" />}>
-        <div className="mx-auto max-w-6xl px-4">
-          <Footer />
-        </div>
+        <Footer />
       </Suspense>
     </div>
   );

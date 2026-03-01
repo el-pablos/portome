@@ -1,154 +1,178 @@
-# Tama EL Pablo | Portfolio Website
+# Porto Tamas — Developer Portfolio
 
-A modern, animated portfolio website showcasing backend development skills and web stress testing services. Built with React and featuring advanced animations, real-time statistics, and responsive design.
+![CI](https://github.com/el-pablos/portome/actions/workflows/ci.yml/badge.svg)
+![License](https://img.shields.io/badge/license-MIT-violet)
+![React](https://img.shields.io/badge/React-18.2-61DAFB?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-enabled-3178C6?logo=typescript)
+![Tailwind](https://img.shields.io/badge/Tailwind-3.4-06B6D4?logo=tailwindcss)
 
-🌐 **Live Demo**: [https://porto.tams.codes](https://porto.tams.codes)
+> Personal portfolio website for **Tama EL Pablo** — Backend Developer specializing in Laravel, PHP, APIs, and security-first DevOps solutions.
 
-## 🌟 Features
-
-### Animated Elements
-- **Typewriter Title**: Animated browser tab title "tamshub | code your dream" with blinking cursor
-- **Dynamic Favicon**: Rotating coding symbols (`</>`, `{}`, `()`) with smooth transitions
-- **URL Hash Animation**: Cycles through `#tamshub`, `#code`, `#your`, `#dream` sections
-- **Theme Transitions**: Smooth 0.3s transitions between light and dark modes
-- **Terminal Animation**: Live typewriter effect in hero terminal component
-
-### Interactive Features
-- **Light/Dark Mode Toggle**: Complete theme switching with proper contrast ratios
-- **Visitor Counter**: Real-time session-based visitor tracking with localStorage
-- **GitHub Statistics**: Live stats from @el-pablos and @dasaraul accounts with API rate limiting
-- **Responsive Design**: Optimized for screens from 320px to 2560px width
-- **Smooth Scrolling**: Section navigation with active state detection
-
-### Technical Highlights
-- **Performance Optimized**: 60fps animations using transform and opacity only
-- **Accessibility**: WCAG AA contrast ratios, keyboard navigation, screen reader support
-- **Core Web Vitals**: LCP < 2.5s, FID < 100ms, CLS < 0.1
-- **Browser Compatibility**: Chrome, Firefox, Safari, Edge support
-
-## 🔧 Technology Stack
-
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript (React)
-- **Styling**: Tailwind CSS with custom CSS variables for theming
-- **Icons**: Lucide React icons
-- **Animations**: Framer Motion for complex animations
-- **APIs**: GitHub REST API v4 with rate limiting and caching
-- **Build**: Create React App with optimization
-
-## 🚀 Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/el-pablos/portome.git
-cd portome
-
-# Install dependencies
-npm install
-
-# Start development server
-npm start
-
-# Build for production
-npm run build
-```
-
-## 📁 Project Structure
-
-```
-portome/
-├── src/
-│   ├── App.js           # Main React component with all features
-│   ├── index.js         # Application entry point
-│   └── index.css        # Tailwind CSS imports
-├── public/
-│   ├── index.html       # HTML template
-│   └── favicon.ico      # Static favicon (replaced by animated)
-├── build/               # Production build output
-└── package.json         # Dependencies and scripts
-```
-
-## 🎨 Features Overview
-
-### 🖥️ Portfolio Sections
-- **Hero**: Animated terminal with typing commands
-- **About**: Developer introduction with GitHub links
-- **GitHub Stats**: Live repository and activity statistics
-- **Services**: Backend development, OSINT, API integration, DevOps
-- **Stress Testing**: Professional web stress testing services with pricing
-- **Showcase**: Verified stress testing results with proof images
-- **Portfolio**: Featured projects from GitHub accounts
-- **Contact**: Multiple contact methods and call-to-action
-
-### ⚡ Animation System
-- **Title Animation**: Character-by-character typewriter with cursor blink
-- **Favicon Rotation**: Canvas-generated 32x32px animated icons
-- **Hash Cycling**: URL updates without page jumping using replaceState
-- **Theme Transitions**: CSS custom properties with smooth color changes
-- **Hover Effects**: Transform-based micro-interactions
-
-### 📊 Real-time Data
-- **Visitor Tracking**: Session-based counting with multi-tab sync
-- **GitHub Integration**: Repository count, activity events, last commit date
-- **API Management**: 10-minute caching, exponential backoff, error handling
-- **Loading States**: Smooth loading indicators and error boundaries
-
-## 🌐 Browser Compatibility
-
-| Browser | Version | Status |
-|---------|---------|--------|
-| Chrome  | 90+     | ✅ Full Support |
-| Firefox | 88+     | ✅ Full Support |
-| Safari  | 14+     | ✅ Full Support |
-| Edge    | 90+     | ✅ Full Support |
-
-## 📱 Responsive Breakpoints
-
-- **Mobile**: 320px - 768px (optimized touch interactions)
-- **Tablet**: 768px - 1024px (adaptive layouts)
-- **Desktop**: 1024px - 2560px (full feature set)
-
-## 🛡️ Security & Performance
-
-- **Content Security Policy**: Prevents XSS attacks
-- **Rate Limiting**: GitHub API requests with proper backoff
-- **Error Boundaries**: Graceful failure handling
-- **Performance**: Optimized bundle size, lazy loading, efficient re-renders
-
-## 🎯 SEO & Accessibility
-
-- **Semantic HTML**: Proper heading hierarchy and landmarks
-- **ARIA Labels**: Screen reader compatibility
-- **Meta Tags**: Open Graph and Twitter Card support
-- **Alt Text**: Descriptive image alternatives
-- **Focus Management**: Keyboard navigation support
-
-## 📈 Analytics & Monitoring
-
-- **Visitor Counter**: Unique session tracking
-- **GitHub Stats**: Repository and activity monitoring
-- **Performance Metrics**: Core Web Vitals tracking
-- **Error Tracking**: API failure monitoring with fallbacks
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📞 Contact
-
-- **GitHub**: [@el-pablos](https://github.com/el-pablos) | [@dasaraul](https://github.com/dasaraul)
-- **Telegram**: [@ImTamaa](https://t.me/ImTamaa)
-- **Email**: yeteprem.end23juni@gmail.com
-- **Location**: Jakarta Selatan, Indonesia
-
-## 📄 License
-
-This project is open source and available under the MIT License.
+**Live**: [porto.tams.codes](https://porto.tams.codes)
 
 ---
 
-**Tama EL Pablo** - Backend Developer | Open Source Enthusiast | Security Researcher
-*Building reliable APIs and secure systems with Laravel and modern technologies*
+## Features
+
+- **10 Custom UI Components** — Shape Landing Hero, Animated Text, Spotlight Cards, Cybernetic Bento Grid, Gradient Heading, Logo Carousel, Circular Testimonials, Tubelight Navbar, Zoom Parallax, Flickering Footer
+- **Dark/Light Theme** — Violet/purple palette with CSS custom properties
+- **Accessibility** — Skip-to-content link, ARIA labels, landmark roles, `prefers-reduced-motion` support
+- **Performance** — React.lazy code-splitting, passive scroll listeners, IntersectionObserver, memoized components
+- **SEO** — Open Graph & Twitter Card meta tags, semantic HTML
+- **TypeScript** — Enabled with gradual adoption (`.tsx` for new components, `.jsx` for motion-heavy files)
+- **CI/CD** — GitHub Actions for lint/test/build pipeline, deploy workflow, auto-release
+
+## Architecture
+
+```mermaid
+graph TD
+    A[App.js] --> B[GlobalStyles]
+    A --> C[Navbar]
+    A --> D[TubelightNavbar - Mobile]
+    A --> E[Hero]
+    A --> F[About]
+    A --> G[TechStack]
+    A --> H[Services]
+    A --> I[StressingService]
+    A --> J[Showcase]
+    A --> K[Portfolio]
+    A --> L[Gallery]
+    A --> M[Testimonials]
+    A --> N[Contact]
+    A --> O[Footer]
+
+    subgraph "UI Components (src/components/ui/)"
+        P[shape-landing-hero]
+        Q[portfolio-text]
+        R[spotlight-card]
+        S[cybernetic-bento-grid]
+        T[gradient-heading]
+        U[logo-carousel]
+        V[circular-testimonials]
+        W[tubelight-navbar]
+        X[zoom-parallax]
+        Y[flickering-footer]
+        Z[hero-ascii-one]
+    end
+
+    E --> P
+    E --> Q
+    H --> R
+    H --> S
+    G --> T
+    G --> U
+    M --> V
+    D --> W
+    O --> Y
+    I --> Z
+```
+
+## Project Structure
+
+```
+src/
+├── __mocks__/           # Jest mocks for ESM packages
+├── __tests__/           # Test suites
+│   ├── App.test.js      # App smoke tests
+│   ├── Sections.test.js # Section render tests
+│   └── UIComponents.test.js # UI component tests
+├── components/
+│   ├── common/          # Shared components (Button, Card, etc.)
+│   ├── sections/        # Page sections (Hero, About, Services, etc.)
+│   └── ui/              # UI primitives (shadcn-like)
+├── hooks/               # Custom hooks (useReducedMotion, usePageVisibility)
+├── lib/                 # Utilities (cn helper)
+├── App.js               # Main app shell
+├── index.js             # Entry point
+└── index.css            # Tailwind directives
+```
+
+## Tech Stack
+
+| Category | Technology |
+|----------|-----------|
+| Framework | React 18.2 + Create React App |
+| Styling | Tailwind CSS 3.4 + CSS Variables |
+| Animation | Framer Motion 10 |
+| Icons | Lucide React, React Icons |
+| Type Safety | TypeScript 5.9 (gradual) |
+| Testing | Jest + React Testing Library |
+| CI/CD | GitHub Actions |
+
+## Getting Started
+
+```bash
+# Clone
+git clone https://github.com/el-pablos/portome.git
+cd portome
+
+# Install
+npm ci --legacy-peer-deps
+
+# Dev server
+npm start
+
+# Build
+npm run build
+
+# Test
+npm test
+
+# Lint
+npm run lint
+```
+
+## Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm start` | Development server on port 3000 |
+| `npm run build` | Production build to `build/` |
+| `npm test` | Run tests in watch mode |
+| `npm run lint` | ESLint check with zero warnings |
+
+## CI/CD
+
+- **CI Pipeline** (`ci.yml`) — Runs lint → test → build on push/PR to main across Node 18/20/22
+- **Deploy** (`deploy.yml`) — Builds and deploys to server via SCP on push to main
+- **Release** (`release.yml`) — Auto-generates changelog and creates GitHub Release on version tags
+
+## Environment Variables (Deploy)
+
+Set these as GitHub repository secrets:
+
+| Secret | Description |
+|--------|-------------|
+| `DEPLOY_HOST` | Server hostname/IP |
+| `DEPLOY_USER` | SSH username |
+| `DEPLOY_KEY` | SSH private key |
+| `DEPLOY_PATH` | Target directory path |
+
+## Color Theme
+
+The violet/purple palette is defined via CSS custom properties:
+
+| Variable | Light | Dark |
+|----------|-------|------|
+| `--violet-primary` | `#7c3aed` | `#a78bfa` |
+| `--violet-secondary` | `#8b5cf6` | `#c4b5fd` |
+| `--bg-primary` | `#ffffff` | `#0b0414` |
+| `--bg-card` | `rgba(255,255,255,0.8)` | `rgba(255,255,255,0.05)` |
+
+## Interactive Features
+
+- **Typewriter Title** — Animated browser tab title with blinking cursor
+- **Dynamic Favicon** — Rotating coding symbols (`</>`, `{}`, `()`)
+- **URL Hash Animation** — Cycles through themed hash values
+- **Visitor Counter** — Session-based tracking with localStorage
+- **GitHub Statistics** — Live stats from @el-pablos and @dasaraul accounts
+
+## Contact
+
+- **GitHub**: [@el-pablos](https://github.com/el-pablos) | [@dasaraul](https://github.com/dasaraul)
+- **Telegram**: [@ImTamaa](https://t.me/ImTamaa)
+- **Location**: Jakarta Selatan, Indonesia
+
+## License
+
+MIT © Tama EL Pablo

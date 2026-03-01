@@ -266,6 +266,7 @@ const Navbar = memo(({ onToggleTheme, theme }) => {
               as="button" 
               onClick={onToggleTheme} 
               style={{ backgroundColor: 'var(--bg-button)', color: 'var(--text-primary)' }}
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             >
               {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
               <span className="hidden sm:inline">{theme === "dark" ? "Light" : "Dark"}</span>
@@ -513,7 +514,9 @@ export default function PortfolioTamaELPabloV2() {
         Skip to content
       </a>
 
-      <Navbar theme={theme} onToggleTheme={handleToggleTheme} />
+      <header role="banner">
+        <Navbar theme={theme} onToggleTheme={handleToggleTheme} />
+      </header>
 
       {/* Mobile Tubelight Navbar */}
       <TubelightNavbar 
@@ -527,6 +530,7 @@ export default function PortfolioTamaELPabloV2() {
         activeSection="home"
       />
 
+      <main id="main-content" role="main">
       {/* HERO - Critical, NOT lazy loaded */}
       <Hero theme={theme} />
 
@@ -577,6 +581,8 @@ export default function PortfolioTamaELPabloV2() {
       <Suspense fallback={<SectionLoader />}>
         <Contact />
       </Suspense>
+
+      </main>
 
       <Suspense fallback={<div className="h-64" />}>
         <Footer />

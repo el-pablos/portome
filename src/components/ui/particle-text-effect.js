@@ -394,10 +394,12 @@ export function ParticleTextEffect({
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("contextmenu", handleContextMenu);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVisible, words, width, height, pixelSteps, drawAsPoints]);
 
   // Intersection Observer for lazy loading
   useEffect(() => {
+    const node = canvasRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -409,13 +411,13 @@ export function ParticleTextEffect({
       { threshold: 0.1 }
     );
 
-    if (canvasRef.current) {
-      observer.observe(canvasRef.current);
+    if (node) {
+      observer.observe(node);
     }
 
     return () => {
-      if (canvasRef.current) {
-        observer.unobserve(canvasRef.current);
+      if (node) {
+        observer.unobserve(node);
       }
     };
   }, []);

@@ -156,7 +156,7 @@ const Background = memo(() => (
 ));
 
 // ---------- Button Component ----------
-const Button = memo(({ as: Tag = "a", href, onClick, children, className = "", target, rel, type, style }) => (
+const Button = memo(({ as: Tag = "a", href, onClick, children, className = "", target, rel, type, style, ...rest }) => (
   <Tag
     href={href}
     onClick={onClick}
@@ -165,6 +165,7 @@ const Button = memo(({ as: Tag = "a", href, onClick, children, className = "", t
     type={type}
     style={style}
     className={`inline-flex items-center gap-2 rounded-2xl px-5 py-2.5 font-medium transition-[transform,background,opacity] duration-150 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-[0.99] ${className}`}
+    {...rest}
   >
     {children}
   </Tag>
@@ -301,6 +302,7 @@ const useAnimatedFavicon = () => {
       canvas.width = 32;
       canvas.height = 32;
       const ctx = canvas.getContext('2d');
+      if (!ctx) return '';
 
       ctx.fillStyle = '#7c3aed';
       ctx.fillRect(0, 0, 32, 32);

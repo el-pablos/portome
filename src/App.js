@@ -459,23 +459,6 @@ const useAnimatedHash = () => {
   }, [isVisible, prefersReducedMotion]);
 };
 
-// ---------- Section Title Component ----------
-const SectionTitle = memo(({ pre, title, desc }) => (
-  <div className="mx-auto max-w-4xl text-center mb-12">
-    <div className="text-sm uppercase tracking-[0.3em] mb-4" style={{color: 'var(--violet-secondary)'}}>
-      {pre}
-    </div>
-    <h2 className="mt-2 text-3xl sm:text-4xl font-semibold" style={{color: 'var(--text-primary)'}}>
-      {title}
-    </h2>
-    {desc && (
-      <p className="mt-4 text-base sm:text-lg max-w-3xl mx-auto px-4" style={{color: 'var(--text-secondary)'}}>
-        {desc}
-      </p>
-    )}
-  </div>
-));
-
 // ---------- Main App ----------
 export default function PortfolioTamaELPabloV2() {
   const [theme, setTheme] = useState("dark");
@@ -567,12 +550,7 @@ export default function PortfolioTamaELPabloV2() {
 
       {/* PHOTO GALLERY */}
       <Suspense fallback={<SectionLoader />}>
-        <section id="gallery" className="py-16">
-          <div className="mx-auto max-w-6xl px-4">
-            <SectionTitle pre="Gallery" title="My Moments" desc="Koleksi foto-foto pribadi dan momen awikwok." />
-            <PhotoGallery />
-          </div>
-        </section>
+        <PhotoGallery />
       </Suspense>
 
       {/* TESTIMONIALS */}

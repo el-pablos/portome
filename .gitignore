@@ -1,6 +1,9 @@
-# Markdown files (except README.md)
+# Markdown files (except README.md and docs/)
 *.md
 !README.md
+!DEPLOYMENT.md
+!docs/
+!docs/**/*.md
 
 # AI Coding Agents & Assistants
 .claude/

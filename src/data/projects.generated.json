@@ -1,0 +1,167 @@
+[
+  {
+    "name": "ai-whatsapp-chatbot",
+    "description": "",
+    "url": "https://github.com/el-pablos/ai-whatsapp-chatbot",
+    "homepage": "",
+    "language": "JavaScript",
+    "topics": [],
+    "stars": 0,
+    "forks": 0,
+    "updatedAt": "2026-03-01T03:16:14Z",
+    "createdAt": "2026-02-01T16:50:20Z"
+  },
+  {
+    "name": "pentest-for-qa",
+    "description": "All-in-One Pentest Toolkit - 20+ security tools recoded By Tama | Recon, SQLi, XSS, OSINT, RAT & more",
+    "url": "https://github.com/el-pablos/pentest-for-qa",
+    "homepage": "",
+    "language": "Go",
+    "topics": [
+      "hacking",
+      "penetration-testing",
+      "pentest",
+      "security",
+      "osint",
+      "rat",
+      "recon",
+      "sqlinjection",
+      "vulnerability-scanner",
+      "xss"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "updatedAt": "2026-02-25T21:54:02Z",
+    "createdAt": "2026-02-15T22:23:54Z"
+  },
+  {
+    "name": "tamshub-store",
+    "description": "TamsHub Store - Platform Top Up Game & Online Service (Laravel + Next.js)",
+    "url": "https://github.com/el-pablos/tamshub-store",
+    "homepage": "",
+    "language": "TypeScript",
+    "topics": [],
+    "stars": 0,
+    "forks": 0,
+    "updatedAt": "2026-02-22T04:37:51Z",
+    "createdAt": "2026-02-22T01:25:49Z"
+  },
+  {
+    "name": "simulasi-atm-udin",
+    "description": "Simulasi Antrian ATM - Laravel 11 queuing theory simulator (M/M/1 & M/M/c) dengan dashboard interaktif & role-based auth",
+    "url": "https://github.com/el-pablos/simulasi-atm-udin",
+    "homepage": "",
+    "language": "Blade",
+    "topics": [
+      "atm",
+      "dashboard",
+      "laravel",
+      "php",
+      "queuing-theory",
+      "simulation",
+      "tailwindcss",
+      "university-project"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "updatedAt": "2026-02-15T22:18:11Z",
+    "createdAt": "2026-02-15T22:17:31Z"
+  },
+  {
+    "name": "unfollow-tools",
+    "description": "Instagram automation tool - mass unfollow, delete media & highlights. Built with Playwright & Node.js",
+    "url": "https://github.com/el-pablos/unfollow-tools",
+    "homepage": "",
+    "language": "JavaScript",
+    "topics": [
+      "automation",
+      "bot",
+      "instagram",
+      "javascript",
+      "nodejs",
+      "playwright",
+      "social-media",
+      "unfollow"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "updatedAt": "2026-02-15T22:10:22Z",
+    "createdAt": "2026-02-15T22:10:02Z"
+  },
+  {
+    "name": "valentine",
+    "description": "Surat digital dari Tama untuk Vida - Happy Valentine's Day",
+    "url": "https://github.com/el-pablos/valentine",
+    "homepage": "https://valentine-five-gold-81.vercel.app",
+    "language": "TypeScript",
+    "topics": [
+      "framer-motion",
+      "love-letter",
+      "nextjs",
+      "react",
+      "tailwindcss",
+      "typescript",
+      "valentine",
+      "webapp"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "updatedAt": "2026-02-15T22:07:04Z",
+    "createdAt": "2026-02-14T23:06:00Z"
+  },
+  {
+    "name": "reboot-godot-uas-projek",
+    "description": "Project: REBOOT  2D Action Platformer (Godot 4.x) | 188 Tests | CI/CD | CC0 Assets",
+    "url": "https://github.com/el-pablos/reboot-godot-uas-projek",
+    "homepage": "",
+    "language": "GDScript",
+    "topics": [
+      "2d-game",
+      "ci-cd",
+      "game-dev",
+      "godot",
+      "godot4",
+      "platformer"
+    ],
+    "stars": 0,
+    "forks": 0,
+    "updatedAt": "2026-02-13T05:37:09Z",
+    "createdAt": "2026-01-28T07:53:48Z"
+  },
+  {
+    "name": "caturnawa-uf-2025",
+    "description": "Apalah",
+    "url": "https://github.com/el-pablos/caturnawa-uf-2025",
+    "homepage": "",
+    "language": "Blade",
+    "topics": [],
+    "stars": 2,
+    "forks": 0,
+    "updatedAt": "2026-02-06T23:34:26Z",
+    "createdAt": "2025-06-22T08:59:28Z"
+  },
+  {
+    "name": "rpl-digital-library",
+    "description": "",
+    "url": "https://github.com/el-pablos/rpl-digital-library",
+    "homepage": "",
+    "language": "PHP",
+    "topics": [],
+    "stars": 0,
+    "forks": 0,
+    "updatedAt": "2026-01-05T05:00:14Z",
+    "createdAt": "2026-01-05T04:34:54Z"
+  },
+  {
+    "name": "platform-aduan-masyarakat",
+    "description": "",
+    "url": "https://github.com/el-pablos/platform-aduan-masyarakat",
+    "homepage": "",
+    "language": "Blade",
+    "topics": [],
+    "stars": 0,
+    "forks": 0,
+    "updatedAt": "2025-11-17T21:47:25Z",
+    "createdAt": "2025-11-17T21:36:37Z"
+  }
+]

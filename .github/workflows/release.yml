@@ -2,15 +2,15 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
 
 permissions:
   contents: write
 
 jobs:
   release:
-    name: Create Release
+    name: Auto-tag & Release
     runs-on: ubuntu-latest
 
     steps:
@@ -33,6 +33,15 @@ jobs:
         env:
           CI: false
 
+      - name: Generate tag
+        id: tag
+        run: |
+          SHA_SHORT=$(git rev-parse --short HEAD)
+          TAG="v0.0.${GITHUB_RUN_NUMBER}-${SHA_SHORT}"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          git tag "$TAG"
+          git push origin "$TAG"
+
       - name: Generate changelog
         id: changelog
         run: |
@@ -49,6 +58,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.tag.outputs.tag }}
           body: |
             ## Changes
             ${{ steps.changelog.outputs.changes }}

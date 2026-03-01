@@ -33,6 +33,22 @@ describe('Portfolio section', () => {
     const { container } = render(<Portfolio />);
     expect(container.querySelector('#portfolio')).toBeInTheDocument();
   });
+
+  it('renders project cards from generated data', async () => {
+    const Portfolio = (await import('../components/sections/Portfolio')).default;
+    const { container } = render(<Portfolio />);
+    const grid = container.querySelector('[data-testid="portfolio-grid"]');
+    expect(grid).toBeInTheDocument();
+    // Should have at least 1 project card
+    expect(grid.children.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('renders filter buttons', async () => {
+    const Portfolio = (await import('../components/sections/Portfolio')).default;
+    render(<Portfolio />);
+    // "All" filter always present
+    expect(screen.getByRole('radio', { name: /All/i })).toBeInTheDocument();
+  });
 });
 
 describe('Contact section', () => {
@@ -65,5 +81,13 @@ describe('Testimonials section', () => {
     const Testimonials = (await import('../components/sections/Testimonials')).default;
     const { container } = render(<Testimonials />);
     expect(container).toBeInTheDocument();
+  });
+});
+
+describe('Gallery section', () => {
+  it('renders with #gallery id', async () => {
+    const Gallery = (await import('../components/sections/Gallery')).default;
+    const { container } = render(<Gallery />);
+    expect(container.querySelector('#gallery')).toBeInTheDocument();
   });
 });

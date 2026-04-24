@@ -35,7 +35,7 @@ export function TubelightNavbar({
       ref={navRef}
       className={cn(
         "fixed bottom-4 left-1/2 -translate-x-1/2 z-50 md:hidden",
-        "flex items-center gap-1 rounded-full p-1.5",
+        "flex max-w-[22.4rem] items-center gap-1 rounded-full p-1.5",
         "backdrop-blur-xl border shadow-xl",
         className
       )}
@@ -93,7 +93,7 @@ export function TubelightNavbar({
             )}
             <span className="relative z-10 flex items-center gap-1">
               {item.icon}
-              <span className="hidden min-[400px]:inline">{item.label}</span>
+              <span className="hidden min-[520px]:inline">{item.label}</span>
             </span>
           </a>
         );

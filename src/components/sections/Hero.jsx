@@ -140,7 +140,7 @@ const Hero = memo(() => {
       </div>
 
       <motion.div className="mx-auto grid max-w-7xl min-w-0 gap-10 px-4 sm:px-6 lg:grid-cols-[1.02fr_0.78fr] lg:items-end lg:px-8" {...motionProps}>
-        <div className="min-w-0 max-w-4xl">
+        <div className="w-full min-w-0 max-w-[22.4rem] min-[420px]:max-w-[24rem] sm:max-w-4xl">
           <motion.div variants={reveal} className="mb-5 flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-black uppercase" style={{ borderColor: "var(--border-color)", background: "var(--bg-button)", color: "var(--accent-2)", letterSpacing: "0.14em" }}>
               <span className="size-2 rounded-full animate-pulse" style={{ background: "var(--accent-2)" }} />
@@ -157,7 +157,7 @@ const Hero = memo(() => {
             that feel alive.
           </motion.h1>
 
-          <motion.p variants={reveal} className="mt-6 max-w-[min(42rem,calc(100vw-2rem))] break-words text-sm leading-7 sm:text-lg sm:leading-8" style={{ color: "var(--text-secondary)" }}>
+          <motion.p variants={reveal} className="mt-6 max-w-full break-words text-sm leading-7 sm:max-w-2xl sm:text-lg sm:leading-8" style={{ color: "var(--text-secondary)" }}>
             Portfolio baru untuk backend developer yang fokus ke API, Laravel, integrasi, automation, dan security-minded delivery. Dibuat mobile-first dengan visual editorial, motion halus, asset real, dan komponen yang tetap aktif.
           </motion.p>
 
@@ -184,7 +184,7 @@ const Hero = memo(() => {
           </motion.div>
         </div>
 
-        <motion.div variants={reveal} className="grid min-w-0 gap-4 lg:pb-4">
+        <motion.div variants={reveal} className="grid w-full min-w-0 max-w-[22.4rem] gap-4 min-[420px]:max-w-[24rem] sm:max-w-none lg:pb-4">
           <div className="kinetic-card relative overflow-hidden rounded-[1.6rem] p-4">
             <div className="absolute inset-x-6 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent)" }} />
             <div className="flex items-start justify-between gap-4">

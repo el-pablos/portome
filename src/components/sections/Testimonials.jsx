@@ -1,86 +1,90 @@
-import React, { useMemo, memo } from 'react';
-import { Testimonials } from '../ui/testimonials-columns';
-import { CircularTestimonials } from '../ui/circular-testimonials';
+import React, { memo, useMemo } from "react";
+import { MessageSquareQuote, ShieldCheck, Sparkles } from "lucide-react";
+import { Testimonials } from "../ui/testimonials-columns";
+import { CircularTestimonials } from "../ui/circular-testimonials";
 
-// ---------- Testimonials Section Wrapper ----------
 const TestimonialsSection = memo(() => {
   const testimonials = useMemo(() => [
     {
-      text: "Tama delivered an exceptional backend system that scaled perfectly with our growth. His expertise in Node.js and database optimization was invaluable.",
+      text: "Tama keeps the work direct: routes are clear, API behavior is predictable, and handoff notes are easy to follow.",
       image: "https://randomuser.me/api/portraits/men/1.jpg",
       name: "Alex Johnson",
       role: "CTO at TechStart Inc",
     },
     {
-      text: "Working with Tama was a breeze. He understood our requirements perfectly and delivered a robust API that handles millions of requests daily.",
+      text: "The implementation felt fast without becoming messy. He handled integration details and kept edge cases visible.",
       image: "https://randomuser.me/api/portraits/women/2.jpg",
       name: "Sarah Chen",
       role: "Product Manager at CloudSync",
     },
     {
-      text: "Tama's code quality is outstanding. Clean, well-documented, and maintainable. He's my go-to developer for complex backend projects.",
+      text: "Clean code, practical security notes, and a repo structure that was simple to continue after delivery.",
       image: "https://randomuser.me/api/portraits/men/3.jpg",
       name: "Michael Rodriguez",
       role: "Lead Developer at DataFlow",
     },
     {
-      text: "The authentication system Tama built for us is rock solid. Zero security issues and excellent performance. Highly recommended!",
+      text: "The auth and API flow landed solid. The review notes helped our team avoid a few risky shortcuts.",
       image: "https://randomuser.me/api/portraits/women/4.jpg",
       name: "Emily Watson",
       role: "Founder at StartupHub",
     },
     {
-      text: "Tama's expertise in payment gateway integration saved us months of development time. Professional, reliable, and highly skilled.",
+      text: "Payment integration, webhook behavior, and release checks were documented clearly enough for the whole team.",
       image: "https://randomuser.me/api/portraits/men/5.jpg",
       name: "David Kim",
       role: "Engineering Manager at FinTech",
     },
     {
-      text: "The real-time notification system Tama developed exceeded our expectations. Fast, reliable, and perfectly integrated with our stack.",
+      text: "The UI polish did not come at the cost of performance. Motion felt intentional and responsive.",
       image: "https://randomuser.me/api/portraits/women/6.jpg",
       name: "Lisa Anderson",
       role: "Tech Lead at E-Commerce Pro",
     },
-    {
-      text: "Outstanding work on our microservices architecture. Tama's solutions are always elegant and performant.",
-      image: "https://randomuser.me/api/portraits/men/7.jpg",
-      name: "James Wilson",
-      role: "CTO at ScaleUp",
-    },
-    {
-      text: "The database optimization Tama performed improved our query performance by 10x. Absolutely brilliant work!",
-      image: "https://randomuser.me/api/portraits/women/8.jpg",
-      name: "Maria Garcia",
-      role: "Data Engineer at BigData Corp",
-    },
-    {
-      text: "Tama's API design is world-class. Clean, RESTful, and perfectly documented. A pleasure to work with.",
-      image: "https://randomuser.me/api/portraits/men/9.jpg",
-      name: "Robert Taylor",
-      role: "Senior Developer at API Solutions",
-    },
   ], []);
 
   return (
-    <section className="py-16">
-      <div className="mx-auto max-w-6xl px-4">
-        <div className="mx-auto max-w-4xl text-center mb-12">
-          <div className="text-sm uppercase tracking-[0.3em] mb-4" style={{ color: 'var(--violet-secondary)' }}>
-            Testimonials
+    <section className="py-16 sm:py-24" aria-label="Testimonials">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="glass-panel rounded-[1.8rem] p-5 sm:p-8">
+          <div className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+            <div>
+              <div className="section-kicker">Testimonials</div>
+              <h2 className="section-title mt-4 font-display text-4xl sm:text-5xl lg:text-6xl">
+                Feedback with motion and rhythm.
+              </h2>
+              <p className="mt-5 text-base leading-8" style={{ color: "var(--text-secondary)" }}>
+                Dua mode testimonial tetap dipakai: circular active card untuk interaksi, lalu column marquee untuk density.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {[
+                { value: testimonials.length, label: "voices", icon: MessageSquareQuote },
+                { value: "2", label: "layouts", icon: Sparkles },
+                { value: "A11y", label: "controls", icon: ShieldCheck },
+              ].map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.label} className="rounded-lg border p-4" style={{ borderColor: "var(--border-color)", background: "var(--bg-button)" }}>
+                    <Icon className="size-5" style={{ color: "var(--accent-2)" }} />
+                    <div className="mt-3 font-display text-3xl font-black" style={{ color: "var(--accent)" }}>
+                      {item.value}
+                    </div>
+                    <div className="mt-1 text-xs font-bold uppercase" style={{ color: "var(--text-muted)", letterSpacing: "0.1em" }}>
+                      {item.label}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-semibold" style={{ color: 'var(--text-primary)' }}>
-            What Clients Say
-          </h2>
-          <p className="mt-4 text-base sm:text-lg max-w-3xl mx-auto px-4" style={{ color: 'var(--text-secondary)' }}>
-            Feedback dari orang-orang yang udah kerja bareng gue.
-          </p>
+
+          <div className="mt-10">
+            <CircularTestimonials testimonials={testimonials} autoplayDuration={5200} />
+          </div>
         </div>
 
-        {/* Circular Testimonials (interactive single-view) */}
-        <CircularTestimonials testimonials={testimonials} autoplayDuration={5000} />
-
-        {/* Columns Testimonials (all visible) */}
-        <div className="mt-12">
+        <div className="mt-10">
           <Testimonials testimonials={testimonials} />
         </div>
       </div>
@@ -88,6 +92,6 @@ const TestimonialsSection = memo(() => {
   );
 });
 
-TestimonialsSection.displayName = 'TestimonialsSection';
+TestimonialsSection.displayName = "TestimonialsSection";
 
 export default TestimonialsSection;

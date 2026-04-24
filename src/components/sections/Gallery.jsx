@@ -1,63 +1,79 @@
-import React, { useMemo, memo } from 'react';
-import { FocusCards } from '../ui/focus-cards';
-import { ZoomParallax } from '../ui/zoom-parallax';
+import React, { memo, useMemo } from "react";
+import { Camera, GalleryHorizontalEnd, MapPinned } from "lucide-react";
+import { FocusCards } from "../ui/focus-cards";
+import { ZoomParallax } from "../ui/zoom-parallax";
 
-// ---------- Photo data ----------
 const photos = [
-  { title: "Moment 1",  src: "/me/IMG-20251010-WA0020.jpg" },
-  { title: "Moment 2",  src: "/me/IMG-20251010-WA0021.jpg" },
-  { title: "Moment 3",  src: "/me/IMG-20251010-WA0022.jpg" },
-  { title: "Moment 4",  src: "/me/IMG-20251010-WA0023.jpg" },
-  { title: "Moment 5",  src: "/me/IMG-20251010-WA0024.jpg" },
-  { title: "Moment 6",  src: "/me/IMG-20251010-WA0025.jpg" },
-  { title: "Moment 7",  src: "/me/IMG-20251010-WA0026.jpg" },
-  { title: "Moment 8",  src: "/me/IMG-20251010-WA0027.jpg" },
-  { title: "Moment 9",  src: "/me/IMG-20251010-WA0028.jpg" },
-  { title: "Moment 10", src: "/me/IMG-20251010-WA0029.jpg" },
-  { title: "Moment 11", src: "/me/WhatsApp%20Image%202025-10-10%20at%2022.26.17_c4dc76b3.jpg" },
-  { title: "Special Moment", src: "/me/WhatsApp%20Image%202025-10-10%20at%2022.29.14_344c694c.jpg" },
+  { title: "Waterfall Camp", src: "/assets/me/IMG-20251010-WA0021.jpg" },
+  { title: "River Outlook", src: "/assets/me/IMG-20251010-WA0024.jpg" },
+  { title: "Travel Frame 01", src: "/assets/me/IMG-20251010-WA0020.jpg" },
+  { title: "Travel Frame 02", src: "/assets/me/IMG-20251010-WA0022.jpg" },
+  { title: "Travel Frame 03", src: "/assets/me/IMG-20251010-WA0023.jpg" },
+  { title: "Travel Frame 04", src: "/assets/me/IMG-20251010-WA0025.jpg" },
+  { title: "Travel Frame 05", src: "/assets/me/IMG-20251010-WA0026.jpg" },
+  { title: "Travel Frame 06", src: "/assets/me/IMG-20251010-WA0027.jpg" },
+  { title: "Travel Frame 07", src: "/assets/me/IMG-20251010-WA0028.jpg" },
+  { title: "Travel Frame 08", src: "/assets/me/IMG-20251010-WA0029.jpg" },
+  { title: "Evening Portrait", src: "/assets/me/WhatsApp%20Image%202025-10-10%20at%2022.26.17_c4dc76b3.jpg" },
+  { title: "Special Moment", src: "/assets/me/WhatsApp%20Image%202025-10-10%20at%2022.29.14_344c694c.jpg" },
 ];
 
-// ---------- ZoomParallax items (first 7 photos) ----------
-const parallaxItems = photos.slice(0, 7).map((p, i) => ({
-  src: p.src,
-  scale: [1, 4 + i],
-  top: i < 3 ? "0%" : "-10%",
-  left: `${(i % 4) * 25}%`,
-  width: i === 1 || i === 4 ? "35%" : "25%",
+const parallaxItems = photos.slice(0, 7).map((photo, index) => ({
+  src: photo.src,
+  scale: [1, 3.4 + index * 0.55],
+  top: index < 3 ? "0%" : "-10%",
+  left: `${(index % 4) * 24}%`,
+  width: index === 1 || index === 4 ? "35%" : "25%",
 }));
 
-// ---------- Photo Gallery Section ----------
 const PhotoGallery = memo(() => {
   const cards = useMemo(() => photos, []);
 
   return (
-    <section id="gallery" className="py-16" aria-label="Photo Gallery">
-      <div className="mx-auto max-w-6xl px-4">
-        <div className="mx-auto max-w-4xl text-center mb-12">
-          <div className="text-sm uppercase tracking-[0.3em] mb-4" style={{ color: 'var(--violet-secondary)' }}>
-            Gallery
+    <section id="gallery" className="py-16 sm:py-24" aria-label="Photo Gallery">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.7fr] lg:items-end">
+          <div>
+            <div className="section-kicker">Gallery</div>
+            <h2 className="section-title mt-4 font-display text-4xl sm:text-5xl lg:text-6xl">
+              Real moments, not stock filler.
+            </h2>
+            <p className="mt-5 max-w-3xl text-base leading-8" style={{ color: "var(--text-secondary)" }}>
+              Asset visual portfolio memakai foto asli dari folder project. Ini bikin halaman terasa personal, bukan template generik.
+            </p>
           </div>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-semibold" style={{ color: 'var(--text-primary)' }}>
-            My Moments
-          </h2>
-          <p className="mt-4 text-base sm:text-lg max-w-3xl mx-auto px-4" style={{ color: 'var(--text-secondary)' }}>
-            Koleksi foto-foto pribadi dan momen awikwok.
-          </p>
+          <div className="grid grid-cols-3 gap-3">
+            {[
+              { value: photos.length, label: "photos", icon: Camera },
+              { value: "2", label: "featured frames", icon: GalleryHorizontalEnd },
+              { value: "ID", label: "local story", icon: MapPinned },
+            ].map((item) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.label} className="rounded-lg border p-4" style={{ borderColor: "var(--border-color)", background: "var(--bg-card)" }}>
+                  <Icon className="size-5" style={{ color: "var(--accent-2)" }} />
+                  <div className="mt-3 font-display text-3xl font-black" style={{ color: "var(--accent)" }}>
+                    {item.value}
+                  </div>
+                  <div className="mt-1 text-xs font-bold uppercase" style={{ color: "var(--text-muted)", letterSpacing: "0.1em" }}>
+                    {item.label}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      {/* Parallax zoom intro */}
-      <ZoomParallax items={parallaxItems} className="mb-16" />
+      <ZoomParallax items={parallaxItems} className="my-10 sm:my-16" />
 
-      {/* Focus cards grid */}
-      <div className="py-8">
+      <div className="px-4 pb-4 sm:px-6 lg:px-8">
         <FocusCards cards={cards} />
       </div>
     </section>
   );
 });
 
-PhotoGallery.displayName = 'PhotoGallery';
+PhotoGallery.displayName = "PhotoGallery";
 
 export default PhotoGallery;

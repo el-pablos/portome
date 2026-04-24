@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from "react";
-import { MessageSquareQuote, ShieldCheck, Sparkles } from "lucide-react";
+import { MessageSquare, ShieldCheck, Sparkles } from "lucide-react";
 import { Testimonials } from "../ui/testimonials-columns";
 import { CircularTestimonials } from "../ui/circular-testimonials";
 
@@ -59,7 +59,7 @@ const TestimonialsSection = memo(() => {
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
               {[
-                { value: testimonials.length, label: "voices", icon: MessageSquareQuote },
+                { value: testimonials.length, label: "voices", icon: MessageSquare },
                 { value: "2", label: "layouts", icon: Sparkles },
                 { value: "A11y", label: "controls", icon: ShieldCheck },
               ].map((item) => {

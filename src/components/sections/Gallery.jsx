@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from "react";
-import { Camera, GalleryHorizontalEnd, MapPinned } from "lucide-react";
+import { Camera, GalleryHorizontalEnd, MapPin } from "lucide-react";
 import { FocusCards } from "../ui/focus-cards";
 import { ZoomParallax } from "../ui/zoom-parallax";
 
@@ -46,7 +46,7 @@ const PhotoGallery = memo(() => {
             {[
               { value: photos.length, label: "photos", icon: Camera },
               { value: "2", label: "featured frames", icon: GalleryHorizontalEnd },
-              { value: "ID", label: "local story", icon: MapPinned },
+              { value: "ID", label: "local story", icon: MapPin },
             ].map((item) => {
               const Icon = item.icon;
               return (

@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 // ---------- Card Component ----------
 const Card = memo(({ children, className = "" }) => (
   <div 
-    className={`rounded-2xl border transition-all duration-200 backdrop-blur-md shadow-lg hoverlift hoverpulse ${className}`} 
+    className={`rounded-lg border transition-all duration-200 backdrop-blur-md shadow-lg hoverlift hoverpulse ${className}`} 
     style={{
       borderColor: 'var(--border-color)',
       backgroundColor: 'var(--bg-card)',

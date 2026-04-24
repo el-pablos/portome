@@ -32,7 +32,7 @@ export const LazyImage = ({ src, alt, className, onClick, style }) => {
         <>
           {!isLoaded && (
             <div className="absolute inset-0 flex items-center justify-center" style={{backgroundColor: 'var(--bg-card)'}}>
-              <div className="w-8 h-8 border-4 border-t-transparent rounded-full animate-spin" style={{borderColor: 'var(--violet-primary)', borderTopColor: 'transparent'}}></div>
+              <div className="w-8 h-8 border-4 border-t-transparent rounded-full animate-spin" style={{borderColor: 'var(--accent)', borderTopColor: 'transparent'}}></div>
             </div>
           )}
           <img

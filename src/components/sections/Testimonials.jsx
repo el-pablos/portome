@@ -44,7 +44,7 @@ const TestimonialsSection = memo(() => {
   ], []);
 
   return (
-    <section className="py-16 sm:py-24" aria-label="Testimonials">
+    <section id="testimonials" className="py-16 sm:py-24" aria-label="Testimonials">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="glass-panel rounded-[1.8rem] p-5 sm:p-8">
           <div className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">

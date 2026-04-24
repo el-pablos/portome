@@ -30,7 +30,7 @@ const techLogos = [
 ];
 
 const TechStack = memo(() => (
-  <section className="py-12 sm:py-20" aria-label="Tech stack">
+  <section id="stack" className="py-12 sm:py-20" aria-label="Tech stack">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="glass-panel overflow-hidden rounded-[1.8rem] py-8">
         <div className="mx-auto mb-8 max-w-3xl px-5 text-center">

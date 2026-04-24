@@ -1,8 +1,18 @@
 {
   "name": "porto-tamas",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "homepage": "https://porto.tams.codes",
+  "description": "Portfolio sinematik Tama EL Pablo dengan React, Tailwind, motion, gallery asset asli, dan CI/CD release flow.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/el-pablos/portome.git"
+  },
+  "license": "MIT",
+  "author": "Tama EL Pablo",
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@number-flow/react": "^0.5.10",
     "@radix-ui/react-avatar": "^1.1.10",
@@ -34,6 +44,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "react-scripts test --watchAll=false --ci --coverage",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx --max-warnings 0 --ignore-pattern src/App.optimized.js --ignore-pattern src/App.backup.js",
     "sync-projects": "node scripts/sync-projects.mjs",
     "eject": "react-scripts eject"

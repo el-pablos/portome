@@ -1,9 +1,9 @@
 {
-  "short_name": "Porto Tamas",
-  "name": "Porto Tamas — Developer Portfolio",
+  "short_name": "Tama Porto",
+  "name": "Tama EL Pablo - Cinematic Developer Portfolio",
   "icons": [],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#7c3aed",
-  "background_color": "#0b0414"
+  "theme_color": "#11100d",
+  "background_color": "#11100d"
 }

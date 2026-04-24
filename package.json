@@ -45,7 +45,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:ci": "react-scripts test --watchAll=false --ci --coverage",
-    "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx --max-warnings 0 --ignore-pattern src/App.optimized.js --ignore-pattern src/App.backup.js",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --max-warnings 0",
     "sync-projects": "node scripts/sync-projects.mjs",
     "eject": "react-scripts eject"
   },

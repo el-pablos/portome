@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, memo, useCallback, useEffect, useMemo, useState } from "react";
 import {
-  BriefcaseBusiness,
+  Briefcase,
   ChevronRight,
   GalleryHorizontalEnd,
   Home,
@@ -10,7 +10,7 @@ import {
   Sparkles,
   Sun,
   TerminalSquare,
-  UserRound,
+  User,
 } from "lucide-react";
 
 import { useReducedMotion } from "./hooks/useReducedMotion";
@@ -32,8 +32,8 @@ const TestimonialsSection = lazy(() => import("./components/sections/Testimonial
 
 const navItems = [
   { id: "home", label: "Home", icon: <Home className="size-4" /> },
-  { id: "about", label: "About", icon: <UserRound className="size-4" /> },
-  { id: "services", label: "Studio", icon: <BriefcaseBusiness className="size-4" /> },
+  { id: "about", label: "About", icon: <User className="size-4" /> },
+  { id: "services", label: "Studio", icon: <Briefcase className="size-4" /> },
   { id: "stressing", label: "Lab", icon: <ShieldCheck className="size-4" /> },
   { id: "portfolio", label: "Work", icon: <Sparkles className="size-4" /> },
   { id: "gallery", label: "Gallery", icon: <GalleryHorizontalEnd className="size-4" /> },

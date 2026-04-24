@@ -1,252 +1,235 @@
-import React, { useState, useEffect, useMemo, memo } from 'react';
-import { ChevronRight } from 'lucide-react';
-import { SparklesCore } from '../ui/sparkles';
-import { HeroGeometric } from '../ui/shape-landing-hero';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+import React, { memo, useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  ArrowUpRight,
+  ChevronRight,
+  Code2,
+  Github,
+  RadioTower,
+  Send,
+  ShieldCheck,
+  Sparkles,
+  TerminalSquare,
+} from "lucide-react";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
-// ---------- Reusable UI atoms ----------
-const Button = memo(({ as: Tag = "a", href, onClick, children, className = "", target, rel, type, style, onMouseEnter, onMouseLeave }) => (
-  <Tag
-    href={href}
-    onClick={onClick}
-    target={target}
-    rel={rel}
-    type={type}
-    style={style}
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}
-    className={`inline-flex items-center gap-2 rounded-2xl px-5 py-2.5 font-medium transition-[transform,background,opacity] duration-150 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-[0.99] ${className}`}
-  >
-    {children}
-  </Tag>
-));
+const heroImage = "/assets/me/IMG-20251010-WA0021.jpg";
 
-const Card = memo(({ children, className = "" }) => (
-  <div 
-    className={`rounded-2xl border transition-all duration-200 backdrop-blur-md shadow-lg hoverlift hoverpulse ${className}`} 
-    style={{
-      borderColor: 'var(--border-color)',
-      backgroundColor: 'var(--bg-card)',
-      boxShadow: `0 10px 25px var(--shadow-color)`
-    }}
-  >
-    {children}
-  </div>
-));
+const reveal = {
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0 },
+};
 
-// ---------- Hero Terminal (MagicUI-inspired custom) ----------
-const HeroTerminal = memo(({ theme = 'dark' }) => {
-  const lines = useMemo(() => [
-    { prompt: "~$", text: " whoami" },
-    { prompt: "tamas@tamshub:$", text: " echo \"Backend Developer | Open Source Enthusiast\"" },
-    { prompt: "tamas@tamshub:$", text: " gh profile view el-pablos" },
-    { prompt: "tamas@tamshub:$", text: " telegram open @ImTamaa" },
-  ], []);
+const commandLines = [
+  { label: "identity", value: "Tama EL Pablo - Backend Developer" },
+  { label: "stack", value: "Laravel / React / API Integration / DevOps" },
+  { label: "mode", value: "security-minded product engineering" },
+  { label: "status", value: "available for selected freelance work" },
+];
 
+const HeroTerminal = memo(() => {
   const prefersReducedMotion = useReducedMotion();
-  const [cursorOn, setCursorOn] = useState(true);
-  const [i, setI] = useState(prefersReducedMotion ? lines.length - 1 : 0);
-  const [typed, setTyped] = useState(prefersReducedMotion ? lines[lines.length - 1].text.length : 0);
+  const [activeLine, setActiveLine] = useState(0);
 
-  // Cursor blink effect - optimized
   useEffect(() => {
-    if (prefersReducedMotion) return;
-    const blink = setInterval(() => setCursorOn((c) => !c), 350);
-    return () => clearInterval(blink);
+    if (prefersReducedMotion) return undefined;
+    const interval = setInterval(() => {
+      setActiveLine((current) => (current + 1) % commandLines.length);
+    }, 1800);
+    return () => clearInterval(interval);
   }, [prefersReducedMotion]);
 
-  // Typing effect - optimized with proper cleanup
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-    
-    const current = lines[i];
-    if (!current) return;
-
-    let timeoutId;
-    
-    if (typed <= current.text.length) {
-      timeoutId = setTimeout(() => setTyped((v) => v + 1), 25);
-    } else {
-      timeoutId = setTimeout(() => {
-        setI((v) => Math.min(v + 1, lines.length - 1));
-        setTyped(0);
-      }, 600);
-    }
-
-    return () => clearTimeout(timeoutId);
-  }, [typed, i, lines, prefersReducedMotion]);
-
   return (
-    <Card className="relative overflow-hidden glow-purple">
-      <div 
-        className="flex items-center gap-2 px-4 py-3 border-b transition-colors duration-200" 
-        style={{
-          borderColor: 'var(--border-color)',
-          backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.05)'
-        }}
-      >
-        <div className="flex gap-1.5">
-          <span className="size-3 rounded-full bg-red-400/90 inline-block" />
-          <span className="size-3 rounded-full bg-yellow-400/90 inline-block" />
-          <span className="size-3 rounded-full bg-green-400/90 inline-block" />
+    <div className="kinetic-card overflow-hidden rounded-[1.35rem]">
+      <div className="flex items-center justify-between border-b px-4 py-3" style={{ borderColor: "var(--border-color)" }}>
+        <div className="flex items-center gap-2">
+          <span className="size-2.5 rounded-full" style={{ background: "var(--accent-3)" }} />
+          <span className="size-2.5 rounded-full" style={{ background: "var(--accent)" }} />
+          <span className="size-2.5 rounded-full" style={{ background: "var(--accent-2)" }} />
         </div>
-        <div className="ml-3 text-xs transition-colors duration-200" style={{color: 'var(--text-muted)'}}>
-          tamas@tamshub
-        </div>
+        <span className="text-xs font-bold uppercase" style={{ color: "var(--text-muted)", letterSpacing: "0.14em" }}>
+          live brief
+        </span>
       </div>
-      <div 
-        className="p-6 text-sm font-mono leading-7 transition-colors duration-200" 
-        style={{
-          background: theme === 'dark' 
-            ? 'linear-gradient(to bottom, rgba(0,0,0,0.4), transparent)' 
-            : 'linear-gradient(to bottom, rgba(0,0,0,0.05), transparent)'
-        }}
-      >
-        {lines.slice(0, i).map((l, idx) => (
-          <div key={idx} style={{color: theme === 'dark' ? 'rgba(196, 181, 253, 0.9)' : 'rgba(88, 28, 135, 0.8)'}}>
-            <span style={{color: theme === 'dark' ? '#6ee7b7' : '#059669'}}>{l.prompt}</span>
-            <span>{l.text}</span>
-          </div>
-        ))}
-        {i < lines.length && (
-          <div style={{color: theme === 'dark' ? 'rgba(196, 181, 253, 0.9)' : 'rgba(88, 28, 135, 0.8)'}}>
-            <span style={{color: theme === 'dark' ? '#6ee7b7' : '#059669'}}>{lines[i].prompt}</span>
-            <span>{lines[i].text.slice(0, typed)}</span>
-            {!prefersReducedMotion && (
-              <span 
-                className={`ml-0.5 transition-opacity duration-200 ${cursorOn ? "opacity-100" : "opacity-0"}`} 
-                style={{color: 'var(--violet-primary)'}}
-              >
-                ▮
+      <div className="space-y-3 p-4 font-mono text-xs sm:text-sm">
+        {commandLines.map((line, index) => {
+          const isActive = activeLine === index;
+          return (
+            <div
+              key={line.label}
+              className="rounded-2xl border px-3 py-2 transition-all"
+              style={{
+                borderColor: isActive ? "var(--accent)" : "var(--border-color)",
+                background: isActive ? "var(--accent-soft)" : "transparent",
+                color: isActive ? "var(--text-primary)" : "var(--text-secondary)",
+              }}
+            >
+              <span style={{ color: "var(--accent-2)" }}>tep://{line.label}</span>
+              <span className="mx-2" style={{ color: "var(--text-tertiary)" }}>
+                -
               </span>
-            )}
-          </div>
-        )}
-        {i >= lines.length - 1 && (
-          <div className="mt-4" style={{color: 'var(--text-secondary)'}}>
-            $ Done. Type <span style={{color: 'var(--text-primary)'}}>help</span> to explore.
-          </div>
-        )}
+              <span>{line.value}</span>
+            </div>
+          );
+        })}
       </div>
-    </Card>
-  );
-});
-
-// ---------- Visitor Counter Component ----------
-const VisitorCounter = memo(() => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const sessionKey = 'tamshub_visitor_session';
-    const countKey = 'tamshub_visitor_count';
-
-    const hasVisited = sessionStorage.getItem(sessionKey);
-    const currentCount = parseInt(localStorage.getItem(countKey)) || 0;
-
-    if (!hasVisited) {
-      const newCount = currentCount + 1;
-      localStorage.setItem(countKey, newCount.toString());
-      sessionStorage.setItem(sessionKey, 'visited');
-      setCount(newCount);
-    } else {
-      setCount(currentCount);
-    }
-
-    const handleStorageChange = (e) => {
-      if (e.key === countKey) {
-        setCount(parseInt(e.newValue) || 0);
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
-
-  return (
-    <div 
-      className="inline-flex items-center gap-2 px-3 py-1 rounded-full transition-all duration-200" 
-      style={{
-        backgroundColor: 'var(--violet-bg)',
-        color: 'var(--text-primary)',
-        fontSize: '0.875rem'
-      }}
-    >
-      <svg className="size-4" style={{color: 'var(--violet-primary)'}} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-      </svg>
-      <span className="font-medium">Visitors: {count.toLocaleString()}</span>
     </div>
   );
 });
 
-// ---------- Hero Section Main Component ----------
-const Hero = memo(({ theme }) => {
-  const prefersReducedMotion = useReducedMotion();
-  
+const VisitorCounter = memo(() => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const sessionKey = "tamshub_visitor_session";
+    const countKey = "tamshub_visitor_count";
+    const currentCount = Number.parseInt(localStorage.getItem(countKey) || "0", 10);
+
+    if (!sessionStorage.getItem(sessionKey)) {
+      const nextCount = currentCount + 1;
+      localStorage.setItem(countKey, String(nextCount));
+      sessionStorage.setItem(sessionKey, "visited");
+      setCount(nextCount);
+      return;
+    }
+
+    setCount(currentCount);
+  }, []);
+
   return (
-    <section id="home" className="relative">
-      <HeroGeometric
-        badge="Available for Freelance"
-        title1="Tama EL Pablo"
-        title2="Backend Developer"
-        subtitle="Building reliable APIs, scalable services & security-first solutions with Laravel, PHP, and modern DevOps."
-      >
-        {/* Terminal */}
-        <HeroTerminal theme={theme} />
+    <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-bold" style={{ borderColor: "var(--border-color)", background: "var(--bg-button)", color: "var(--text-secondary)" }}>
+      <RadioTower className="size-4" style={{ color: "var(--accent-2)" }} />
+      Visitors: {count.toLocaleString()}
+    </div>
+  );
+});
 
-        {/* Sparkles Effect - Only render if not reduced motion */}
-        {!prefersReducedMotion && (
-          <div className="w-full max-w-2xl mx-auto h-20 relative mt-4">
-            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-violet-500 to-transparent h-[2px] w-3/4 blur-sm mx-auto" />
-            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-violet-500 to-transparent h-px w-3/4 mx-auto" />
+const Hero = memo(() => {
+  const prefersReducedMotion = useReducedMotion();
+  const motionProps = prefersReducedMotion
+    ? {}
+    : {
+        initial: "hidden",
+        animate: "show",
+        transition: { staggerChildren: 0.11, delayChildren: 0.1 },
+      };
 
-            <SparklesCore
-              background="transparent"
-              minSize={0.4}
-              maxSize={1}
-              particleDensity={300}
-              className="w-full h-full"
-              particleColor={theme === 'dark' ? '#a78bfa' : '#7c3aed'}
-              speed={0.3}
-            />
+  const stats = useMemo(
+    () => [
+      { value: "API", label: "backend-first craft" },
+      { value: "CI", label: "tested delivery flow" },
+      { value: "UX", label: "motion-led portfolio" },
+    ],
+    []
+  );
 
-            <div 
-              className="absolute inset-0 w-full h-full [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]" 
-              style={{backgroundColor: 'var(--bg-primary)'}}
-            />
-          </div>
-        )}
+  return (
+    <section id="home" className="relative overflow-hidden pb-16 pt-32 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-40">
+      <div className="absolute inset-0 -z-10">
+        <img
+          src={heroImage}
+          alt=""
+          className="absolute right-0 top-0 h-full w-full object-cover opacity-30 sm:opacity-36 lg:w-[58%] lg:opacity-72"
+          style={{
+            WebkitMaskImage: "linear-gradient(90deg, transparent 0%, black 34%, black 100%)",
+            maskImage: "linear-gradient(90deg, transparent 0%, black 34%, black 100%)",
+          }}
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, var(--bg-primary) 0%, color-mix(in srgb, var(--bg-primary) 82%, transparent) 48%, color-mix(in srgb, var(--bg-primary) 36%, transparent) 100%)" }} />
+        <div className="absolute inset-x-0 bottom-0 h-40" style={{ background: "linear-gradient(0deg, var(--bg-primary), transparent)" }} />
+      </div>
 
-        {/* CTA Buttons */}
-        <div className="mt-6 flex flex-col items-center gap-4">
-          <div className="flex items-center justify-center gap-3">
-            <Button 
-              href="#portfolio" 
-              className="transition-all duration-200" 
-              style={{ backgroundColor: 'var(--violet-primary)', color: 'white' }}
-            >
-              View Portfolio <ChevronRight className="size-4"/>
-            </Button>
-            <Button 
-              href="#contact" 
-              className="transition-all duration-200" 
-              style={{ backgroundColor: 'var(--bg-button)', color: 'var(--text-primary)' }}
-            >
-              Get in Touch
-            </Button>
-          </div>
-          <VisitorCounter />
+      <motion.div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.02fr_0.78fr] lg:items-end lg:px-8" {...motionProps}>
+        <div className="max-w-4xl">
+          <motion.div variants={reveal} className="mb-5 flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-black uppercase" style={{ borderColor: "var(--border-color)", background: "var(--bg-button)", color: "var(--accent-2)", letterSpacing: "0.14em" }}>
+              <span className="size-2 rounded-full animate-pulse" style={{ background: "var(--accent-2)" }} />
+              Available for freelance
+            </span>
+            <VisitorCounter />
+          </motion.div>
+
+          <motion.h1 variants={reveal} className="font-display text-[3.4rem] font-black leading-[0.88] text-balance sm:text-[5.4rem] lg:text-[7.2rem]" style={{ color: "var(--text-primary)" }}>
+            Tama EL Pablo
+            <span className="block" style={{ color: "var(--accent)" }}>
+              builds systems
+            </span>
+            that feel alive.
+          </motion.h1>
+
+          <motion.p variants={reveal} className="mt-6 max-w-2xl text-base leading-8 sm:text-lg" style={{ color: "var(--text-secondary)" }}>
+            Portfolio baru untuk backend developer yang fokus ke API, Laravel, integrasi, automation, dan security-minded delivery. Dibuat mobile-first dengan visual editorial, motion halus, asset real, dan komponen yang tetap aktif.
+          </motion.p>
+
+          <motion.div variants={reveal} className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#portfolio" className="shine-sweep relative inline-flex items-center justify-center overflow-hidden rounded-2xl px-5 py-4 text-sm font-black transition-transform magnetic-link" style={{ background: "var(--accent)", color: "#11100d" }}>
+              Lihat karya <ChevronRight className="ml-2 size-4" />
+            </a>
+            <a href="#contact" className="inline-flex items-center justify-center rounded-2xl border px-5 py-4 text-sm font-black transition-transform magnetic-link" style={{ borderColor: "var(--border-color)", background: "var(--bg-button)", color: "var(--text-primary)" }}>
+              Bahas project <ArrowUpRight className="ml-2 size-4" />
+            </a>
+          </motion.div>
+
+          <motion.div variants={reveal} className="mt-8 grid gap-3 sm:grid-cols-3">
+            {stats.map((item) => (
+              <div key={item.label} className="rounded-2xl border p-4" style={{ borderColor: "var(--border-color)", background: "var(--bg-card)" }}>
+                <div className="font-display text-2xl font-black" style={{ color: "var(--accent-2)" }}>
+                  {item.value}
+                </div>
+                <div className="mt-1 text-xs font-semibold uppercase" style={{ color: "var(--text-muted)", letterSpacing: "0.1em" }}>
+                  {item.label}
+                </div>
+              </div>
+            ))}
+          </motion.div>
         </div>
-      </HeroGeometric>
+
+        <motion.div variants={reveal} className="grid gap-4 lg:pb-4">
+          <div className="kinetic-card relative overflow-hidden rounded-[1.6rem] p-4">
+            <div className="absolute inset-x-6 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent)" }} />
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <div className="section-kicker">signal profile</div>
+                <h2 className="mt-3 font-display text-2xl font-black" style={{ color: "var(--text-primary)" }}>
+                  Backend craft with cinematic interface energy.
+                </h2>
+              </div>
+              <TerminalSquare className="size-9 shrink-0" style={{ color: "var(--accent)" }} />
+            </div>
+            <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
+              <a className="rounded-2xl border p-4 transition-transform magnetic-link" href="https://github.com/el-pablos" target="_blank" rel="noreferrer" style={{ borderColor: "var(--border-color)", background: "var(--bg-button)", color: "var(--text-primary)" }}>
+                <Github className="mb-3 size-5" style={{ color: "var(--accent-2)" }} />
+                GitHub
+              </a>
+              <a className="rounded-2xl border p-4 transition-transform magnetic-link" href="https://t.me/ImTamaa" target="_blank" rel="noreferrer" style={{ borderColor: "var(--border-color)", background: "var(--bg-button)", color: "var(--text-primary)" }}>
+                <Send className="mb-3 size-5" style={{ color: "var(--accent-2)" }} />
+                Telegram
+              </a>
+              <div className="rounded-2xl border p-4" style={{ borderColor: "var(--border-color)", background: "var(--accent-soft)" }}>
+                <ShieldCheck className="mb-3 size-5" style={{ color: "var(--accent)" }} />
+                Secure flow
+              </div>
+              <div className="rounded-2xl border p-4" style={{ borderColor: "var(--border-color)", background: "var(--accent-2-soft)" }}>
+                <Code2 className="mb-3 size-5" style={{ color: "var(--accent-2)" }} />
+                Clean APIs
+              </div>
+            </div>
+          </div>
+
+          <HeroTerminal />
+
+          <div className="flex items-center gap-3 rounded-[1.35rem] border px-4 py-3 text-sm" style={{ borderColor: "var(--border-color)", background: "var(--bg-button)", color: "var(--text-secondary)" }}>
+            <Sparkles className="size-5" style={{ color: "var(--accent)" }} />
+            Motion respects reduced-motion preference and keeps the page usable on mobile.
+          </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 });
 
-Hero.displayName = 'Hero';
-HeroTerminal.displayName = 'HeroTerminal';
-VisitorCounter.displayName = 'VisitorCounter';
-Button.displayName = 'Button';
-Card.displayName = 'Card';
+Hero.displayName = "Hero";
+HeroTerminal.displayName = "HeroTerminal";
+VisitorCounter.displayName = "VisitorCounter";
 
 export default Hero;

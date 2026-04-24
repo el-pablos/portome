@@ -51,6 +51,24 @@ describe('Portfolio section', () => {
   });
 });
 
+describe('Resilience lab section', () => {
+  it('renders authorized resilience lab copy', async () => {
+    const StressingService = (await import('../components/sections/StressingService')).default;
+    render(<StressingService />);
+    expect(screen.getByText(/Authorized Resilience Lab/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Authorized resilience check only/i).length).toBeGreaterThanOrEqual(1);
+  });
+});
+
+describe('Showcase section', () => {
+  it('renders safe evidence wall copy and filters', async () => {
+    const Showcase = (await import('../components/sections/Showcase')).default;
+    render(<Showcase />);
+    expect(screen.getByText(/Evidence wall/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Government/i })).toBeInTheDocument();
+  });
+});
+
 describe('Contact section', () => {
   it('renders with #contact id', async () => {
     const Contact = (await import('../components/sections/Contact')).default;

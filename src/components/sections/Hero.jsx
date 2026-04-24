@@ -40,7 +40,7 @@ const HeroTerminal = memo(() => {
   }, [prefersReducedMotion]);
 
   return (
-    <div className="kinetic-card overflow-hidden rounded-[1.35rem]">
+    <div className="kinetic-card min-w-0 overflow-hidden rounded-[1.35rem]">
       <div className="flex items-center justify-between border-b px-4 py-3" style={{ borderColor: "var(--border-color)" }}>
         <div className="flex items-center gap-2">
           <span className="size-2.5 rounded-full" style={{ background: "var(--accent-3)" }} />
@@ -68,7 +68,7 @@ const HeroTerminal = memo(() => {
               <span className="mx-2" style={{ color: "var(--text-tertiary)" }}>
                 -
               </span>
-              <span>{line.value}</span>
+          <span className="break-words">{line.value}</span>
             </div>
           );
         })}
@@ -139,8 +139,8 @@ const Hero = memo(() => {
         <div className="absolute inset-x-0 bottom-0 h-40" style={{ background: "linear-gradient(0deg, var(--bg-primary), transparent)" }} />
       </div>
 
-      <motion.div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.02fr_0.78fr] lg:items-end lg:px-8" {...motionProps}>
-        <div className="max-w-4xl">
+      <motion.div className="mx-auto grid max-w-7xl min-w-0 gap-10 px-4 sm:px-6 lg:grid-cols-[1.02fr_0.78fr] lg:items-end lg:px-8" {...motionProps}>
+        <div className="min-w-0 max-w-4xl">
           <motion.div variants={reveal} className="mb-5 flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-black uppercase" style={{ borderColor: "var(--border-color)", background: "var(--bg-button)", color: "var(--accent-2)", letterSpacing: "0.14em" }}>
               <span className="size-2 rounded-full animate-pulse" style={{ background: "var(--accent-2)" }} />
@@ -157,22 +157,22 @@ const Hero = memo(() => {
             that feel alive.
           </motion.h1>
 
-          <motion.p variants={reveal} className="mt-6 max-w-2xl text-base leading-8 sm:text-lg" style={{ color: "var(--text-secondary)" }}>
+          <motion.p variants={reveal} className="mt-6 max-w-[min(42rem,calc(100vw-2rem))] break-words text-sm leading-7 sm:text-lg sm:leading-8" style={{ color: "var(--text-secondary)" }}>
             Portfolio baru untuk backend developer yang fokus ke API, Laravel, integrasi, automation, dan security-minded delivery. Dibuat mobile-first dengan visual editorial, motion halus, asset real, dan komponen yang tetap aktif.
           </motion.p>
 
           <motion.div variants={reveal} className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#portfolio" className="shine-sweep relative inline-flex items-center justify-center overflow-hidden rounded-2xl px-5 py-4 text-sm font-black transition-transform magnetic-link" style={{ background: "var(--accent)", color: "#11100d" }}>
+            <a href="#portfolio" className="shine-sweep relative inline-flex w-full items-center justify-center overflow-hidden rounded-2xl px-5 py-4 text-sm font-black transition-transform magnetic-link sm:w-auto" style={{ background: "var(--accent)", color: "#11100d" }}>
               Lihat karya <ChevronRight className="ml-2 size-4" />
             </a>
-            <a href="#contact" className="inline-flex items-center justify-center rounded-2xl border px-5 py-4 text-sm font-black transition-transform magnetic-link" style={{ borderColor: "var(--border-color)", background: "var(--bg-button)", color: "var(--text-primary)" }}>
+            <a href="#contact" className="inline-flex w-full items-center justify-center rounded-2xl border px-5 py-4 text-sm font-black transition-transform magnetic-link sm:w-auto" style={{ borderColor: "var(--border-color)", background: "var(--bg-button)", color: "var(--text-primary)" }}>
               Bahas project <ArrowUpRight className="ml-2 size-4" />
             </a>
           </motion.div>
 
           <motion.div variants={reveal} className="mt-8 grid gap-3 sm:grid-cols-3">
             {stats.map((item) => (
-              <div key={item.label} className="rounded-2xl border p-4" style={{ borderColor: "var(--border-color)", background: "var(--bg-card)" }}>
+              <div key={item.label} className="min-w-0 rounded-2xl border p-4" style={{ borderColor: "var(--border-color)", background: "var(--bg-card)" }}>
                 <div className="font-display text-2xl font-black" style={{ color: "var(--accent-2)" }}>
                   {item.value}
                 </div>
@@ -184,7 +184,7 @@ const Hero = memo(() => {
           </motion.div>
         </div>
 
-        <motion.div variants={reveal} className="grid gap-4 lg:pb-4">
+        <motion.div variants={reveal} className="grid min-w-0 gap-4 lg:pb-4">
           <div className="kinetic-card relative overflow-hidden rounded-[1.6rem] p-4">
             <div className="absolute inset-x-6 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent)" }} />
             <div className="flex items-start justify-between gap-4">

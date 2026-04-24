@@ -30,10 +30,10 @@ export function Pricing({
           y: y / window.innerHeight,
         },
         colors: [
-          "#7c3aed",
-          "#8b5cf6",
-          "#a78bfa",
-          "#c4b5fd",
+          "#f0c45b",
+          "#73f1d5",
+          "#ff7b5f",
+          "#fff7e6",
         ],
         ticks: 200,
         gravity: 1.2,
@@ -67,7 +67,7 @@ export function Pricing({
               onCheckedChange={handleToggle}
               className="relative"
               style={{
-                '--tw-ring-color': 'var(--violet-primary)'
+                '--tw-ring-color': 'var(--accent)'
               }}
             />
           </Label>
@@ -95,15 +95,15 @@ export function Pricing({
               plan.isPopular && "ring-2 ring-offset-2",
             )}
             style={{
-              borderColor: plan.isPopular ? 'var(--violet-primary)' : 'var(--border-color)',
+              borderColor: plan.isPopular ? 'var(--accent)' : 'var(--border-color)',
               borderWidth: plan.isPopular ? '2px' : '1px',
               backgroundColor: 'var(--bg-card)',
               boxShadow: plan.isPopular ? '0 10px 40px rgba(124, 58, 237, 0.3)' : '0 10px 25px var(--shadow-color)',
-              ringColor: plan.isPopular ? 'var(--violet-primary)' : 'transparent'
+              ringColor: plan.isPopular ? 'var(--accent)' : 'transparent'
             }}
           >
             {plan.isPopular && (
-              <div className="absolute top-0 right-0 py-0.5 px-2 rounded-bl-xl rounded-tr-xl flex items-center" style={{backgroundColor: 'var(--violet-primary)'}}>
+              <div className="absolute top-0 right-0 py-0.5 px-2 rounded-bl-xl rounded-tr-xl flex items-center" style={{backgroundColor: 'var(--accent)'}}>
                 <Star className="h-4 w-4 fill-current text-white" />
                 <span className="ml-1 font-sans font-semibold text-white">
                   Popular
@@ -115,7 +115,7 @@ export function Pricing({
                 {plan.name}
               </p>
               <div className="mt-6 flex items-center justify-center gap-x-2">
-                <span className="text-5xl font-bold tracking-tight transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>
+                <span className="text-5xl font-bold tracking-tight transition-colors duration-200" style={{color: 'var(--accent)'}}>
                   {isUSD ? (
                     <>
                       $<NumberFlow
@@ -162,7 +162,7 @@ export function Pricing({
               <ul className="mt-5 gap-2 flex flex-col">
                 {plan.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <Check className="h-4 w-4 mt-1 flex-shrink-0" style={{color: 'var(--violet-secondary)'}} />
+                    <Check className="h-4 w-4 mt-1 flex-shrink-0" style={{color: 'var(--accent-2)'}} />
                     <span className="text-left text-sm transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>{feature}</span>
                   </li>
                 ))}
@@ -179,7 +179,7 @@ export function Pricing({
                   "hover:scale-105"
                 )}
                 style={{
-                  backgroundColor: plan.isPopular ? 'var(--violet-primary)' : 'var(--bg-button)',
+                  backgroundColor: plan.isPopular ? 'var(--accent)' : 'var(--bg-button)',
                   color: plan.isPopular ? 'white' : 'var(--text-primary)',
                   border: plan.isPopular ? 'none' : '1px solid var(--border-color)',
                 }}
@@ -187,14 +187,14 @@ export function Pricing({
                   if (!plan.isPopular) {
                     e.currentTarget.style.backgroundColor = 'var(--bg-button-hover)';
                   } else {
-                    e.currentTarget.style.backgroundColor = 'var(--violet-secondary)';
+                    e.currentTarget.style.backgroundColor = 'var(--accent-2)';
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!plan.isPopular) {
                     e.currentTarget.style.backgroundColor = 'var(--bg-button)';
                   } else {
-                    e.currentTarget.style.backgroundColor = 'var(--violet-primary)';
+                    e.currentTarget.style.backgroundColor = 'var(--accent)';
                   }
                 }}
               >
@@ -226,15 +226,15 @@ export function Pricing({
               plan.isPopular && "ring-2 ring-offset-2",
             )}
             style={{
-              borderColor: plan.isPopular ? 'var(--violet-primary)' : 'var(--border-color)',
+              borderColor: plan.isPopular ? 'var(--accent)' : 'var(--border-color)',
               borderWidth: plan.isPopular ? '2px' : '1px',
               backgroundColor: 'var(--bg-card)',
               boxShadow: plan.isPopular ? '0 10px 40px rgba(124, 58, 237, 0.3)' : '0 10px 25px var(--shadow-color)',
-              ringColor: plan.isPopular ? 'var(--violet-primary)' : 'transparent'
+              ringColor: plan.isPopular ? 'var(--accent)' : 'transparent'
             }}
           >
             {plan.isPopular && (
-              <div className="absolute top-0 right-0 py-0.5 px-2 rounded-bl-xl rounded-tr-xl flex items-center" style={{backgroundColor: 'var(--violet-primary)'}}>
+              <div className="absolute top-0 right-0 py-0.5 px-2 rounded-bl-xl rounded-tr-xl flex items-center" style={{backgroundColor: 'var(--accent)'}}>
                 <Star className="h-4 w-4 fill-current text-white" />
                 <span className="ml-1 font-sans font-semibold text-white">
                   Popular
@@ -246,7 +246,7 @@ export function Pricing({
                 {plan.name}
               </p>
               <div className="mt-6 flex items-center justify-center gap-x-2">
-                <span className="text-5xl font-bold tracking-tight transition-colors duration-200" style={{color: 'var(--violet-primary)'}}>
+                <span className="text-5xl font-bold tracking-tight transition-colors duration-200" style={{color: 'var(--accent)'}}>
                   {isUSD ? (
                     <>
                       $<NumberFlow
@@ -293,7 +293,7 @@ export function Pricing({
               <ul className="mt-5 gap-2 flex flex-col">
                 {plan.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <Check className="h-4 w-4 mt-1 flex-shrink-0" style={{color: 'var(--violet-secondary)'}} />
+                    <Check className="h-4 w-4 mt-1 flex-shrink-0" style={{color: 'var(--accent-2)'}} />
                     <span className="text-left text-sm transition-colors duration-200" style={{color: 'var(--text-secondary)'}}>{feature}</span>
                   </li>
                 ))}
@@ -310,7 +310,7 @@ export function Pricing({
                   "hover:scale-105"
                 )}
                 style={{
-                  backgroundColor: plan.isPopular ? 'var(--violet-primary)' : 'var(--bg-button)',
+                  backgroundColor: plan.isPopular ? 'var(--accent)' : 'var(--bg-button)',
                   color: plan.isPopular ? 'white' : 'var(--text-primary)',
                   border: plan.isPopular ? 'none' : '1px solid var(--border-color)',
                 }}
@@ -318,14 +318,14 @@ export function Pricing({
                   if (!plan.isPopular) {
                     e.currentTarget.style.backgroundColor = 'var(--bg-button-hover)';
                   } else {
-                    e.currentTarget.style.backgroundColor = 'var(--violet-secondary)';
+                    e.currentTarget.style.backgroundColor = 'var(--accent-2)';
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!plan.isPopular) {
                     e.currentTarget.style.backgroundColor = 'var(--bg-button)';
                   } else {
-                    e.currentTarget.style.backgroundColor = 'var(--violet-primary)';
+                    e.currentTarget.style.backgroundColor = 'var(--accent)';
                   }
                 }}
               >

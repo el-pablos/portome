@@ -67,8 +67,8 @@ export function TubelightNavbar({
                   position: "absolute",
                   inset: 0,
                   borderRadius: "9999px",
-                  backgroundColor: "var(--violet-bg)",
-                  border: "1px solid var(--violet-secondary)",
+                  backgroundColor: "var(--accent-soft)",
+                  border: "1px solid var(--accent-2)",
                 }}
                 transition={{ type: "spring", stiffness: 350, damping: 30 }}
               />
@@ -85,7 +85,7 @@ export function TubelightNavbar({
                   width: "2rem",
                   height: "4px",
                   borderRadius: "9999px",
-                  background: "linear-gradient(90deg, transparent, var(--violet-primary), transparent)",
+                  background: "linear-gradient(90deg, transparent, var(--accent), transparent)",
                   filter: "blur(2px)",
                 }}
                 transition={{ type: "spring", stiffness: 350, damping: 30 }}

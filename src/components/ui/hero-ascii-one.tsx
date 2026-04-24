@@ -99,7 +99,7 @@ export function HeroAscii({
         className="text-center leading-none select-none font-mono"
         style={{
           fontSize: `${fontSize}px`,
-          color: color || "var(--violet-primary)",
+          color: color || "var(--accent)",
           letterSpacing: "0.1em",
           opacity: 0.7,
         }}

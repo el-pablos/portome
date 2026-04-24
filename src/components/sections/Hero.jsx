@@ -149,7 +149,7 @@ const Hero = memo(() => {
             <VisitorCounter />
           </motion.div>
 
-          <motion.h1 variants={reveal} className="font-display text-[2.75rem] font-black leading-[0.9] text-balance min-[420px]:text-[3.15rem] sm:text-[5.4rem] lg:text-[7.2rem]" style={{ color: "var(--text-primary)" }}>
+          <motion.h1 variants={reveal} className="font-display text-[2.75rem] font-black leading-[0.9] text-balance min-[420px]:text-[3.15rem] sm:text-[4.8rem] lg:text-[6rem] xl:text-[6.7rem]" style={{ color: "var(--text-primary)" }}>
             Tama EL Pablo
             <span className="block" style={{ color: "var(--accent)" }}>
               builds systems

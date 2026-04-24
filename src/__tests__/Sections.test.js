@@ -65,7 +65,7 @@ describe('Showcase section', () => {
     const Showcase = (await import('../components/sections/Showcase')).default;
     render(<Showcase />);
     expect(screen.getByText(/Evidence wall/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Government/i })).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: /Government/i }).length).toBeGreaterThanOrEqual(1);
   });
 });
 

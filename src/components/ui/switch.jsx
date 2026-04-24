@@ -10,7 +10,7 @@ const Switch = React.forwardRef(({ className, style, ...props }, ref) => (
       className,
     )}
     style={{
-      backgroundColor: props.checked ? 'var(--violet-primary)' : 'var(--bg-button)',
+      backgroundColor: props.checked ? 'var(--accent)' : 'var(--bg-button)',
       ...style
     }}
     {...props}
@@ -21,7 +21,7 @@ const Switch = React.forwardRef(({ className, style, ...props }, ref) => (
         "pointer-events-none block h-5 w-5 rounded-full shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0",
       )}
       style={{
-        backgroundColor: 'white'
+        backgroundColor: props.checked ? '#11100d' : 'var(--text-primary)'
       }}
     />
   </SwitchPrimitives.Root>

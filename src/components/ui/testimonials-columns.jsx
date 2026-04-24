@@ -24,7 +24,7 @@ export const TestimonialsColumn = (props) => {
             <React.Fragment key={index}>
               {props.testimonials.map(({ text, image, name, role }, i) => (
                 <div
-                  className="p-10 rounded-2xl border transition-all duration-200 backdrop-blur-md shadow-lg max-w-xs w-full"
+                  className="p-7 rounded-lg border transition-all duration-200 backdrop-blur-md shadow-lg max-w-xs w-full"
                   key={i}
                   style={{
                     borderColor: 'var(--border-color)',
@@ -72,7 +72,7 @@ export const Testimonials = ({ testimonials }) => {
           className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
         >
           <div className="flex justify-center">
-            <div className="border py-1 px-4 rounded-lg transition-colors duration-200" style={{borderColor: 'var(--violet-primary)', color: 'var(--violet-primary)'}}>Testimonials</div>
+            <div className="border py-1 px-4 rounded-lg transition-colors duration-200" style={{borderColor: 'var(--accent)', color: 'var(--accent)'}}>Testimonials</div>
           </div>
 
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter mt-5 transition-colors duration-200" style={{color: 'var(--text-primary)'}}>

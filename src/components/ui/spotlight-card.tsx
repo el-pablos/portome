@@ -10,7 +10,7 @@ interface SpotlightCardProps {
 export function GlowCard({
   children,
   className = "",
-  spotlightColor = "rgba(124, 58, 237, 0.15)",
+  spotlightColor = "rgba(240, 196, 91, 0.15)",
 }: SpotlightCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -35,7 +35,7 @@ export function GlowCard({
     <div
       ref={cardRef}
       className={cn(
-        "relative rounded-2xl border overflow-hidden transition-all duration-200 backdrop-blur-md",
+        "relative rounded-lg border overflow-hidden transition-all duration-200 backdrop-blur-md",
         className
       )}
       style={{
@@ -48,7 +48,7 @@ export function GlowCard({
     >
       {/* Spotlight overlay */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300"
+        className="pointer-events-none absolute -inset-px rounded-lg opacity-0 transition-opacity duration-300"
         style={{
           opacity,
           background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,

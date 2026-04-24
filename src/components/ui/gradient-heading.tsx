@@ -15,9 +15,12 @@ export function GradientHeading({
   return (
     <Tag
       className={cn(
-        "bg-gradient-to-r from-violet-400 via-purple-400 to-violet-300 bg-clip-text text-transparent font-bold",
+        "bg-clip-text text-transparent font-bold",
         className
       )}
+      style={{
+        backgroundImage: "linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3))",
+      }}
     >
       {children}
     </Tag>

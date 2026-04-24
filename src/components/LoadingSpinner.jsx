@@ -16,7 +16,7 @@ export const LoadingSpinner = ({ size = 'md', className = '' }) => {
       <div
         className={`${sizeClasses[size]} border-t-transparent rounded-full animate-spin`}
         style={{
-          borderColor: 'var(--violet-primary)',
+          borderColor: 'var(--accent)',
           borderTopColor: 'transparent',
         }}
       />

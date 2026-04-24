@@ -37,7 +37,7 @@ function BentoCard({ item, index }: { item: BentoItem; index: number }) {
     <div
       ref={cardRef}
       className={cn(
-        "group relative rounded-2xl border overflow-hidden transition-all duration-500 backdrop-blur-md",
+        "group relative rounded-lg border overflow-hidden transition-all duration-500 backdrop-blur-md",
         "hover:scale-[1.02] hover:shadow-xl",
         item.className,
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -53,19 +53,19 @@ function BentoCard({ item, index }: { item: BentoItem; index: number }) {
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: `
-            linear-gradient(var(--violet-primary) 1px, transparent 1px),
-            linear-gradient(90deg, var(--violet-primary) 1px, transparent 1px)
+            linear-gradient(var(--accent) 1px, transparent 1px),
+            linear-gradient(90deg, var(--accent-2) 1px, transparent 1px)
           `,
           backgroundSize: "20px 20px",
         }}
       />
 
       {/* Corner decorations */}
-      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 rounded-tl-2xl opacity-30 transition-opacity group-hover:opacity-60"
-        style={{ borderColor: "var(--violet-primary)" }}
+      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 rounded-tl-lg opacity-30 transition-opacity group-hover:opacity-60"
+        style={{ borderColor: "var(--accent)" }}
       />
-      <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 rounded-br-2xl opacity-30 transition-opacity group-hover:opacity-60"
-        style={{ borderColor: "var(--violet-primary)" }}
+      <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 rounded-br-lg opacity-30 transition-opacity group-hover:opacity-60"
+        style={{ borderColor: "var(--accent-2)" }}
       />
 
       {/* Content */}
@@ -74,8 +74,8 @@ function BentoCard({ item, index }: { item: BentoItem; index: number }) {
           <div
             className="mb-4 p-3 rounded-xl w-fit transition-colors duration-200"
             style={{
-              backgroundColor: "var(--violet-bg)",
-              color: "var(--violet-primary)",
+              backgroundColor: "var(--accent-soft)",
+              color: "var(--accent)",
             }}
           >
             {item.icon}
@@ -99,7 +99,7 @@ function BentoCard({ item, index }: { item: BentoItem; index: number }) {
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{
-          background: `radial-gradient(ellipse at 50% 0%, var(--violet-bg), transparent 70%)`,
+          background: `linear-gradient(180deg, var(--accent-soft), transparent 70%)`,
         }}
       />
     </div>

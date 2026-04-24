@@ -80,7 +80,7 @@ const TestimonialsSection = memo(() => {
           </div>
 
           <div className="mt-10">
-            <CircularTestimonials testimonials={testimonials} autoplayDuration={5200} />
+            <CircularTestimonials testimonials={testimonials} autoplayInterval={5200} />
           </div>
         </div>
 

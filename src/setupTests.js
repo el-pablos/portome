@@ -94,7 +94,9 @@ beforeAll(() => {
   console.error = (...args) => {
     if (
       typeof args[0] === 'string' &&
-      (args[0].includes('act(') || args[0].includes('not wrapped in act'))
+      (args[0].includes('act(') ||
+        args[0].includes('not wrapped in act') ||
+        args[0].includes('ReactDOMTestUtils.act'))
     ) {
       return;
     }

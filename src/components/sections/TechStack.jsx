@@ -1,63 +1,53 @@
-import React, { memo } from 'react';
-import { LogoCarousel } from '../ui/logo-carousel';
-import { GradientHeading } from '../ui/gradient-heading';
-import { 
-  Code2, 
-  Database, 
-  Shield, 
-  Server, 
-  Layers, 
-  Terminal,
-  Globe,
+import React, { memo } from "react";
+import {
+  Boxes,
+  Code2,
   Cpu,
+  Database,
+  Globe,
+  Layers,
   Lock,
-  Zap
-} from 'lucide-react';
+  Server,
+  Shield,
+  Terminal,
+  Zap,
+} from "lucide-react";
+import { LogoCarousel } from "../ui/logo-carousel";
 
-// ---------- Tech Stack Logos ----------
 const techLogos = [
-  { name: "Laravel", icon: <Code2 className="size-6" style={{ color: 'var(--violet-primary)' }} /> },
-  { name: "PHP", icon: <Terminal className="size-6" style={{ color: 'var(--violet-primary)' }} /> },
-  { name: "MySQL", icon: <Database className="size-6" style={{ color: 'var(--violet-primary)' }} /> },
-  { name: "PostgreSQL", icon: <Database className="size-6" style={{ color: 'var(--violet-secondary)' }} /> },
-  { name: "Docker", icon: <Layers className="size-6" style={{ color: 'var(--violet-primary)' }} /> },
-  { name: "Node.js", icon: <Server className="size-6" style={{ color: 'var(--violet-primary)' }} /> },
-  { name: "React", icon: <Globe className="size-6" style={{ color: 'var(--violet-secondary)' }} /> },
-  { name: "Tailwind", icon: <Zap className="size-6" style={{ color: 'var(--violet-primary)' }} /> },
-  { name: "OSINT", icon: <Shield className="size-6" style={{ color: 'var(--violet-primary)' }} /> },
-  { name: "Linux", icon: <Cpu className="size-6" style={{ color: 'var(--violet-secondary)' }} /> },
-  { name: "CI/CD", icon: <Zap className="size-6" style={{ color: 'var(--violet-primary)' }} /> },
-  { name: "Security", icon: <Lock className="size-6" style={{ color: 'var(--violet-secondary)' }} /> },
+  { name: "Laravel", icon: <Code2 className="size-6" style={{ color: "var(--accent)" }} /> },
+  { name: "PHP", icon: <Terminal className="size-6" style={{ color: "var(--accent-2)" }} /> },
+  { name: "MySQL", icon: <Database className="size-6" style={{ color: "var(--accent)" }} /> },
+  { name: "PostgreSQL", icon: <Database className="size-6" style={{ color: "var(--accent-2)" }} /> },
+  { name: "Docker", icon: <Boxes className="size-6" style={{ color: "var(--accent)" }} /> },
+  { name: "Node.js", icon: <Server className="size-6" style={{ color: "var(--accent-2)" }} /> },
+  { name: "React", icon: <Globe className="size-6" style={{ color: "var(--accent)" }} /> },
+  { name: "Tailwind", icon: <Zap className="size-6" style={{ color: "var(--accent-2)" }} /> },
+  { name: "OSINT", icon: <Shield className="size-6" style={{ color: "var(--accent)" }} /> },
+  { name: "Linux", icon: <Cpu className="size-6" style={{ color: "var(--accent-2)" }} /> },
+  { name: "CI/CD", icon: <Layers className="size-6" style={{ color: "var(--accent)" }} /> },
+  { name: "Security", icon: <Lock className="size-6" style={{ color: "var(--accent-2)" }} /> },
 ];
 
-// ---------- TechStack Section ----------
-const TechStack = memo(() => {
-  return (
-    <section className="py-16">
-      <div className="mx-auto max-w-6xl px-4">
-        <div className="text-center mb-8">
-          <div 
-            className="text-sm uppercase tracking-[0.3em] mb-4" 
-            style={{ color: 'var(--violet-secondary)' }}
-          >
-            Tech Stack
-          </div>
-          <GradientHeading className="text-3xl sm:text-4xl">
-            Tools & Technologies
-          </GradientHeading>
-          <p 
-            className="mt-4 text-base sm:text-lg max-w-3xl mx-auto" 
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            Teknologi yang biasa gue pake buat ngerjain project — dari backend sampe deployment.
+const TechStack = memo(() => (
+  <section className="py-12 sm:py-20" aria-label="Tech stack">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="glass-panel overflow-hidden rounded-[1.8rem] py-8">
+        <div className="mx-auto mb-8 max-w-3xl px-5 text-center">
+          <div className="section-kicker">Tech Stack</div>
+          <h2 className="section-title mt-4 font-display text-4xl sm:text-5xl">
+            Tools that keep the build sharp.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-8" style={{ color: "var(--text-secondary)" }}>
+            Stack yang sering gue pakai buat nyambungin backend, interface, security checks, deployment, dan automation tanpa bikin workflow ribet.
           </p>
         </div>
-        <LogoCarousel logos={techLogos} speed={25} />
+        <LogoCarousel logos={techLogos} speed={28} />
       </div>
-    </section>
-  );
-});
+    </div>
+  </section>
+));
 
-TechStack.displayName = 'TechStack';
+TechStack.displayName = "TechStack";
 
 export default TechStack;

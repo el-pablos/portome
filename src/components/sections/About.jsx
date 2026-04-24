@@ -1,248 +1,132 @@
-import React, { memo, useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import { 
-  Github, 
-  Send, 
+import React, { memo, useCallback, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Calendar,
   ExternalLink,
   GitBranch,
+  Github,
+  MapPin,
+  Send,
+  ShieldCheck,
   Star,
-  Calendar
-} from 'lucide-react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+  Workflow,
+} from "lucide-react";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
-// ---------- Card Component ----------
-const Card = memo(({ children, className = "" }) => (
-  <div 
-    className={`rounded-2xl border transition-all duration-200 backdrop-blur-md shadow-lg hoverlift hoverpulse ${className}`} 
-    style={{
-      borderColor: 'var(--border-color)',
-      backgroundColor: 'var(--bg-card)',
-      boxShadow: `0 10px 25px var(--shadow-color)`
-    }}
-  >
-    {children}
-  </div>
-));
+const profileImage = "/assets/me/IMG-20251010-WA0024.jpg";
 
-// ---------- Hero Terminal (untuk About section) ----------
-const HeroTerminal = memo(({ theme = 'dark' }) => {
-  const lines = [
-    { prompt: "~$", text: " whoami" },
-    { prompt: "tamas@tamshub:$", text: " echo \"Backend Developer | Open Source Enthusiast\"" },
-    { prompt: "tamas@tamshub:$", text: " gh profile view el-pablos" },
-    { prompt: "tamas@tamshub:$", text: " telegram open @ImTamaa" },
-  ];
+const profileCards = [
+  { title: "Primary role", value: "Backend Developer", icon: Workflow },
+  { title: "Home base", value: "Jakarta Selatan", icon: MapPin },
+  { title: "Build style", value: "Fast, tested, security-aware", icon: ShieldCheck },
+];
 
-  const prefersReducedMotion = useReducedMotion();
-  const [cursorOn, setCursorOn] = useState(true);
-  const [i, setI] = useState(prefersReducedMotion ? lines.length - 1 : 0);
-  const [typed, setTyped] = useState(prefersReducedMotion ? lines[lines.length - 1].text.length : 0);
-
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-    const blink = setInterval(() => setCursorOn((c) => !c), 350);
-    return () => clearInterval(blink);
-  }, [prefersReducedMotion]);
-
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-    
-    const current = lines[i];
-    if (!current) return;
-
-    let timeoutId;
-    if (typed <= current.text.length) {
-      timeoutId = setTimeout(() => setTyped((v) => v + 1), 25);
-    } else {
-      timeoutId = setTimeout(() => {
-        setI((v) => Math.min(v + 1, lines.length - 1));
-        setTyped(0);
-      }, 600);
-    }
-
-    return () => clearTimeout(timeoutId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [typed, i, prefersReducedMotion]);
-
-  return (
-    <Card className="relative overflow-hidden glow-purple">
-      <div 
-        className="flex items-center gap-2 px-4 py-3 border-b" 
-        style={{
-          borderColor: 'var(--border-color)',
-          backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.05)'
-        }}
-      >
-        <div className="flex gap-1.5">
-          <span className="size-3 rounded-full bg-red-400/90 inline-block" />
-          <span className="size-3 rounded-full bg-yellow-400/90 inline-block" />
-          <span className="size-3 rounded-full bg-green-400/90 inline-block" />
-        </div>
-        <div className="ml-3 text-xs" style={{color: 'var(--text-muted)'}}>tamas@tamshub</div>
-      </div>
-      <div 
-        className="p-6 text-sm font-mono leading-7" 
-        style={{
-          background: theme === 'dark' 
-            ? 'linear-gradient(to bottom, rgba(0,0,0,0.4), transparent)' 
-            : 'linear-gradient(to bottom, rgba(0,0,0,0.05), transparent)'
-        }}
-      >
-        {lines.slice(0, i).map((l, idx) => (
-          <div key={idx} style={{color: theme === 'dark' ? 'rgba(196, 181, 253, 0.9)' : 'rgba(88, 28, 135, 0.8)'}}>
-            <span style={{color: theme === 'dark' ? '#6ee7b7' : '#059669'}}>{l.prompt}</span>
-            <span>{l.text}</span>
-          </div>
-        ))}
-        {i < lines.length && (
-          <div style={{color: theme === 'dark' ? 'rgba(196, 181, 253, 0.9)' : 'rgba(88, 28, 135, 0.8)'}}>
-            <span style={{color: theme === 'dark' ? '#6ee7b7' : '#059669'}}>{lines[i].prompt}</span>
-            <span>{lines[i].text.slice(0, typed)}</span>
-            {!prefersReducedMotion && (
-              <span 
-                className={`ml-0.5 ${cursorOn ? "opacity-100" : "opacity-0"}`} 
-                style={{color: 'var(--violet-primary)', transition: 'opacity 0.2s'}}
-              >
-                ▮
-              </span>
-            )}
-          </div>
-        )}
-        {i >= lines.length - 1 && (
-          <div className="mt-4" style={{color: 'var(--text-secondary)'}}>
-            $ Done. Type <span style={{color: 'var(--text-primary)'}}>help</span> to explore.
-          </div>
-        )}
-      </div>
-    </Card>
-  );
-});
-
-// ---------- GitHub Stats Hook with proper caching ----------
 const useGitHubStats = () => {
   const [stats, setStats] = useState({
-    elPablos: { repos: 0, commits: 0, lastCommit: null, loading: true },
-    dasaraul: { repos: 0, commits: 0, lastCommit: null, loading: true }
+    elPablos: { repos: 0, events: 0, lastCommit: null, loading: true },
+    dasaraul: { repos: 0, events: 0, lastCommit: null, loading: true },
   });
 
   useEffect(() => {
-    const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
+    const cacheDuration = 15 * 60 * 1000;
     const controller = new AbortController();
 
     const fetchStats = async () => {
       const now = Date.now();
-      const cachedData = localStorage.getItem('github_stats');
-      const cacheTime = localStorage.getItem('github_stats_time');
+      const cachedData = localStorage.getItem("github_stats");
+      const cacheTime = localStorage.getItem("github_stats_time");
 
-      if (cachedData && cacheTime && (now - parseInt(cacheTime)) < CACHE_DURATION) {
+      if (cachedData && cacheTime && now - Number.parseInt(cacheTime, 10) < cacheDuration) {
         try {
           setStats(JSON.parse(cachedData));
           return;
-        } catch (e) {
-          // Invalid cache, continue to fetch
+        } catch (error) {
+          localStorage.removeItem("github_stats");
+          localStorage.removeItem("github_stats_time");
         }
       }
 
-      const accounts = ['el-pablos', 'dasaraul'];
-      const newStats = { elPablos: {}, dasaraul: {} };
+      const accounts = ["el-pablos", "dasaraul"];
+      const nextStats = {};
 
       for (const account of accounts) {
+        const key = account === "el-pablos" ? "elPablos" : "dasaraul";
         try {
-          if (account === 'dasaraul') {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-          }
-
           const [reposResponse, eventsResponse] = await Promise.all([
-            fetch(`https://api.github.com/users/${account}/repos?per_page=100&type=owner`, {
-              signal: controller.signal
-            }),
-            fetch(`https://api.github.com/users/${account}/events?per_page=100`, {
-              signal: controller.signal
-            })
+            fetch(`https://api.github.com/users/${account}/repos?per_page=100&type=owner`, { signal: controller.signal }),
+            fetch(`https://api.github.com/users/${account}/events?per_page=100`, { signal: controller.signal }),
           ]);
 
           if (!reposResponse.ok || !eventsResponse.ok) {
-            throw new Error(`API request failed for ${account}`);
+            throw new Error(`GitHub API request failed for ${account}`);
           }
 
           const repos = await reposResponse.json();
           const events = await eventsResponse.json();
-
-          const publicRepos = repos.filter(repo => !repo.private && !repo.fork).length;
-          const pushEvents = events.filter(event => event.type === 'PushEvent');
+          const publicRepos = repos.filter((repo) => !repo.private && !repo.fork).length;
+          const pushEvents = events.filter((event) => event.type === "PushEvent");
           const lastCommit = pushEvents.length > 0 ? pushEvents[0].created_at : null;
 
-          const key = account === 'el-pablos' ? 'elPablos' : 'dasaraul';
-          newStats[key] = {
+          nextStats[key] = {
             repos: publicRepos,
-            commits: pushEvents.length,
-            lastCommit: lastCommit ? new Date(lastCommit).toLocaleDateString() : 'N/A',
-            loading: false
+            events: pushEvents.length,
+            lastCommit: lastCommit ? new Date(lastCommit).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "N/A",
+            loading: false,
           };
         } catch (error) {
-          if (error.name === 'AbortError') return;
-          
-          const key = account === 'el-pablos' ? 'elPablos' : 'dasaraul';
-          newStats[key] = {
+          if (error.name === "AbortError") return;
+          nextStats[key] = {
             repos: 0,
-            commits: 0,
-            lastCommit: 'Unavailable',
+            events: 0,
+            lastCommit: "Unavailable",
             loading: false,
-            error: true
+            error: true,
           };
         }
       }
 
-      setStats(newStats);
-      localStorage.setItem('github_stats', JSON.stringify(newStats));
-      localStorage.setItem('github_stats_time', now.toString());
+      setStats(nextStats);
+      localStorage.setItem("github_stats", JSON.stringify(nextStats));
+      localStorage.setItem("github_stats_time", String(now));
     };
 
     fetchStats();
-
     return () => controller.abort();
   }, []);
 
   return stats;
 };
 
-// ---------- GitHub Stats Component ----------
 const GitHubStats = memo(() => {
   const stats = useGitHubStats();
 
   const StatCard = useCallback(({ title, data }) => (
-    <div 
-      className="p-4 rounded-xl" 
-      style={{
-        backgroundColor: 'var(--bg-card)',
-        borderColor: 'var(--border-color)',
-        border: '1px solid'
-      }}
-    >
-      <h4 className="font-semibold mb-3" style={{color: 'var(--text-primary)'}}>
-        {title}
-      </h4>
+    <div className="kinetic-card rounded-[1.35rem] p-5">
+      <div className="flex items-center justify-between gap-3">
+        <h4 className="font-display text-lg font-black" style={{ color: "var(--text-primary)" }}>
+          {title}
+        </h4>
+        <Github className="size-5" style={{ color: "var(--accent)" }} />
+      </div>
       {data.loading ? (
-        <div className="text-sm" style={{color: 'var(--text-muted)'}}>
-          Loading stats...
-        </div>
+        <div className="mt-5 h-20 animate-pulse rounded-2xl" style={{ background: "var(--bg-button)" }} />
       ) : data.error ? (
-        <div className="text-sm" style={{color: 'var(--text-muted)'}}>
+        <p className="mt-5 text-sm" style={{ color: "var(--text-muted)" }}>
           Stats unavailable
-        </div>
+        </p>
       ) : (
-        <div className="space-y-2 text-sm">
-          <div className="flex items-center gap-2" style={{color: 'var(--text-secondary)'}}>
-            <GitBranch className="size-4" style={{color: 'var(--violet-primary)'}} />
-            <span>Repos: {data.repos}</span>
+        <div className="mt-5 grid gap-3 text-sm">
+          <div className="flex items-center gap-2" style={{ color: "var(--text-secondary)" }}>
+            <GitBranch className="size-4" style={{ color: "var(--accent-2)" }} />
+            <span>{data.repos} public repos</span>
           </div>
-          <div className="flex items-center gap-2" style={{color: 'var(--text-secondary)'}}>
-            <Star className="size-4" style={{color: 'var(--violet-primary)'}} />
-            <span>Activity: {data.commits}+ events</span>
+          <div className="flex items-center gap-2" style={{ color: "var(--text-secondary)" }}>
+            <Star className="size-4" style={{ color: "var(--accent-2)" }} />
+            <span>{data.events}+ recent push events</span>
           </div>
-          <div className="flex items-center gap-2" style={{color: 'var(--text-secondary)'}}>
-            <Calendar className="size-4" style={{color: 'var(--violet-primary)'}} />
-            <span>Last: {data.lastCommit}</span>
+          <div className="flex items-center gap-2" style={{ color: "var(--text-secondary)" }}>
+            <Calendar className="size-4" style={{ color: "var(--accent-2)" }} />
+            <span>Last signal: {data.lastCommit}</span>
           </div>
         </div>
       )}
@@ -250,124 +134,98 @@ const GitHubStats = memo(() => {
   ), []);
 
   return (
-    <div className="grid md:grid-cols-2 gap-4">
+    <div className="grid gap-4 md:grid-cols-2">
       <StatCard title="@el-pablos" data={stats.elPablos} />
       <StatCard title="@dasaraul" data={stats.dasaraul} />
     </div>
   );
 });
 
-// ---------- About Section Content ----------
-const AboutContent = memo(({ theme }) => {
+const About = memo(() => {
   const prefersReducedMotion = useReducedMotion();
+  const wrapper = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 26 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.2 },
+        transition: { duration: 0.7 },
+      };
 
   return (
-    <div className="grid md:grid-cols-2 gap-6">
-      <Card className="p-6">
-        <h3 className="text-xl font-semibold" style={{color: 'var(--text-primary)'}}>About Me</h3>
-        <p className="mt-3" style={{color: 'var(--text-secondary)'}}>
-          Hi! I'm <span className="font-medium" style={{color: 'var(--text-primary)'}}>Tama EL Pablo</span>, 
-          a <span style={{color: 'var(--text-primary)'}}>Backend Developer</span> who loves building reliable 
-          APIs and scalable services with <span style={{color: 'var(--text-primary)'}}>Laravel</span> as my primary stack.
-        </p>
-        <div className="mt-5 flex flex-wrap items-center gap-3 text-sm">
-          <a 
-            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl transition-all duration-200" 
-            style={{ backgroundColor: 'var(--bg-button)', color: 'var(--text-primary)' }} 
-            href="https://github.com/el-pablos" 
-            target="_blank" 
-            rel="noreferrer"
-          >
-            <Github className="size-4" /> el-pablos <ExternalLink className="size-4" />
-          </a>
-          <a 
-            href="https://t.me/ImTamaa" 
-            target="_blank" 
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-2xl px-5 py-2.5 font-medium transition-all duration-200"
-            style={{ backgroundColor: 'var(--violet-primary)', color: 'white' }}
-          >
-            <Send className="size-4"/> @ImTamaa
-          </a>
-        </div>
-      </Card>
+    <section id="about" className="relative py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-stretch" {...wrapper}>
+          <div className="kinetic-card relative min-h-[520px] overflow-hidden rounded-[1.8rem]">
+            <img src={profileImage} alt="Tama EL Pablo" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(0deg, rgba(17,16,13,0.84), rgba(17,16,13,0.18) 52%, rgba(17,16,13,0.04))" }} />
+            <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
+              <div className="section-kicker">profile dossier</div>
+              <h2 className="mt-3 font-display text-4xl font-black leading-none text-white sm:text-5xl">
+                Field notes from a builder.
+              </h2>
+              <p className="mt-4 max-w-md text-sm leading-7 text-white/74">
+                Portfolio ini dibuat untuk nunjukin sisi engineering yang rapi tanpa kehilangan personality: cepat, visual, mobile-first, dan tetap gampang discan.
+              </p>
+            </div>
+          </div>
 
-      {prefersReducedMotion ? (
-        <div className="relative">
-          <HeroTerminal theme={theme} />
-        </div>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="relative"
-        >
-          <HeroTerminal theme={theme} />
+          <div className="grid gap-5">
+            <div className="glass-panel rounded-[1.8rem] p-6 sm:p-8">
+              <div className="section-kicker">About</div>
+              <h2 className="section-title mt-4 font-display text-4xl sm:text-5xl lg:text-6xl">
+                Backend logic, product sense, and interface drama in one place.
+              </h2>
+              <p className="mt-6 max-w-3xl text-base leading-8" style={{ color: "var(--text-secondary)" }}>
+                Hi, gue Tama EL Pablo. Fokus utama gue ada di Laravel, API, integrasi sistem, database, deployment, dan flow security yang masuk akal. Website ini tetap membawa modul lama seperti portfolio, gallery, testimonial, showcase, contact, dan service lab, tapi dibungkus ulang dengan desain yang jauh lebih elegan dan beda dari versi sebelumnya.
+              </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <a href="https://github.com/el-pablos" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-2xl border px-4 py-3 text-sm font-black transition-transform magnetic-link" style={{ borderColor: "var(--border-color)", background: "var(--bg-button)", color: "var(--text-primary)" }}>
+                  <Github className="mr-2 size-4" /> GitHub <ExternalLink className="ml-2 size-4" />
+                </a>
+                <a href="https://t.me/ImTamaa" target="_blank" rel="noreferrer" className="shine-sweep relative inline-flex items-center justify-center overflow-hidden rounded-2xl px-4 py-3 text-sm font-black transition-transform magnetic-link" style={{ background: "var(--accent)", color: "#11100d" }}>
+                  <Send className="mr-2 size-4" /> Telegram
+                </a>
+              </div>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-3">
+              {profileCards.map((card) => {
+                const Icon = card.icon;
+                return (
+                  <div key={card.title} className="kinetic-card rounded-[1.35rem] p-5">
+                    <Icon className="size-6" style={{ color: "var(--accent-2)" }} />
+                    <p className="mt-4 text-xs font-bold uppercase" style={{ color: "var(--text-muted)", letterSpacing: "0.12em" }}>
+                      {card.title}
+                    </p>
+                    <p className="mt-2 font-display text-xl font-black leading-tight" style={{ color: "var(--text-primary)" }}>
+                      {card.value}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div>
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <div>
+                  <div className="section-kicker">GitHub</div>
+                  <h3 className="mt-2 font-display text-2xl font-black" style={{ color: "var(--text-primary)" }}>
+                    Live development signals
+                  </h3>
+                </div>
+                <div className="hidden h-px flex-1 sm:block" style={{ background: "var(--border-color)" }} />
+              </div>
+              <GitHubStats />
+            </div>
+          </div>
         </motion.div>
-      )}
-    </div>
-  );
-});
-
-// ---------- Section Title ----------
-const SectionTitle = memo(({ pre, title, desc }) => (
-  <div className="mx-auto max-w-4xl text-center mb-12">
-    <div 
-      className="text-sm uppercase tracking-[0.3em] mb-4" 
-      style={{color: 'var(--violet-secondary)'}}
-    >
-      {pre}
-    </div>
-    <h2 
-      className="mt-2 text-3xl sm:text-4xl font-semibold" 
-      style={{color: 'var(--text-primary)'}}
-    >
-      {title}
-    </h2>
-    {desc && (
-      <p 
-        className="mt-4 text-base sm:text-lg max-w-3xl mx-auto px-4" 
-        style={{color: 'var(--text-secondary)'}}
-      >
-        {desc}
-      </p>
-    )}
-  </div>
-));
-
-// ---------- Main About Section ----------
-const About = memo(({ theme }) => {
-  return (
-    <section id="about" className="py-16">
-      <div className="mx-auto max-w-6xl px-4">
-        <SectionTitle 
-          pre="About" 
-          title="A Little About Me" 
-          desc="Tama EL Pablo — Backend Developer focused on Laravel." 
-        />
-        <AboutContent theme={theme} />
-
-        {/* GitHub Stats Section */}
-        <div className="mt-12">
-          <SectionTitle 
-            pre="GitHub" 
-            title="Development Statistics" 
-            desc="Real-time statistics from my GitHub accounts" 
-          />
-          <GitHubStats />
-        </div>
       </div>
     </section>
   );
 });
 
-About.displayName = 'About';
-AboutContent.displayName = 'AboutContent';
-GitHubStats.displayName = 'GitHubStats';
-SectionTitle.displayName = 'SectionTitle';
-Card.displayName = 'Card';
-HeroTerminal.displayName = 'HeroTerminal';
+About.displayName = "About";
+GitHubStats.displayName = "GitHubStats";
 
 export default About;

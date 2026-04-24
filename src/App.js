@@ -484,7 +484,7 @@ export default function PortfolioTamaELPabloV3() {
 
       <TubelightNavbar
         items={navItems.filter((item) => ["home", "about", "services", "portfolio", "contact"].includes(item.id)).map((item) => ({
-          label: item.label === "Studio" ? "Work" : item.label,
+          label: item.label,
           href: `#${item.id}`,
           icon: item.icon,
         }))}

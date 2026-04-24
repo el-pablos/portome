@@ -1,28 +1,24 @@
-import React, { memo } from 'react';
-import { Pricing } from '../ui/pricing';
-import { HeroAscii } from '../ui/hero-ascii-one';
+import React, { memo } from "react";
+import { Pricing } from "../ui/pricing";
+import { HeroAscii } from "../ui/hero-ascii-one";
 
-// ---------- Web Stressing Service Section ----------
 const WebStressingService = memo(() => {
   const pricingPlans = [
     {
-      name: "1 HOURS",
+      name: "1 HOUR",
       price: "17",
       yearlyPrice: "250000",
-      period: "per session",
+      period: "scoping sprint",
       features: [
-        "Jasa Takedown Website Slot",
-        "Jasa Takedown Website Phising",
-        "Jasa Takedown Website Pemerintah",
-        "Jasa Takedown Website Store/E-commerce",
-        "Custom Target Analysis",
-        "CDN Bypass (Akamai, Cloudflare, Fastly)",
-        "Real-time Monitoring",
-        "Detailed Attack Report",
-        "24/7 Support & Consultation"
+        "Authorized resilience check only",
+        "Endpoint inventory and risk notes",
+        "Basic load profile discussion",
+        "Rate-limit and caching review",
+        "Concise remediation checklist",
+        "Telegram coordination",
       ],
-      description: "Perfect for quick stress testing",
-      buttonText: "Order via Telegram",
+      description: "Quick technical read for small flows",
+      buttonText: "Discuss scope",
       href: "https://t.me/ImTamaa",
       isPopular: false,
     },
@@ -30,20 +26,17 @@ const WebStressingService = memo(() => {
       name: "2 HOURS",
       price: "27",
       yearlyPrice: "400000",
-      period: "per session",
+      period: "lab session",
       features: [
-        "Jasa Takedown Website Slot",
-        "Jasa Takedown Website Phising",
-        "Jasa Takedown Website Pemerintah",
-        "Jasa Takedown Website Store/E-commerce",
-        "Custom Target Analysis",
-        "CDN Bypass (Akamai, Cloudflare, Fastly)",
-        "Real-time Monitoring",
-        "Detailed Attack Report",
-        "24/7 Support & Consultation"
+        "Authorized resilience check only",
+        "Critical route mapping",
+        "API response and error review",
+        "Observability notes",
+        "Actionable remediation plan",
+        "Follow-up chat summary",
       ],
-      description: "Most popular choice for testing",
-      buttonText: "Order via Telegram",
+      description: "Balanced session for active apps",
+      buttonText: "Discuss scope",
       href: "https://t.me/ImTamaa",
       isPopular: true,
     },
@@ -51,41 +44,35 @@ const WebStressingService = memo(() => {
       name: "3 HOURS",
       price: "33",
       yearlyPrice: "500000",
-      period: "per session",
+      period: "deep review",
       features: [
-        "Jasa Takedown Website Slot",
-        "Jasa Takedown Website Phising",
-        "Jasa Takedown Website Pemerintah",
-        "Jasa Takedown Website Store/E-commerce",
-        "Custom Target Analysis",
-        "CDN Bypass (Akamai, Cloudflare, Fastly)",
-        "Real-time Monitoring",
-        "Detailed Attack Report",
-        "24/7 Support & Consultation"
+        "Authorized resilience check only",
+        "Database and queue pressure review",
+        "Auth boundary inspection",
+        "CI/build hygiene notes",
+        "Prioritized fix plan",
+        "Delivery recap",
       ],
-      description: "Extended testing duration",
-      buttonText: "Order via Telegram",
+      description: "Deeper technical pass for complex stacks",
+      buttonText: "Discuss scope",
       href: "https://t.me/ImTamaa",
       isPopular: false,
     },
     {
-      name: "1 DAYS",
+      name: "1 DAY",
       price: "80",
       yearlyPrice: "1200000",
-      period: "per session",
+      period: "audit day",
       features: [
-        "Jasa Takedown Website Slot",
-        "Jasa Takedown Website Phising",
-        "Jasa Takedown Website Pemerintah",
-        "Jasa Takedown Website Store/E-commerce",
-        "Custom Target Analysis",
-        "CDN Bypass (Akamai, Cloudflare, Fastly)",
-        "Real-time Monitoring",
-        "Detailed Attack Report",
-        "24/7 Support & Consultation"
+        "Authorized resilience check only",
+        "Architecture and dependency review",
+        "API and route cross-check",
+        "Security notes for exposed surfaces",
+        "Repo hygiene and release review",
+        "Detailed written recap",
       ],
-      description: "Full day comprehensive testing",
-      buttonText: "Order via Telegram",
+      description: "Full day review for launch prep",
+      buttonText: "Discuss scope",
       href: "https://t.me/ImTamaa",
       isPopular: false,
     },
@@ -93,40 +80,38 @@ const WebStressingService = memo(() => {
       name: "2 DAYS",
       price: "160",
       yearlyPrice: "2400000",
-      period: "per session",
+      period: "delivery lab",
       features: [
-        "Jasa Takedown Website Slot",
-        "Jasa Takedown Website Phising",
-        "Jasa Takedown Website Pemerintah",
-        "Jasa Takedown Website Store/E-commerce",
-        "Custom Target Analysis",
-        "CDN Bypass (Akamai, Cloudflare, Fastly)",
-        "Real-time Monitoring",
-        "Detailed Attack Report",
-        "24/7 Support & Consultation"
+        "Authorized resilience check only",
+        "Implementation support window",
+        "CI/CD and release flow review",
+        "Documentation cleanup",
+        "Final verification checklist",
+        "Handoff notes",
       ],
-      description: "Maximum duration for complex testing",
-      buttonText: "Order via Telegram",
+      description: "Maximum coverage for serious cleanup",
+      buttonText: "Discuss scope",
       href: "https://t.me/ImTamaa",
       isPopular: false,
     },
   ];
 
   return (
-    <section className="py-16 md:py-32 relative">
-      {/* ASCII Art Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        <HeroAscii text="STRESS" fontSize={10} />
+    <div className="relative overflow-hidden py-16 sm:py-24">
+      <div className="absolute inset-0 pointer-events-none opacity-[0.08]">
+        <HeroAscii text="RESILIENCE" fontSize={9} />
       </div>
-      <Pricing
-        plans={pricingPlans}
-        title="Web Stress Testing Services"
-        description="Professional web stress testing and security analysis services. Dengan bypass yang terbukti bisa jebol berbagai CDN terkenal seperti Akamai, Cloudflare, Fastly, dan lainnya."
-      />
-    </section>
+      <div className="relative">
+        <Pricing
+          plans={pricingPlans}
+          title="Authorized Resilience Lab"
+          description="Layanan ini hanya untuk sistem yang kamu miliki atau kamu punya izin eksplisit untuk diuji. Fokusnya review performa, observability, keamanan permukaan publik, dan rencana perbaikan yang bisa dieksekusi."
+        />
+      </div>
+    </div>
   );
 });
 
-WebStressingService.displayName = 'WebStressingService';
+WebStressingService.displayName = "WebStressingService";
 
 export default WebStressingService;

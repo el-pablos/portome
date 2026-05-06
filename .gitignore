@@ -55,6 +55,9 @@ logs/
 .cache/
 .eslintcache
 
+# TypeScript build info
+*.tsbuildinfo
+
 # Temp
 *.tmp
 *.temp

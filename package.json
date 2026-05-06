@@ -1,100 +1,43 @@
 {
-  "name": "porto-tamas",
-  "version": "0.2.0",
+  "name": "sugidev-portfolio",
   "private": true,
-  "homepage": "https://porto.tams.codes",
-  "description": "Portfolio sinematik Tama EL Pablo dengan React, Tailwind, motion, gallery asset asli, dan CI/CD release flow.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/el-pablos/portome.git"
-  },
-  "license": "MIT",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Portfolio frontend developer Sugi.dev — React + Vite + TypeScript + Tailwind CSS 4 + Framer Motion",
   "author": "Tama EL Pablo",
-  "engines": {
-    "node": ">=20"
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@number-flow/react": "^0.5.10",
-    "@radix-ui/react-avatar": "^1.1.10",
-    "@radix-ui/react-icons": "^1.3.2",
-    "@radix-ui/react-label": "^2.1.7",
-    "@radix-ui/react-slot": "^1.2.3",
-    "@radix-ui/react-switch": "^1.2.6",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@tsparticles/engine": "^3.9.1",
-    "@tsparticles/react": "^3.0.0",
-    "@tsparticles/slim": "^3.9.1",
-    "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "color-bits": "^1.1.1",
-    "framer-motion": "^10.18.0",
-    "lucide-react": "^0.263.1",
+    "framer-motion": "^11.18.0",
+    "lucide-react": "^0.468.0",
     "motion": "^12.23.24",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",
-    "react-scripts": "5.0.1",
-    "tailwind-merge": "^3.3.1",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:ci": "react-scripts test --watchAll=false --ci --coverage",
-    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --max-warnings 0",
-    "sync-projects": "node scripts/sync-projects.mjs",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": ["src/**/*.test.js", "src/**/*.test.jsx", "src/**/*.test.ts", "src/**/*.test.tsx"],
-        "rules": {
-          "testing-library/no-container": "off",
-          "testing-library/no-node-access": "off"
-        }
-      }
-    ]
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "node_modules/(?!(@tsparticles|@number-flow|number-flow)/)"
-    ],
-    "moduleNameMapper": {
-      "^@tsparticles/react$": "<rootDir>/src/__mocks__/@tsparticles/react.js",
-      "^@tsparticles/slim$": "<rootDir>/src/__mocks__/@tsparticles/slim.js",
-      "^@tsparticles/engine$": "<rootDir>/src/__mocks__/@tsparticles/engine.js",
-      "^@number-flow/react$": "<rootDir>/src/__mocks__/@number-flow/react.js"
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
-    "@types/node": "^25.3.3",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.9.3"
+    "@tailwindcss/vite": "^4.1.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^25.0.1",
+    "tailwindcss": "^4.1.0",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.5",
+    "vitest": "^2.1.8",
+    "@vitest/coverage-v8": "^2.1.8"
   }
 }

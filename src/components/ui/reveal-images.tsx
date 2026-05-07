@@ -47,24 +47,24 @@ function RevealImageListItem({ title, images, index }: RevealImageListItemProps)
 
 const services = [
   {
-    title: "Branding",
+    title: "Backend API",
     images: [
-      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&auto=format&fit=crop&q=60",
-      "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&auto=format&fit=crop&q=60",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&auto=format&fit=crop&q=60",
+      "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&auto=format&fit=crop&q=60",
     ] as [string, string],
   },
   {
-    title: "Web Design",
+    title: "DevOps & Deploy",
     images: [
-      "https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&auto=format&fit=crop&q=60",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&auto=format&fit=crop&q=60",
+      "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400&auto=format&fit=crop&q=60",
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&auto=format&fit=crop&q=60",
     ] as [string, string],
   },
   {
-    title: "Illustration",
+    title: "Security & OSINT",
     images: [
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&auto=format&fit=crop&q=60",
-      "https://images.unsplash.com/photo-1633177317976-3f9bc45e1d1d?w=400&auto=format&fit=crop&q=60",
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&auto=format&fit=crop&q=60",
+      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&auto=format&fit=crop&q=60",
     ] as [string, string],
   },
 ];

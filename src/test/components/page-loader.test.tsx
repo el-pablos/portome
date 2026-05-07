@@ -1,4 +1,4 @@
-import { render, screen, act } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { PageLoader } from '@/components/ui/page-loader'
 
@@ -11,9 +11,9 @@ describe('PageLoader', () => {
     vi.useRealTimers()
   })
 
-  it('renders loader with SUGI logo', () => {
+  it('renders loader with TAMA logo', () => {
     render(<PageLoader duration={3000} />)
-    expect(screen.getByText('SUGI')).toBeInTheDocument()
+    expect(screen.getByText('TAMA')).toBeInTheDocument()
     expect(screen.getByText('DEV')).toBeInTheDocument()
   })
 

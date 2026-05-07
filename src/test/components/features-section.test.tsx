@@ -12,19 +12,19 @@ describe('FeaturesSection', () => {
 
   it('renders tech badges', () => {
     render(<FeaturesSection />)
-    expect(screen.getByText('TypeScript')).toBeInTheDocument()
+    expect(screen.getByText('PHP')).toBeInTheDocument()
     expect(screen.getByText('shadcn/ui · Tailwind')).toBeInTheDocument()
   })
 
   it('renders project count', () => {
     render(<FeaturesSection />)
-    expect(screen.getByText('42+')).toBeInTheDocument()
+    expect(screen.getByText('10+')).toBeInTheDocument()
     expect(screen.getByText('Projects Done')).toBeInTheDocument()
   })
 
-  it('renders sugi.dev pill', () => {
+  it('renders el-pablos pill', () => {
     render(<FeaturesSection />)
-    expect(screen.getByText('sugi.dev')).toBeInTheDocument()
-    expect(screen.getByText('React · Next.js')).toBeInTheDocument()
+    expect(screen.getByText('el-pablos')).toBeInTheDocument()
+    expect(screen.getByText('Laravel · PHP')).toBeInTheDocument()
   })
 })

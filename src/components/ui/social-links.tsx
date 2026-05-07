@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram, FaEnvelope } from "react-icons/fa6";
+import { FaGithub, FaTelegram, FaInstagram, FaEnvelope } from "react-icons/fa6";
 
 const links = [
-  { icon: FaLinkedinIn, label: "LinkedIn", href: "https://linkedin.com/in/sugidev", variant: "primary" },
-  { icon: FaGithub, label: "GitHub", href: "https://github.com/sugidev", variant: "primary" },
-  { icon: FaXTwitter, label: "X / Twitter", href: "https://x.com/sugidev", variant: "primary" },
-  { icon: FaInstagram, label: "Instagram", href: "https://instagram.com/sugidev", variant: "accent" },
-  { icon: FaEnvelope, label: "Email", href: "mailto:sugi@sugi.dev", variant: "accent" },
+  { icon: FaGithub, label: "GitHub", href: "https://github.com/el-pablos", variant: "primary" },
+  { icon: FaGithub, label: "GitHub 2", href: "https://github.com/dasaraul", variant: "primary" },
+  { icon: FaTelegram, label: "Telegram", href: "https://t.me/ImTamaa", variant: "primary" },
+  { icon: FaInstagram, label: "Instagram", href: "https://instagram.com/imtamaa", variant: "accent" },
+  { icon: FaEnvelope, label: "Email", href: "mailto:admin@porto.tams.codes", variant: "accent" },
 ];
 
 export function SocialLinks() {

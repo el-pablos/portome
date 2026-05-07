@@ -52,11 +52,11 @@ function BuildFastBubble() {
           )}
         </AnimatePresence>
         <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white/50 shrink-0">
-          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sugi" alt="" className="w-full h-full" />
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Tama" alt="" className="w-full h-full" />
         </div>
         <div>
-          <p className="text-white font-bold text-sm">sugi.dev</p>
-          <p className="text-white/70 text-xs">React · Next.js</p>
+          <p className="text-white font-bold text-sm">el-pablos</p>
+          <p className="text-white/70 text-xs">Laravel · PHP</p>
         </div>
       </motion.div>
       <motion.div
@@ -65,7 +65,7 @@ function BuildFastBubble() {
         className="self-start cursor-pointer rounded-full px-4 py-2 text-xs font-bold"
         style={{ background: "var(--clr-accent)", color: "#000" }}
       >
-        TypeScript
+        PHP
       </motion.div>
     </div>
   );
@@ -104,7 +104,7 @@ function ShipOnTimeBubble() {
         whileHover={{ scale: 1.2 }}
         className="block text-3xl font-black text-black"
       >
-        42+
+        10+
       </motion.span>
       <span className="text-xs font-bold text-black/70 uppercase tracking-wider">Projects Done</span>
     </motion.div>

@@ -2,12 +2,14 @@ import { motion } from "motion/react";
 import { RevealImageList } from "./reveal-images";
 
 const techStack = [
-  { name: "React", variant: "primary" },
-  { name: "Next.js", variant: "accent" },
-  { name: "TypeScript", variant: "primary" },
-  { name: "Tailwind", variant: "accent" },
-  { name: "Framer Motion", variant: "primary" },
-  { name: "Node.js", variant: "accent" },
+  { name: "Laravel", variant: "primary" },
+  { name: "PHP", variant: "accent" },
+  { name: "MySQL", variant: "primary" },
+  { name: "Docker", variant: "accent" },
+  { name: "Node.js", variant: "primary" },
+  { name: "React", variant: "accent" },
+  { name: "Linux", variant: "primary" },
+  { name: "Security", variant: "accent" },
 ];
 
 const pillVariants = {
@@ -64,12 +66,12 @@ export function ServicesSection() {
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }}
           >
             <h2 className="text-3xl md:text-5xl font-black leading-tight mb-4">
-              Crafting digital<br />experiences
+              Building reliable<br />backend systems
             </h2>
             <p className="text-base leading-relaxed" style={{ color: "var(--clr-text-muted)" }}>
-              I build performant, accessible, and visually stunning web applications
-              using modern frontend technologies. From concept to deployment,
-              every pixel is intentional.
+              I build reliable APIs, scalable services & security-first solutions
+              with Laravel, PHP, and modern DevOps. From architecture to deployment,
+              every endpoint is intentional.
             </p>
           </motion.div>
 

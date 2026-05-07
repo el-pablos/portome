@@ -16,7 +16,7 @@ export function Hero() {
       <nav className="relative z-30 flex items-center justify-between px-6 py-6 md:px-10 md:py-8 max-w-[1440px] mx-auto w-full">
         <div className="flex items-center gap-1">
           <div className="bg-white text-black font-black tracking-tight text-xs md:text-sm px-3 py-1.5 rounded-2xl rounded-bl-sm relative shadow-sm">
-            SUGI
+            TAMA
             <div className="absolute -bottom-1.5 left-0 w-3 h-3 bg-white"
               style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }} />
           </div>
@@ -24,14 +24,14 @@ export function Hero() {
             style={{ background: "var(--clr-accent)" }}>DEV</div>
         </div>
         <div className="hidden md:flex items-center space-x-2">
-          {["Work", "About", "Stack", "Blog"].map((item) => (
+          {["Work", "About", "Stack", "Contact"].map((item) => (
             <a key={item} href={`#${item.toLowerCase()}`}
               className="px-4 py-1.5 rounded-full border border-white/30 text-white text-xs font-semibold hover:bg-white/10 transition-colors">
               {item}
             </a>
           ))}
         </div>
-        <a href="mailto:sugi@sugi.dev"
+        <a href="mailto:admin@porto.tams.codes"
           className="px-6 py-2 rounded-full border border-white text-white text-xs md:text-sm font-semibold transition-colors"
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.color = "var(--clr-primary)";
@@ -57,11 +57,11 @@ export function Hero() {
               style={{ background: "rgba(255,255,255,0.2)" }}>
               <div className="w-24 h-24 rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden"
                 style={{ background: "#D2B48C" }}>
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sugi&backgroundColor=D2B48C" alt="Avatar" className="w-full h-full object-cover" />
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Tama&backgroundColor=D2B48C" alt="Avatar" className="w-full h-full object-cover" />
               </div>
               <div className="text-center mt-2">
-                <p className="font-bold text-lg text-white">sugi.dev</p>
-                <p className="text-xs text-white/80 mt-1">42+ projects</p>
+                <p className="font-bold text-lg text-white">el-pablos</p>
+                <p className="text-xs text-white/80 mt-1">10+ projects</p>
               </div>
             </div>
           </motion.div>
@@ -74,11 +74,11 @@ export function Hero() {
               style={{ background: "rgba(255,255,255,0.2)" }}>
               <div className="w-24 h-24 rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden"
                 style={{ background: "#2C3E50" }}>
-                <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Frontend" alt="Avatar" className="w-full h-full object-cover scale-150" />
+                <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Backend" alt="Avatar" className="w-full h-full object-cover scale-150" />
               </div>
               <div className="text-center mt-2">
-                <p className="font-bold text-lg text-white">React Dev</p>
-                <p className="text-xs text-white/80 mt-1">3+ yrs experience</p>
+                <p className="font-bold text-lg text-white">Laravel Dev</p>
+                <p className="text-xs text-white/80 mt-1">Backend & Security</p>
               </div>
             </div>
           </motion.div>
@@ -101,14 +101,14 @@ export function Hero() {
               <h1 className="text-[clamp(4.5rem,12vw,160px)] font-black leading-[0.85] tracking-tighter m-0 p-0 uppercase"
                 style={{ fontFamily: '"Arial Black", Impact, sans-serif', color: "var(--clr-accent)",
                   textShadow: "1px 1px 0 #001A99, 2px 2px 0 #001A99, 3px 3px 0 #001A99, 4px 4px 0 #001A99, 5px 5px 0 #001A99, 6px 6px 0 #001A99, 7px 7px 0 #001A99, 8px 8px 0 #001A99" }}>
-                SUGI
+                TAMA
               </h1>
             </div>
             <div className="w-full flex justify-start md:justify-center overflow-hidden md:overflow-visible">
               <h1 className="text-[clamp(4.5rem,15vw,220px)] font-black leading-[0.85] tracking-tighter text-white m-0 p-0 uppercase"
                 style={{ fontFamily: '"Arial Black", Impact, sans-serif',
                   textShadow: "1px 1px 0 #001A99, 2px 2px 0 #001A99, 3px 3px 0 #001A99, 4px 4px 0 #001A99, 5px 5px 0 #001A99, 6px 6px 0 #001A99, 7px 7px 0 #001A99, 8px 8px 0 #001A99" }}>
-                FRONTEND
+                BACKEND
               </h1>
             </div>
             <div className="w-full flex justify-start pl-[15%] md:pl-[30%]">
@@ -127,22 +127,22 @@ export function Hero() {
             <div className="flex items-center gap-3 px-4 py-3 rounded-2xl backdrop-blur-md border border-white/30 shadow-lg"
               style={{ background: "rgba(255,255,255,0.15)" }}>
               <div className="w-9 h-9 rounded-full border-2 border-white/50 overflow-hidden shrink-0" style={{ background: "#D2B48C" }}>
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sugi&backgroundColor=D2B48C" alt="Avatar" className="w-full h-full object-cover" />
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Tama&backgroundColor=D2B48C" alt="Avatar" className="w-full h-full object-cover" />
               </div>
               <div>
-                <p className="font-black text-xs text-white leading-none">sugi.dev</p>
-                <p className="text-[10px] text-white/70 mt-0.5 font-semibold">42+ projects</p>
+                <p className="font-black text-xs text-white leading-none">el-pablos</p>
+                <p className="text-[10px] text-white/70 mt-0.5 font-semibold">10+ projects</p>
               </div>
             </div>
             <div className="w-1.5 h-1.5 rounded-full bg-white/30 shrink-0" />
             <div className="flex items-center gap-3 px-4 py-3 rounded-2xl backdrop-blur-md border border-white/30 shadow-lg"
               style={{ background: "rgba(255,255,255,0.15)" }}>
               <div className="w-9 h-9 rounded-full border-2 border-white/50 overflow-hidden shrink-0" style={{ background: "#2C3E50" }}>
-                <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Frontend" alt="Avatar" className="w-full h-full object-cover scale-150" />
+                <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Backend" alt="Avatar" className="w-full h-full object-cover scale-150" />
               </div>
               <div>
-                <p className="font-black text-xs text-white leading-none">React Dev</p>
-                <p className="text-[10px] text-white/70 mt-0.5 font-semibold">3+ yrs exp</p>
+                <p className="font-black text-xs text-white leading-none">Laravel Dev</p>
+                <p className="text-[10px] text-white/70 mt-0.5 font-semibold">Backend & Security</p>
               </div>
             </div>
           </motion.div>

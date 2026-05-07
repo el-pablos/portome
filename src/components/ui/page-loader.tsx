@@ -60,7 +60,7 @@ export function PageLoader({ duration = 3000 }: { duration?: number }) {
               initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
               <div className="bg-white text-black font-black tracking-tight text-sm px-3 py-1.5 rounded-2xl rounded-bl-sm relative shadow-sm">
-                SUGI
+                TAMA
                 <div className="absolute -bottom-1.5 left-0 w-3 h-3 bg-white"
                   style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }} />
               </div>

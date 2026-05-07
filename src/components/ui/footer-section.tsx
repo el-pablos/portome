@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram } from "react-icons/fa6";
+import { FaGithub, FaTelegram, FaInstagram } from "react-icons/fa6";
 
 function AnimatedContainer({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
@@ -20,21 +20,21 @@ const footerLinks = {
     { label: "Work", href: "#work" },
     { label: "About", href: "#about" },
     { label: "Stack", href: "#stack" },
-    { label: "Blog", href: "#blog" },
+    { label: "Contact", href: "#contact" },
   ],
   Contact: [
-    { label: "Email", href: "mailto:sugi@sugi.dev" },
-    { label: "LinkedIn", href: "https://linkedin.com/in/sugidev" },
-    { label: "GitHub", href: "https://github.com/sugidev" },
-    { label: "Twitter/X", href: "https://x.com/sugidev" },
+    { label: "admin@porto.tams.codes", href: "mailto:admin@porto.tams.codes" },
+    { label: "t.me/ImTamaa", href: "https://t.me/ImTamaa" },
+    { label: "GitHub (el-pablos)", href: "https://github.com/el-pablos" },
+    { label: "GitHub (dasaraul)", href: "https://github.com/dasaraul" },
   ],
 };
 
 const socialIcons = [
-  { icon: FaGithub, href: "https://github.com/sugidev" },
-  { icon: FaLinkedinIn, href: "https://linkedin.com/in/sugidev" },
-  { icon: FaXTwitter, href: "https://x.com/sugidev" },
-  { icon: FaInstagram, href: "https://instagram.com/sugidev" },
+  { icon: FaGithub, href: "https://github.com/el-pablos" },
+  { icon: FaGithub, href: "https://github.com/dasaraul" },
+  { icon: FaTelegram, href: "https://t.me/ImTamaa" },
+  { icon: FaInstagram, href: "https://instagram.com/imtamaa" },
 ];
 
 export function Footer() {
@@ -68,7 +68,7 @@ export function Footer() {
               variants={{ hover: { x: -2 } }}
               className="bg-black text-white font-black tracking-tight text-sm px-3 py-1.5 rounded-2xl rounded-bl-sm relative"
             >
-              SUGI
+              TAMA
               <div className="absolute -bottom-1.5 left-0 w-3 h-3 bg-black"
                 style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }} />
             </motion.div>
@@ -82,8 +82,7 @@ export function Footer() {
             </motion.div>
           </motion.a>
           <p className="text-sm leading-relaxed max-w-xs" style={{ color: "var(--clr-text-muted)" }}>
-            Building performant, accessible, and visually stunning web experiences.
-            Let's create something amazing together.
+            Backend Developer berfokus pada Laravel. Mengutamakan performa, keamanan, dan integrasi yang rapi.
           </p>
           {/* Social icons */}
           <div className="flex gap-3 mt-6">
@@ -140,7 +139,7 @@ export function Footer() {
       <div className="border-t pt-6 flex flex-col md:flex-row items-center justify-between gap-4"
         style={{ borderColor: "var(--clr-border)" }}>
         <p className="text-xs" style={{ color: "var(--clr-text-muted)" }}>
-          © {new Date().getFullYear()} sugi.dev — All rights reserved.
+          © {new Date().getFullYear()} Tama EL Pablo — All rights reserved.
         </p>
         <a href="#top" className="text-xs font-semibold hover:underline" style={{ color: "var(--clr-primary)" }}>
           Back to top ↑

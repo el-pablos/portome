@@ -139,7 +139,7 @@ export function Footer() {
       <div className="border-t pt-6 flex flex-col md:flex-row items-center justify-between gap-4"
         style={{ borderColor: "var(--clr-border)" }}>
         <p className="text-xs" style={{ color: "var(--clr-text-muted)" }}>
-          © {new Date().getFullYear()} Tama EL Pablo — All rights reserved.
+          © {new Date().getFullYear()} Tama EL Pablo • Code That Matters, Security That Protects • Jakarta Selatan
         </p>
         <a href="#top" className="text-xs font-semibold hover:underline" style={{ color: "var(--clr-primary)" }}>
           Back to top ↑

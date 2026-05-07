@@ -29,7 +29,7 @@ describe('Footer', () => {
   it('renders copyright text', () => {
     render(<Footer />)
     const year = new Date().getFullYear()
-    expect(screen.getByText(`© ${year} Tama EL Pablo — All rights reserved.`)).toBeInTheDocument()
+    expect(screen.getByText(`© ${year} Tama EL Pablo • Code That Matters, Security That Protects • Jakarta Selatan`)).toBeInTheDocument()
   })
 
   it('renders back to top link', () => {

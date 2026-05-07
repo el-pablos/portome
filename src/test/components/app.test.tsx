@@ -15,8 +15,8 @@ describe('App', () => {
 
   it('renders all major sections', () => {
     const { container } = render(<App />)
-    // Check that sections exist
     const sections = container.querySelectorAll('section')
-    expect(sections.length).toBeGreaterThanOrEqual(4)
+    // Stats, Features(3cards), Services, WhyWorkWithMe, PortfolioText, PortfolioGrid, Gallery, Testimonials, Rating = 9+ sections
+    expect(sections.length).toBeGreaterThanOrEqual(7)
   })
 })

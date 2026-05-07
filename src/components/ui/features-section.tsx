@@ -26,6 +26,90 @@ function FeatureCard({
   );
 }
 
+/* ── Stats Section ── */
+export function StatsSection() {
+  return (
+    <section className="py-16 px-6">
+      <div className="max-w-4xl mx-auto grid grid-cols-3 gap-6 text-center">
+        {[
+          { value: "99.9%", label: "Success Rate" },
+          { value: "150+", label: "Websites Tested" },
+          { value: "24/7", label: "Available" },
+        ].map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            className="flex flex-col items-center gap-1"
+          >
+            <span className="text-3xl md:text-4xl font-black" style={{ color: "var(--clr-primary)" }}>
+              {stat.value}
+            </span>
+            <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--clr-text-muted)" }}>
+              {stat.label}
+            </span>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ── Why Work With Me Bento ── */
+const bentoItems = [
+  { icon: "⚡", title: "High Performance", desc: "Optimized APIs with sub-100ms response times and efficient database queries." },
+  { icon: "🌐", title: "Global Scale", desc: "Infrastructure ready for millions of requests across multiple regions." },
+  { icon: "🗄️", title: "Data Integrity", desc: "Robust database design with proper indexing, caching, and backup strategies." },
+  { icon: "🔒", title: "Security First", desc: "OWASP-compliant security practices, encryption, and vulnerability assessments." },
+  { icon: "🏗️", title: "Clean Architecture", desc: "Maintainable, testable code following SOLID principles and design patterns." },
+  { icon: "🚀", title: "Rapid Delivery", desc: "CI/CD pipelines, automated testing, and agile development workflow." },
+];
+
+export function WhyWorkWithMe() {
+  return (
+    <section className="py-24 px-6 border-t" style={{ borderColor: "var(--clr-border)" }}>
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <span className="text-xs font-black uppercase tracking-widest" style={{ color: "var(--clr-primary)" }}>
+            Features
+          </span>
+          <h2 className="text-3xl md:text-4xl font-black mt-3">Why Work With Me</h2>
+          <p className="mt-3 text-base" style={{ color: "var(--clr-text-muted)" }}>
+            Keunggulan yang bikin project kamu beda dari yang lain.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {bentoItems.map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] as const }}
+              whileHover={{ y: -4, scale: 1.02 }}
+              className="rounded-2xl p-6 border"
+              style={{ background: "var(--clr-bg-card)", borderColor: "var(--clr-border)" }}
+            >
+              <span className="text-2xl mb-3 block">{item.icon}</span>
+              <h3 className="font-bold text-sm mb-2">{item.title}</h3>
+              <p className="text-xs leading-relaxed" style={{ color: "var(--clr-text-muted)" }}>{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function BuildFastBubble() {
   const [ripple, setRipple] = useState(false);
 
